@@ -1,0 +1,2 @@
+library news_repository;
+

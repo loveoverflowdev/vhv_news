@@ -4,20 +4,19 @@ part 'article_response.g.dart';
 
 @JsonSerializable()
 class ArticleResponse {
-  @JsonKey(fromJson: _parseId)
   final String id;
   final String title;
-  final String brief;
+  final String? brief;
   final int totalViews;
 
   @JsonKey(name: 'creatorTitle')
-  final String creator;
+  final String? creator;
 
   @JsonKey(fromJson: _parseIsFeatured)
   final bool isFeatured;
 
   @JsonKey(name: 'image')
-  final String imageUrl;
+  final String? imageUrl;
 
   ArticleResponse({
     required this.imageUrl,
@@ -33,10 +32,6 @@ class ArticleResponse {
       _$ArticleResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ArticleResponseToJson(this);
-
-  static String _parseId(Map<String, dynamic> json) {
-    return json['_id']['\$oid'];
-  }
 
   static bool _parseIsFeatured(num value) => value != 0;
 }

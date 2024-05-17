@@ -11,13 +11,20 @@ class NewsApiClient {
   
   NewsApiClient({
     required Dio dio,
-  }) : _dio = dio;
+  }) : _dio = dio {
+    _dio.options.headers.addAll({
+      'Content-Type': 'application/json',
+    });
+  }
 
   Future<List<ApiResponse>> selectAll(NewApiEndpoint endpoint) {
     return _dio.get('${endpoint.url}/selectAll')
       .then(
-        (response) => (jsonDecode(response.data['items']) as Map<String, dynamic>)
-        .values.map((e) => e as ApiResponse).toList()
+        (response) {
+          final results = (response.data['items'] as Map<String, dynamic>)
+            .values.map((e) => e as ApiResponse).toList();
+          return results;
+        }
       );
   }
 
@@ -26,7 +33,7 @@ class NewsApiClient {
   }) {
     return _dio.get('${endpoint.url}/select/$id')
       .then((response) {
-        return jsonDecode(response.data) as ApiResponse;
+        return response.data as ApiResponse;
       });
   }
 

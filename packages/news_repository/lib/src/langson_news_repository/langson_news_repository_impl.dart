@@ -1,7 +1,6 @@
 import 'package:news_repository/src/core/news_api_client.dart';
 
 import 'langson_news_repository.dart';
-import 'response/response.dart';
 import 'endpoints.dart' as endpoints;
 
 class LangsonNewsRepositoryImpl implements LangsonNewsRepository {

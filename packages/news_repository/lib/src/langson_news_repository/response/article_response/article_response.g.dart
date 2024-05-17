@@ -8,12 +8,12 @@ part of 'article_response.dart';
 
 ArticleResponse _$ArticleResponseFromJson(Map<String, dynamic> json) =>
     ArticleResponse(
-      imageUrl: json['image'] as String,
-      id: ArticleResponse._parseId(json['id'] as Map<String, dynamic>),
+      imageUrl: json['image'] as String?,
+      id: json['id'] as String,
       title: json['title'] as String,
-      brief: json['brief'] as String,
+      brief: json['brief'] as String?,
       totalViews: (json['totalViews'] as num).toInt(),
-      creator: json['creator'] as String,
+      creator: json['creatorTitle'] as String?,
       isFeatured: ArticleResponse._parseIsFeatured(json['isFeatured'] as num),
     );
 
@@ -23,7 +23,7 @@ Map<String, dynamic> _$ArticleResponseToJson(ArticleResponse instance) =>
       'title': instance.title,
       'brief': instance.brief,
       'totalViews': instance.totalViews,
-      'creator': instance.creator,
+      'creatorTitle': instance.creator,
       'isFeatured': instance.isFeatured,
       'image': instance.imageUrl,
     };

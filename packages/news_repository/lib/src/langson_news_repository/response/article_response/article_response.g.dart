@@ -12,9 +12,9 @@ ArticleResponse _$ArticleResponseFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       title: json['title'] as String,
       brief: json['brief'] as String?,
-      totalViews: (json['totalViews'] as num).toInt(),
+      totalViews: (json['totalViews'] as num?)?.toInt(),
       creator: json['creatorTitle'] as String?,
-      isFeatured: ArticleResponse._parseIsFeatured(json['isFeatured'] as num),
+      isFeatured: ArticleResponse._parseIsFeatured(json['isFeatured'] as num?),
     );
 
 Map<String, dynamic> _$ArticleResponseToJson(ArticleResponse instance) =>

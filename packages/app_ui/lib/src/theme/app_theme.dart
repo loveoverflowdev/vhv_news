@@ -12,7 +12,7 @@ class AppTheme {
   /// Default `ThemeData` for App UI.
   ThemeData get themeData {
     return ThemeData(
-      primaryColor: AppColors.blue,
+      primaryColor: AppColors.green.shade800,
       canvasColor: _backgroundColor,
       scaffoldBackgroundColor: _backgroundColor,
       iconTheme: _iconTheme,
@@ -67,6 +67,7 @@ class AppTheme {
       elevation: 0,
       toolbarHeight: 64,
       backgroundColor: AppColors.transparent,
+      surfaceTintColor: Colors.green.shade800,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,

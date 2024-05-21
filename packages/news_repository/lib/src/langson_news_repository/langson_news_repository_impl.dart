@@ -13,8 +13,9 @@ class LangsonNewsRepositoryImpl implements LangsonNewsRepository {
 
   @override
   Future<List<ArticleResponse>> getArticles() async {
+    print(endpoints.articleNews.apiUrl);
     return _apiClient
-      .selectAll(endpoints.article)
+      .selectAll(endpoints.articleNews)
       .then(
         (responses) => responses.map((e) => ArticleResponse.fromJson(e)
       )
@@ -26,7 +27,7 @@ class LangsonNewsRepositoryImpl implements LangsonNewsRepository {
     required String id,
   }) {
     return _apiClient
-      .selectById(endpoints.article, id: id)
+      .selectById(endpoints.articleNews, id: id)
       .then((response) => ArticleDetailResponse.fromJson(response));
   }
 }

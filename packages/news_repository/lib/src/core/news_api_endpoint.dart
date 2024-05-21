@@ -2,16 +2,38 @@ class NewsApiEndpoint {
   final String domain;
   final String resource;
   final Protocol protocol;
+  final ArticleType articleType;
 
   NewsApiEndpoint({
     required this.domain,
     required this.resource,
     this.protocol = Protocol.https,
+    this.articleType = ArticleType.news,
   });
 
-  String get apiUrl => '${protocol.name}://$domain/api/$resource';
+  String get apiUrl => '${protocol.name}://$domain/api/$resource?type=${articleType.toParams()}';
 
   String get fileUrl => '${protocol.name}://$domain/$resource';
+}
+
+enum ArticleType {
+  person,
+  news,
+  photoAlbum,
+  legalDocument;
+
+  String toParams() {
+    switch (this) {
+      case ArticleType.person:
+        return 'Article.Person';
+      case ArticleType.news:
+        return 'Article.News';
+      case ArticleType.photoAlbum:
+        return 'Article.PhotoAlbum';
+      case ArticleType.legalDocument:
+        return 'Article.LegalDocument';
+    }
+  } 
 }
 
 enum Protocol {

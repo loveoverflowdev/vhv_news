@@ -16,9 +16,11 @@ void main() async {
   test('Test if call LangsonNewsRepository select all response not empty list', () async {
     final articles = await langsonNewsRepository.getArticles();
 
-    for (final article in articles) {
-      debugPrint(article.toJson().toString());
-    }
+    debugPrint(articles.length.toString());
+
+    // for (final article in articles) {
+    //   // debugPrint(article.toJson().toString());
+    // }
 
     expect(articles.isNotEmpty, true);
   });

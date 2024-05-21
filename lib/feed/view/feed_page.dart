@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'feed_view.dart';
+import 'package:vhv_news/feed/view/feed_view.dart';
 
 class FeedPage extends StatelessWidget {
   const FeedPage({super.key});

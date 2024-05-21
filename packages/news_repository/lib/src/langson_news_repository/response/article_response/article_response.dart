@@ -10,7 +10,7 @@ class ArticleResponse {
   final String id;
   final String title;
   final String? brief;
-  final int totalViews;
+  final int? totalViews;
 
   @JsonKey(name: 'creatorTitle')
   final String? creator;
@@ -36,7 +36,7 @@ class ArticleResponse {
 
   Map<String, dynamic> toJson() => _$ArticleResponseToJson(this);
 
-  static bool _parseIsFeatured(num value) => value != 0;
+  static bool _parseIsFeatured(num? value) => value != 0;
 
   static String? _parseImageUrl(String? url) => 
     url != null 

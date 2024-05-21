@@ -15,7 +15,7 @@ class NewsApiClient {
   }
 
   Future<List<ApiResponse>> selectAll(NewsApiEndpoint endpoint) {
-    return _dio.get('${endpoint.apiUrl}/selectAll')
+    return _dio.get(endpoint.apiUrl)
       .then(
         (response) {
           final results = (response.data['items'] as Map<String, dynamic>)

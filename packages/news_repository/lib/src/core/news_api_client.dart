@@ -1,6 +1,3 @@
-
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:news_repository/src/core/news_api_endpoint.dart';
 
@@ -17,8 +14,8 @@ class NewsApiClient {
     });
   }
 
-  Future<List<ApiResponse>> selectAll(NewApiEndpoint endpoint) {
-    return _dio.get('${endpoint.url}/selectAll')
+  Future<List<ApiResponse>> selectAll(NewsApiEndpoint endpoint) {
+    return _dio.get('${endpoint.apiUrl}/selectAll')
       .then(
         (response) {
           final results = (response.data['items'] as Map<String, dynamic>)
@@ -28,16 +25,16 @@ class NewsApiClient {
       );
   }
 
-  Future<ApiResponse> selectById(NewApiEndpoint endpoint, {
+  Future<ApiResponse> selectById(NewsApiEndpoint endpoint, {
     required String id,
   }) {
-    return _dio.get('${endpoint.url}/select/$id')
+    return _dio.get('${endpoint.apiUrl}/select/$id')
       .then((response) {
         return response.data as ApiResponse;
       });
   }
 
-  Future<List<ApiResponse>> selectByFilter(NewApiEndpoint endpoint, {
+  Future<List<ApiResponse>> selectByFilter(NewsApiEndpoint endpoint, {
     required Map<String, dynamic> filter,
   }) {
     throw UnimplementedError();

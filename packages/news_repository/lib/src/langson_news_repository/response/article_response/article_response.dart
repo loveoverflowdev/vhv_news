@@ -1,4 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import '../../endpoints.dart' as endpoints;
+
+import '../../../core/core.dart';
 
 part 'article_response.g.dart';
 
@@ -15,7 +18,7 @@ class ArticleResponse {
   @JsonKey(fromJson: _parseIsFeatured)
   final bool isFeatured;
 
-  @JsonKey(name: 'image')
+  @JsonKey(name: 'image', fromJson: _parseImageUrl)
   final String? imageUrl;
 
   ArticleResponse({
@@ -34,6 +37,11 @@ class ArticleResponse {
   Map<String, dynamic> toJson() => _$ArticleResponseToJson(this);
 
   static bool _parseIsFeatured(num value) => value != 0;
+
+  static String? _parseImageUrl(String? url) => 
+    url != null 
+      ? NewsApiEndpoint(domain: endpoints.domainName, resource: url).fileUrl 
+      : null;
 }
 
 /*

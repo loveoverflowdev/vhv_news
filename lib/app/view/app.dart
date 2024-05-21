@@ -6,6 +6,7 @@ import 'package:news_repository/news_repository.dart';
 import 'package:vhv_news/feed/controller/controller.dart';
 import 'package:vhv_news/feed/controller/feed_controller.dart';
 import 'package:vhv_news/home/controller/home_controller.dart';
+import '../../article/article.dart';
 import '../routes/routes.dart' as routes;
 
 class App extends StatelessWidget {
@@ -35,5 +36,6 @@ class AppBinding extends Bindings {
     // Controllers
     Get.put<HomeController>(HomeController());
     Get.put<FeedController>(FeedController(newsRepository: Get.find()));
+    Get.put<ArticleController>(ArticleController(newsRepository: Get.find()));
   }
 }

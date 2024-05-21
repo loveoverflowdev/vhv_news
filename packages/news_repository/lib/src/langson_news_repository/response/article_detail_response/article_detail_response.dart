@@ -1,24 +1,31 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../news_repository.dart';
+import '../../endpoints.dart' as endpoints;
+
 part 'article_detail_response.g.dart';
 
 @JsonSerializable()
 class ArticleDetailResponse {
   final String id;
   final String title;
-  final String brief;
-  final int totalViews;
+  final String? brief;
+  final int? totalViews;
+  final int? totalCharacters;
+
+  final String? content;
+
+  @JsonKey(name: 'rewriteURL', fromJson: _parseFileUrl)
+  final String? rewriteUrl;
 
   @JsonKey(name: 'creatorTitle')
-  final String creator;
+  final String? creator;
 
   @JsonKey(fromJson: _parseIsFeatured)
   final bool isFeatured;
 
-  @JsonKey(name: 'image')
-  final String imageUrl;
-
-  final String content;
+  @JsonKey(name: 'image', fromJson: _parseFileUrl)
+  final String? imageUrl;
 
   ArticleDetailResponse({
     required this.imageUrl,
@@ -29,6 +36,8 @@ class ArticleDetailResponse {
     required this.creator,
     required this.isFeatured,
     required this.content,
+    required this.rewriteUrl,
+    required this.totalCharacters,
   });
 
   factory ArticleDetailResponse.fromJson(Map<String, dynamic> json) =>
@@ -36,7 +45,12 @@ class ArticleDetailResponse {
 
   Map<String, dynamic> toJson() => _$ArticleDetailResponseToJson(this);
 
-  static bool _parseIsFeatured(num value) => value != 0;
+  static bool _parseIsFeatured(num? value) => value != 0;
+
+  static String? _parseFileUrl(String? url) => 
+    url != null 
+      ? NewsApiEndpoint(domain: endpoints.domainName, resource: url).fileUrl 
+      : null;
 }
 
 /*

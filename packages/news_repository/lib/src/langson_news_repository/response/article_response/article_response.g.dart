@@ -8,7 +8,7 @@ part of 'article_response.dart';
 
 ArticleResponse _$ArticleResponseFromJson(Map<String, dynamic> json) =>
     ArticleResponse(
-      imageUrl: ArticleResponse._parseImageUrl(json['image'] as String?),
+      imageUrl: ArticleResponse._parseFileUrl(json['image'] as String?),
       id: json['id'] as String,
       title: json['title'] as String,
       brief: json['brief'] as String?,

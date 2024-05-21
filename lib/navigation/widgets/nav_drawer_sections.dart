@@ -45,7 +45,6 @@ class NavDrawerSections extends StatelessWidget {
   }
 }
 
-@visibleForTesting
 class NavDrawerSectionsTitle extends StatelessWidget {
   const NavDrawerSectionsTitle({super.key});
 

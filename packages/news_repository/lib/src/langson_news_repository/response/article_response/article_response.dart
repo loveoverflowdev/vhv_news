@@ -18,7 +18,7 @@ class ArticleResponse {
   @JsonKey(fromJson: _parseIsFeatured)
   final bool isFeatured;
 
-  @JsonKey(name: 'image', fromJson: _parseImageUrl)
+  @JsonKey(name: 'image', fromJson: _parseFileUrl)
   final String? imageUrl;
 
   ArticleResponse({
@@ -38,7 +38,7 @@ class ArticleResponse {
 
   static bool _parseIsFeatured(num? value) => value != 0;
 
-  static String? _parseImageUrl(String? url) => 
+  static String? _parseFileUrl(String? url) => 
     url != null 
       ? NewsApiEndpoint(domain: endpoints.domainName, resource: url).fileUrl 
       : null;

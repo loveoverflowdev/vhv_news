@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart' show CategoryChildType;
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../article/article.dart';
 import '../../category/category.dart' show CategoryController;
 
-import '../../article/controller/articles_controller.dart';
 import '../widgets/widgets.dart';
 
 class FeedView extends StatelessWidget {
@@ -66,7 +66,14 @@ class _FeedIntroduction extends StatelessWidget {
                   return FeedCarouselCell(
                     imageUrl: article.imageUrl ?? '', 
                     title: article.title, 
-                    description: article.brief ?? '',
+                    description: article.brief ?? '', 
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context, 
+                        '/detail',
+                        arguments: ArticleArgs(articleId: article.id),  
+                      );
+                    },
                   );
                 }, 
               ),
@@ -95,7 +102,16 @@ class _FeedArticles extends StatelessWidget {
             itemCount: articles.length,
             itemBuilder: (context, index) {
               final article = articles[index];
-              return FeedTile(article: article);
+              return FeedTile(
+                article: article, 
+                onTap: () {
+                  Navigator.pushNamed(
+                    context, 
+                    '/detail',
+                    arguments: ArticleArgs(articleId: article.id),  
+                  );
+                },
+              );
             }, separatorBuilder: (BuildContext context, int index) {
               return const Divider();
             },

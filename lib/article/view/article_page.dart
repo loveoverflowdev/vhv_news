@@ -5,18 +5,44 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:vhv_news/article/article.dart';
 
+class ArticleArgs {
+  final String articleId;
+
+  ArticleArgs({
+    required this.articleId,
+  });
+}
 
 class ArticlePage extends StatelessWidget {
-  const ArticlePage({super.key});
+
+  final ArticleArgs args;
+
+  const ArticlePage({super.key, required this.args});
+
+
+  static Route route({
+    required ArticleArgs args,
+  }) => MaterialPageRoute(
+    builder: (_) => ArticlePage(args: args),
+  );
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ArticleDetailController>(
+      initState: (state) {
+        Get.find<ArticleDetailController>().loadArticleDetail(args.articleId);
+        // state.controller?.loadArticleDetail(args.articleId);
+      },
       builder: (ArticleDetailController controller) {
-        final rewriteUrl = controller.articleDetail.value?.rewriteUrl;
+        final articleDetail = controller.articleDetail.value;
+
+        final rewriteUrl = articleDetail?.rewriteUrl;
+        final articleTitle = articleDetail?.title;
+
+
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Article Page'),
+            title:  Text(articleTitle ?? ''),
             systemOverlayStyle: const SystemUiOverlayStyle(
                 statusBarIconBrightness:Brightness.dark,
                 statusBarBrightness:Brightness.light,
@@ -32,12 +58,14 @@ class ArticlePage extends StatelessWidget {
                     child: ShareButton(
                       shareText: 'Chia sẻ',
                       color: AppColors.highEmphasisSurface,
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.shareArticle(url: rewriteUrl ?? '');
+                      },
                     ),
                   ),
               ],
             ),
-          body: const ArticleView(),
+          body: ArticleView(article: articleDetail,),
         );
       }
     );

@@ -1,6 +1,7 @@
 
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ArticleDetailController extends GetxController {
   late Rx<ArticleDetailResponse?> articleDetail;
@@ -16,9 +17,15 @@ class ArticleDetailController extends GetxController {
     update();
   }
 
+  void shareArticle({
+    required String url,
+  }) {
+    Share.share(url);
+  }
+
   @override
   void onInit() {
     super.onInit();
-    articleDetail = null.obs;
+    articleDetail = Rx<ArticleDetailResponse?>(null);
   }
 }

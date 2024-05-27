@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:vhv_news/article/article.dart';
 
 import '../../home/home.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case '/': return HomePage.route();
+    case '/': 
+      return HomePage.route();
+    case '/detail':
+      final args = settings.arguments as ArticleArgs;
+      return ArticlePage.route(args: args);
     //
     default:
       return MaterialPageRoute(builder: (_) {

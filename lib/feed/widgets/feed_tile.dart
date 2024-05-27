@@ -8,8 +8,10 @@ class FeedTile extends StatelessWidget {
   const FeedTile({
     super.key, 
     required this.article,
+    required this.onTap,
   });
 
+  final void Function()? onTap;
   final ArticleResponse article;
 
   @override
@@ -35,22 +37,27 @@ class FeedTile extends StatelessWidget {
         ),
       ),
     );
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        leading,
-        const SizedBox(width: AppSpacing.lg),
-        Flexible(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(child: title),
-              subtitle,
-            ],
+    return GestureDetector(
+      onTap: () {
+        onTap?.call();
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          leading,
+          const SizedBox(width: AppSpacing.lg),
+          Flexible(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(child: title),
+                subtitle,
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

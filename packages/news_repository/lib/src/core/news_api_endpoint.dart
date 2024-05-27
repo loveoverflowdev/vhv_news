@@ -11,7 +11,11 @@ class NewsApiEndpoint {
     this.articleType = ArticleType.news,
   });
 
-  String get apiUrl => '${protocol.name}://$domain/api/$resource?type=${articleType.toParams()}';
+  String selectApiUrl({
+    required String id,
+  }) => '${protocol.name}://$domain/api/$resource/select/$id?type=${articleType.toParams()}';
+
+  String selectAllApiUrl() => '${protocol.name}://$domain/api/$resource/selectAll?type=${articleType.toParams()}';
 
   String get fileUrl => '${protocol.name}://$domain/$resource';
 }

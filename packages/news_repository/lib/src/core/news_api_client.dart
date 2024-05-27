@@ -30,7 +30,7 @@ class NewsApiClient {
     Map<String, dynamic>? queryParameters,
   }) {
     return _dio.get(
-      endpoint.apiUrl, 
+      endpoint.selectAllApiUrl(), 
       queryParameters: queryParameters,
     )
       .then(
@@ -47,7 +47,7 @@ class NewsApiClient {
     Map<String, dynamic>? queryParameters,
   }) {
     return _dio.get(
-      endpoint.apiUrl, 
+      endpoint.selectAllApiUrl(), 
       queryParameters: queryParameters,
     )
       .then(
@@ -63,7 +63,7 @@ class NewsApiClient {
   Future<ApiResponse> selectById(NewsApiEndpoint endpoint, {
     required String id,
   }) {
-    return _dio.get('${endpoint.apiUrl}/select/$id')
+    return _dio.get(endpoint.selectApiUrl(id: id))
       .then((response) {
         return response.data as ApiResponse;
       });

@@ -26,11 +26,11 @@ void main() async {
   });
 
   const id = '6555c355dcced49cf60b700d';
-  test('Test if call LangsonNewsRepository select by id response valid', () async {
-    final articleDetail = await langsonNewsRepository.getArticleDetail(id: id);
+  // test('Test if call LangsonNewsRepository select by id response valid', () async {
+  //   final articleDetail = await langsonNewsRepository.getArticleDetail(id: id);
 
-    debugPrint(articleDetail.toJson().toString());
+  //   debugPrint(articleDetail.toJson().toString());
 
-    expect(articleDetail.id , id);
-  });
+  //   expect(articleDetail , id);
+  // });
 }

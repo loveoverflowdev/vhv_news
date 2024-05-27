@@ -7,8 +7,7 @@ part 'article_detail_response.g.dart';
 
 @JsonSerializable()
 class ArticleDetailResponse {
-  final String id;
-  final String title;
+  final String? title;
   final String? brief;
   final int? totalViews;
   final int? totalCharacters;
@@ -29,7 +28,6 @@ class ArticleDetailResponse {
 
   ArticleDetailResponse({
     required this.imageUrl,
-    required this.id,
     required this.title,
     required this.brief,
     required this.totalViews,

@@ -10,8 +10,7 @@ ArticleDetailResponse _$ArticleDetailResponseFromJson(
         Map<String, dynamic> json) =>
     ArticleDetailResponse(
       imageUrl: ArticleDetailResponse._parseFileUrl(json['image'] as String?),
-      id: json['id'] as String,
-      title: json['title'] as String,
+      title: json['title'] as String?,
       brief: json['brief'] as String?,
       totalViews: (json['totalViews'] as num?)?.toInt(),
       creator: json['creatorTitle'] as String?,
@@ -26,7 +25,6 @@ ArticleDetailResponse _$ArticleDetailResponseFromJson(
 Map<String, dynamic> _$ArticleDetailResponseToJson(
         ArticleDetailResponse instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'title': instance.title,
       'brief': instance.brief,
       'totalViews': instance.totalViews,

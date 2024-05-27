@@ -1,4 +1,6 @@
 library news_repository;
 
-export 'src/langson_news_repository/langson_news_repository.dart';
+export 'src/article_repository/article_repository.dart';
+export 'src/category_repository/category_repository.dart';
+
 export 'src/core/core.dart';

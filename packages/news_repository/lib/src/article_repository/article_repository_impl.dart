@@ -1,21 +1,27 @@
 import 'package:news_repository/src/core/news_api_client.dart';
 
-import 'langson_news_repository.dart';
-import 'endpoints.dart' as endpoints;
+import 'article_repository.dart';
+import '../core/endpoints.dart' as endpoints;
 
-class LangsonNewsRepositoryImpl implements LangsonNewsRepository {
+class ArticleRepositoryImpl implements ArticleRepository {
   final NewsApiClient _apiClient;
 
-  LangsonNewsRepositoryImpl({
+  ArticleRepositoryImpl({
     required NewsApiClient apiClient,
   }) : _apiClient = apiClient;
 
 
   @override
-  Future<List<ArticleResponse>> getArticles() async {
-    print(endpoints.articleNews.apiUrl);
+  Future<List<ArticleResponse>> getArticles({
+    String? categoryId,
+  }) async {
     return _apiClient
-      .selectAll(endpoints.articleNews)
+      .selectAllMap(
+        endpoints.article, 
+        queryParameters: categoryId != null ? {
+          'categoryId': categoryId,
+        } : null,
+      )
       .then(
         (responses) => responses.map((e) => ArticleResponse.fromJson(e)
       )
@@ -27,7 +33,7 @@ class LangsonNewsRepositoryImpl implements LangsonNewsRepository {
     required String id,
   }) {
     return _apiClient
-      .selectById(endpoints.articleNews, id: id)
+      .selectById(endpoints.article, id: id)
       .then((response) => ArticleDetailResponse.fromJson(response));
   }
 }

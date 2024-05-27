@@ -10,14 +10,13 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-      init: HomeController(),
+    return GetBuilder<HomeController>(
       builder: (HomeController controller) {
         final tabIndex = controller.tabIndex.value;
         return IndexedStack(
           index: tabIndex,
           children: [
-            FeedView(),
+            const FeedView(),
             Placeholder(),
           ],
         );

@@ -1,16 +1,22 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../endpoints.dart' as endpoints;
 
-import '../../../core/core.dart';
+import '../../../../news_repository.dart';
+import '../../../core/endpoints.dart' as endpoints;
 
-part 'article_response.g.dart';
+part 'article_detail_response.g.dart';
 
 @JsonSerializable()
-class ArticleResponse {
+class ArticleDetailResponse {
   final String id;
   final String title;
   final String? brief;
   final int? totalViews;
+  final int? totalCharacters;
+
+  final String? content;
+
+  @JsonKey(name: 'rewriteURL', fromJson: _parseFileUrl)
+  final String? rewriteUrl;
 
   @JsonKey(name: 'creatorTitle')
   final String? creator;
@@ -21,7 +27,7 @@ class ArticleResponse {
   @JsonKey(name: 'image', fromJson: _parseFileUrl)
   final String? imageUrl;
 
-  ArticleResponse({
+  ArticleDetailResponse({
     required this.imageUrl,
     required this.id,
     required this.title,
@@ -29,12 +35,15 @@ class ArticleResponse {
     required this.totalViews,
     required this.creator,
     required this.isFeatured,
+    required this.content,
+    required this.rewriteUrl,
+    required this.totalCharacters,
   });
 
-  factory ArticleResponse.fromJson(Map<String, dynamic> json) =>
-      _$ArticleResponseFromJson(json);
+  factory ArticleDetailResponse.fromJson(Map<String, dynamic> json) =>
+      _$ArticleDetailResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ArticleResponseToJson(this);
+  Map<String, dynamic> toJson() => _$ArticleDetailResponseToJson(this);
 
   static bool _parseIsFeatured(num? value) => value != 0;
 

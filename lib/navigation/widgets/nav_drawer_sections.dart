@@ -1,46 +1,37 @@
 import 'package:app_ui/app_ui.dart' show AppColors, AppSpacing;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vhv_news/home/controller/home_controller.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 
-class CategoryModel {
-  final String name;
-
-  const CategoryModel({
-    required this.name,
-  });
-
-}
+import '../../category/category.dart';
 
 class NavDrawerSections extends StatelessWidget {
   const NavDrawerSections({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final categories = <CategoryModel>[
-      const CategoryModel(name: 'Feed'),
-      const CategoryModel(name: 'Search'),
-    ];
-    final homeController = Get.find<HomeController>();
+    return GetBuilder<CategoryController>(
+      builder: (CategoryController controller) {
+        final categories = controller.categories;
 
-    return Column(
-      children: [
-        const NavDrawerSectionsTitle(),
-        ...[
-          for (int index = 0; index < categories.length; index++)
-            NavDrawerSectionItem(
-              key: ValueKey(categories[index]),
-              title: toBeginningOfSentenceCase(categories[index].name) ?? '',
-              selected: index == homeController.tabIndex.value,
-              onTap: () {
-                Scaffold.of(context).closeDrawer();
-                homeController.changeTab(index);
-              },
-            ),
-            
-        ],
-      ],
+        return Column(
+          children: [
+            const NavDrawerSectionsTitle(),
+            ...[
+              for (final category in categories)
+                NavDrawerSectionItem(
+                  key: ValueKey(category),
+                  title: toBeginningOfSentenceCase(category.title) ?? '',
+                  selected: category == controller.selectedCategory.value,
+                  onTap: () {
+                    controller.selectCategory(category);
+                    Scaffold.of(context).closeDrawer();
+                  },
+                ),
+            ],
+          ],
+        );
+      }
     );
   }
 }
@@ -58,7 +49,7 @@ class NavDrawerSectionsTitle extends StatelessWidget {
           vertical: AppSpacing.lg + AppSpacing.xxs,
         ),
         child: Text(
-          'Danh mục',
+          'Danh mục'.toUpperCase(),
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: AppColors.primaryContainer,
               ),

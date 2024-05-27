@@ -3,10 +3,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
-import 'package:vhv_news/feed/controller/controller.dart';
-import 'package:vhv_news/feed/controller/feed_controller.dart';
-import 'package:vhv_news/home/controller/home_controller.dart';
+
+import '../../home/home.dart';
 import '../../article/article.dart';
+import '../../category/category.dart';
 import '../routes/routes.dart' as routes;
 
 class App extends StatelessWidget {
@@ -27,15 +27,21 @@ class App extends StatelessWidget {
 class AppBinding extends Bindings {
   @override
   void dependencies() {
+    // Network Client
     Get.put<NewsApiClient>(NewsApiClient(dio: Dio()));
 
-    Get.put<LangsonNewsRepository>(LangsonNewsRepositoryImpl(
+    // Repositories
+    Get.put<ArticleRepository>(ArticleRepositoryImpl(
+      apiClient: Get.find()),
+    );
+    Get.put<CategoryRepository>(CategoryRepositoryImpl(
       apiClient: Get.find()),
     );
 
     // Controllers
     Get.put<HomeController>(HomeController());
-    Get.put<FeedController>(FeedController(newsRepository: Get.find()));
-    Get.put<ArticleController>(ArticleController(newsRepository: Get.find()));
+    Get.put<ArticlesController>(ArticlesController(articleRepository: Get.find()));
+    Get.put<ArticleDetailController>(ArticleDetailController(articleRepository: Get.find()));
+    Get.put<CategoryController>(CategoryController(categoryRepository: Get.find()));
   }
 }

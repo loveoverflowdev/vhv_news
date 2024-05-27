@@ -1,6 +1,5 @@
 import 'package:app_ui/app_ui.dart' show AppColors, AppLogo, AppSpacing;
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../widgets/widgets.dart';
 
@@ -41,7 +40,7 @@ class NavDrawer extends StatelessWidget {
                     SizedBox(width: 60, child:  AppLogo.light()),
                     const SizedBox(width: AppSpacing.lg),
                     Expanded(
-                      child: Text('Cổng thông tin Lạng Sơn', 
+                      child: Text('Cổng thông tin Vusta Vĩnh Phúc', 
                         style: Theme.of(context).textTheme.titleLarge
                         ?.copyWith(color: Colors.white),
                       ),

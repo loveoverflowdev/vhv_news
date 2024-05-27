@@ -11,9 +11,8 @@ class ArticlePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-      init: Get.find<ArticleController>(),
-      builder: (ArticleController controller) {
+    return GetBuilder<ArticleDetailController>(
+      builder: (ArticleDetailController controller) {
         final rewriteUrl = controller.articleDetail.value?.rewriteUrl;
         return Scaffold(
           appBar: AppBar(
@@ -32,10 +31,8 @@ class ArticlePage extends StatelessWidget {
                     padding: const EdgeInsets.only(right: AppSpacing.lg),
                     child: ShareButton(
                       shareText: 'Chia sẻ',
-                      color: foregroundColor,
-                      onPressed: () => context
-                          .read<ArticleBloc>()
-                          .add(ShareRequested(uri: uri)),
+                      color: AppColors.highEmphasisSurface,
+                      onPressed: () {},
                     ),
                   ),
               ],

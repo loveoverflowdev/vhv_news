@@ -15,14 +15,14 @@ class FeedView extends StatelessWidget {
 
   void _listenCategorySelected() {
     final CategoryController categoryController = Get.find();
-    final ArticlesController feedController = Get.find();
+    final ArticlesController articleController = Get.find();
 
     categoryController.selectedCategory.listen((category) {
       switch (category?.childType) {
         case CategoryChildType.introduction:
-          feedController.getArticles();
+          articleController.getArticles();
         default:
-          feedController.getArticles(categoryId: category?.id);
+          articleController.getArticles(categoryId: category?.id);
       }
     });
   }
@@ -145,7 +145,6 @@ class _FeedWebviewState extends State<_FeedWebview> {
     _progressValueNotifier = ValueNotifier(0);
 
     _webViewController = WebViewController()
-    
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
@@ -159,10 +158,26 @@ class _FeedWebviewState extends State<_FeedWebview> {
                 _isLoading = false;
               });
 
+              _filterWholePageContent();
             },
           ),
         )
       ..loadRequest(Uri.parse(widget.feedUrl));
+  }
+
+  void _filterWholePageContent() {
+    const String script = """
+    (function() { 
+
+      var targetDiv = document.getElementById('whole-page'); 
+      if (targetDiv) { document.body.innerHTML = ''; 
+        document.body.appendChild(targetDiv);
+        } else { document.body.innerHTML = '<p>Nội dung đang được cập nhật</p>';
+      } 
+    })();
+    """;
+    _webViewController.runJavaScript(script);
+    _webViewController.setJavaScriptMode(JavaScriptMode.disabled);
   }
 
   @override

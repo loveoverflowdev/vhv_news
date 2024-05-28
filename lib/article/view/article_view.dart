@@ -1,6 +1,5 @@
 
 import 'package:app_ui/app_ui.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:news_repository/news_repository.dart' show ArticleDetailResponse;
@@ -23,22 +22,19 @@ class ArticleView extends StatelessWidget {
         if (element.localName == 'img') {
           return Container(
             margin: const EdgeInsets.all(AppSpacing.xs),
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: 'https://vustavinhphuc.coquan.vn${element.attributes['src'] ?? ''}',
+            child: AppCachedNetworkImage(
+              uri: element.attributes['src'] ?? '',
             )
           );
         }
+        return null;
       }
     );
 
     final Widget coverImage = article?.imageUrl != null ? Padding(
       padding: const EdgeInsets.all(AppSpacing.xs),
-      child: CachedNetworkImage(
-        fit: BoxFit.cover,
-        imageUrl: article!.imageUrl!,
-        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+      child: AppCachedNetworkImage(
+        uri: article!.imageUrl!,
       ),
     ) : const SizedBox.shrink();
 
@@ -54,7 +50,7 @@ class ArticleView extends StatelessWidget {
                 article?.title ?? '',
                 style: const TextStyle(
                   fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
+                  // fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 16),
@@ -75,3 +71,4 @@ class ArticleView extends StatelessWidget {
     );
   }
 }
+

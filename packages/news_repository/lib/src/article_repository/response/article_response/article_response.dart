@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../../core/endpoints.dart' as endpoints;
 import '../../../core/news_api_endpoint.dart';
 
 part 'article_response.g.dart';
@@ -39,7 +38,7 @@ class ArticleResponse {
 
   static String? _parseFileUrl(String? url) => 
     url != null 
-      ? NewsApiEndpoint(domain: endpoints.domainName, resource: url).fileUrl 
+      ? NewsApiEndpoint(resource: url).fileUrl 
       : null;
 }
 

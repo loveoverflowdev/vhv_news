@@ -22,6 +22,7 @@ class CategoryController extends GetxController {
     update();
   }
 
+
   void getCategories() {
     status.value = RxStatus.loading();
     _categoryRepository

@@ -1,5 +1,4 @@
-import 'package:app_ui/app_ui.dart' show AppSpacing;
-import 'package:cached_network_image/cached_network_image.dart' show CachedNetworkImage;
+import 'package:app_ui/app_ui.dart' show AppCachedNetworkImage, AppSpacing;
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:news_repository/news_repository.dart' show ArticleResponse;
@@ -18,12 +17,9 @@ class FeedTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final Widget leading = article.imageUrl != null ? Padding(
       padding: const EdgeInsets.all(AppSpacing.xs),
-      child: CachedNetworkImage(
+      child: AppCachedNetworkImage(
         width: 100,
-        fit: BoxFit.cover,
-        imageUrl: article.imageUrl!,
-        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+        uri: article.imageUrl!,
       ),
     ) : const SizedBox.shrink();
     final Widget title = Text(article.title, style: Theme.of(context).textTheme.titleLarge); 

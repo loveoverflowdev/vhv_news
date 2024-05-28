@@ -1,11 +1,10 @@
-class NewsApiEndpoint {
-  final String domain;
+final class NewsApiEndpoint {
+  static late  String domain;
   final String resource;
   final Protocol protocol;
   final ArticleType articleType;
 
   NewsApiEndpoint({
-    required this.domain,
     required this.resource,
     this.protocol = Protocol.https,
     this.articleType = ArticleType.news,

@@ -40,7 +40,11 @@ class CategoryResponse {
   static CategoryChildType _parseChildType(String type) => switch (type) {
     'Introduction' => CategoryChildType.introduction,
     'Article.News' => CategoryChildType.news,
-    _ => CategoryChildType.webview,
+    'Article.LegalDocument' => CategoryChildType.legalDocument,
+    'Article.PhotoAlbumn' => CategoryChildType.photoAlbumn,
+    'Article.Video' => CategoryChildType.video,
+    'Article.Emagazine' => CategoryChildType.emagazine,
+    _ => CategoryChildType.unsupported,
   };
 
   static String? _parseRewriteUrl(String? url) => 
@@ -52,5 +56,9 @@ class CategoryResponse {
 enum CategoryChildType {
   introduction,
   news,
-  webview,
+  legalDocument,
+  photoAlbumn,
+  video,
+  emagazine,
+  unsupported,
 }

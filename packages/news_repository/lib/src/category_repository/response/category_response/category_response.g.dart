@@ -32,5 +32,9 @@ Map<String, dynamic> _$CategoryResponseToJson(CategoryResponse instance) =>
 const _$CategoryChildTypeEnumMap = {
   CategoryChildType.introduction: 'introduction',
   CategoryChildType.news: 'news',
-  CategoryChildType.webview: 'webview',
+  CategoryChildType.legalDocument: 'legalDocument',
+  CategoryChildType.photoAlbumn: 'photoAlbumn',
+  CategoryChildType.video: 'video',
+  CategoryChildType.emagazine: 'emagazine',
+  CategoryChildType.unsupported: 'unsupported',
 };

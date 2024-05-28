@@ -14,8 +14,12 @@ class PhotoAlbumResponse {
   
   @JsonKey(fromJson: _parseDateTimeFromMillisecondsSinceEpoch)
   final DateTime? publishTime;
+  
   final String? brief;
-  final String? creatorTitle;
+
+  @JsonKey(name: 'creatorTitle')
+  final String? creator;
+
   final int? totalViews;
   final int? totalPhoto;
 
@@ -26,7 +30,7 @@ class PhotoAlbumResponse {
     required this.title,
     this.publishTime,
     this.brief,
-    this.creatorTitle,
+    this.creator,
     this.totalViews,
     this.totalPhoto,
     this.photos = const [],

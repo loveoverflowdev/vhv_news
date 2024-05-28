@@ -2,7 +2,6 @@ import 'package:news_repository/news_repository.dart';
 
 import '../core/endpoints.dart' as endpoints;
 
-import 'photo_album_repository.dart';
 import 'response/response.dart';
 
 class PhotoAlbumRepositoryImpl extends PhotoAlbumRepository {

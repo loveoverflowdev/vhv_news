@@ -13,7 +13,7 @@ PhotoAlbumResponse _$PhotoAlbumResponseFromJson(Map<String, dynamic> json) =>
       publishTime: PhotoAlbumResponse._parseDateTimeFromMillisecondsSinceEpoch(
           (json['publishTime'] as num?)?.toInt()),
       brief: json['brief'] as String?,
-      creatorTitle: json['creatorTitle'] as String?,
+      creator: json['creatorTitle'] as String?,
       totalViews: (json['totalViews'] as num?)?.toInt(),
       totalPhoto: (json['totalPhoto'] as num?)?.toInt(),
       photos: (json['photos'] as List<dynamic>?)
@@ -28,7 +28,7 @@ Map<String, dynamic> _$PhotoAlbumResponseToJson(PhotoAlbumResponse instance) =>
       'title': instance.title,
       'publishTime': instance.publishTime?.toIso8601String(),
       'brief': instance.brief,
-      'creatorTitle': instance.creatorTitle,
+      'creatorTitle': instance.creator,
       'totalViews': instance.totalViews,
       'totalPhoto': instance.totalPhoto,
       'photos': instance.photos,

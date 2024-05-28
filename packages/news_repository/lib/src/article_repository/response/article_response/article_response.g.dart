@@ -14,7 +14,10 @@ ArticleResponse _$ArticleResponseFromJson(Map<String, dynamic> json) =>
       brief: json['brief'] as String?,
       totalViews: (json['totalViews'] as num?)?.toInt(),
       creator: json['creatorTitle'] as String?,
-      isFeatured: ArticleResponse._parseIsFeatured(json['isFeatured'] as num?),
+      isFeatured: ArticleResponse._parseIsFeatured(
+          (json['isFeatured'] as num?)?.toInt()),
+      publishTime: ArticleResponse._parseDateTimeFromMillisecondsSinceEpoch(
+          (json['publishTime'] as num?)?.toInt()),
     );
 
 Map<String, dynamic> _$ArticleResponseToJson(ArticleResponse instance) =>
@@ -23,6 +26,7 @@ Map<String, dynamic> _$ArticleResponseToJson(ArticleResponse instance) =>
       'title': instance.title,
       'brief': instance.brief,
       'totalViews': instance.totalViews,
+      'publishTime': instance.publishTime?.toIso8601String(),
       'creatorTitle': instance.creator,
       'isFeatured': instance.isFeatured,
       'image': instance.imageUrl,

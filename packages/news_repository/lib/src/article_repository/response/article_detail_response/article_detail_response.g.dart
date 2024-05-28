@@ -14,12 +14,15 @@ ArticleDetailResponse _$ArticleDetailResponseFromJson(
       brief: json['brief'] as String?,
       totalViews: (json['totalViews'] as num?)?.toInt(),
       creator: json['creatorTitle'] as String?,
-      isFeatured:
-          ArticleDetailResponse._parseIsFeatured(json['isFeatured'] as num?),
+      isFeatured: ArticleDetailResponse._parseIsFeatured(
+          (json['isFeatured'] as num?)?.toInt()),
       content: json['content'] as String?,
       rewriteUrl:
           ArticleDetailResponse._parseFileUrl(json['rewriteURL'] as String?),
       totalCharacters: (json['totalCharacters'] as num?)?.toInt(),
+      publishTime:
+          ArticleDetailResponse._parseDateTimeFromMillisecondsSinceEpoch(
+              (json['publishTime'] as num?)?.toInt()),
     );
 
 Map<String, dynamic> _$ArticleDetailResponseToJson(
@@ -34,4 +37,5 @@ Map<String, dynamic> _$ArticleDetailResponseToJson(
       'creatorTitle': instance.creator,
       'isFeatured': instance.isFeatured,
       'image': instance.imageUrl,
+      'publishTime': instance.publishTime?.toIso8601String(),
     };

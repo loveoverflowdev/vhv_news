@@ -1,5 +1,5 @@
 final class NewsApiEndpoint {
-  static late  String domain;
+  static late final String domain;
   final String resource;
   final Protocol protocol;
   final ArticleType articleType;

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../../../news_repository.dart';
+import '../../../core/utils.dart' as utils;
 
 part 'article_detail_response.g.dart';
 
@@ -24,6 +24,9 @@ class ArticleDetailResponse {
   @JsonKey(name: 'image', fromJson: _parseFileUrl)
   final String? imageUrl;
 
+  @JsonKey(fromJson: _parseDateTimeFromMillisecondsSinceEpoch)
+  final DateTime? publishTime;
+
   ArticleDetailResponse({
     required this.imageUrl,
     required this.title,
@@ -34,6 +37,7 @@ class ArticleDetailResponse {
     required this.content,
     required this.rewriteUrl,
     required this.totalCharacters,
+    required this.publishTime,
   });
 
   factory ArticleDetailResponse.fromJson(Map<String, dynamic> json) =>
@@ -41,12 +45,12 @@ class ArticleDetailResponse {
 
   Map<String, dynamic> toJson() => _$ArticleDetailResponseToJson(this);
 
-  static bool _parseIsFeatured(num? value) => value != 0;
+  static DateTime? _parseDateTimeFromMillisecondsSinceEpoch(int? publishTime) 
+    => utils.parseDateTimeFromMillisecondsSinceEpoch(publishTime);
+  
+  static String? _parseFileUrl(String? url) => utils.parseFileUrl(url);
 
-  static String? _parseFileUrl(String? url) => 
-    url != null 
-      ? NewsApiEndpoint(resource: url).fileUrl 
-      : null;
+  static bool _parseIsFeatured(int? isFeatured) => utils.parseBoolFromNum(isFeatured);
 }
 
 /*

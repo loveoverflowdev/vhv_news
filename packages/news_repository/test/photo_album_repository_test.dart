@@ -5,15 +5,16 @@ import 'package:news_repository/news_repository.dart';
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';
-  final CategoryRepository categoryRepository = CategoryRepositoryImpl(
+  final PhotoAlbumRepository photoAlbumRepository = PhotoAlbumRepositoryImpl(
     apiClient: NewsApiClient(dio: Dio()),
   );
-  test('Test if call LangsonNewsRepository select all response not empty list', () async {
-    final categories = await categoryRepository.getCategories();
+
+  test('Test if call select all response not empty list', () async {
+    final photoAlbum = await photoAlbumRepository.getPhotoAlbums();
     // for (final article in articles) {
     //   // debugPrint(article.toJson().toString());
     // }
 
-    expect(categories.isNotEmpty, true);
+    expect(photoAlbum.isNotEmpty, true);
   });
 }

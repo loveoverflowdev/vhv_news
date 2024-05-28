@@ -12,7 +12,7 @@ class AppCachedNetworkImage extends StatelessWidget {
     this.width,
   });
 
-  static late String imageDomain;
+  static late final String imageDomain;
 
   final double? height;
   final double? width;

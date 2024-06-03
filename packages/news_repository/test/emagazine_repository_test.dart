@@ -3,15 +3,15 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:dio/dio.dart';
 import 'package:news_repository/src/core/core.dart';
-import 'package:news_repository/src/article_repository/article_repository.dart';
+import 'package:news_repository/src/emagazine_repository/emagazine_repository.dart';
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';
-  final ArticleRepository langsonNewsRepository = ArticleRepository.remote(
+  final EmagazineRepository emagazineRepository = EmagazineRepository.remote(
     apiClient: NewsApiClient.common(dio: Dio()),
   );
   test('Test if call LangsonNewsRepository select all response not empty list', () async {
-    final articles = await langsonNewsRepository.getArticles();
+    final articles = await emagazineRepository.getEmagazines();
 
     debugPrint(articles.length.toString());
 

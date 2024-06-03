@@ -1,15 +1,14 @@
-import 'package:news_repository/src/core/news_api_client.dart';
-
-import 'article_repository.dart';
+import '../core/news_api_client.dart';
 import '../core/endpoints.dart' as endpoints;
 
-class ArticleRepositoryImpl implements ArticleRepository {
+import 'article_repository.dart';
+
+class RemoteArticleRepository extends ArticleRepository {
   final NewsApiClient _apiClient;
 
-  ArticleRepositoryImpl({
+  RemoteArticleRepository({
     required NewsApiClient apiClient,
   }) : _apiClient = apiClient;
-
 
   @override
   Future<List<ArticleResponse>> getArticles({

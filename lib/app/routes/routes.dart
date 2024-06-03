@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vhv_news/article/article.dart';
+import 'package:vhv_news/news/article.dart';
 
 import '../../home/home.dart';
 

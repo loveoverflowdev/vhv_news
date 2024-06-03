@@ -4,17 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:news_repository/news_repository.dart' show ArticleDetailResponse;
 
-class ArticleView extends StatelessWidget {
+class ArticleView extends StatefulWidget {
   final ArticleDetailResponse? article;
 
   const ArticleView({super.key, required this.article,});
 
   @override
+  State<ArticleView> createState() => _ArticleViewState();
+}
+
+class _ArticleViewState extends State<ArticleView> {
+  @override
   Widget build(BuildContext context) {
-    if (article == null) return const SizedBox.shrink();
+    if (widget.article == null) return const SizedBox.shrink();
 
     final Widget content = HtmlWidget(
-      article?.content ?? '',
+      widget.article?.content ?? '',
       textStyle: const TextStyle(
         fontSize: 14.0,
       ),
@@ -31,10 +36,10 @@ class ArticleView extends StatelessWidget {
       }
     );
 
-    final Widget coverImage = article?.imageUrl != null ? Padding(
+    final Widget coverImage = widget.article?.imageUrl != null ? Padding(
       padding: const EdgeInsets.all(AppSpacing.xs),
       child: AppCachedNetworkImage(
-        uri: article!.imageUrl!,
+        uri: widget.article!.imageUrl!,
       ),
     ) : const SizedBox.shrink();
 
@@ -47,7 +52,7 @@ class ArticleView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                article?.title ?? '',
+                widget.article?.title ?? '',
                 style: const TextStyle(
                   fontSize: 20.0,
                   // fontWeight: FontWeight.bold,

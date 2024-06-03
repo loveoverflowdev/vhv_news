@@ -3,10 +3,10 @@ import '../core/news_api_client.dart';
 
 import 'category_repository.dart';
 
-class CategoryRepositoryImpl extends CategoryRepository {
+class RemoteCategoryRepository extends CategoryRepository {
   final NewsApiClient _apiClient;
 
-  CategoryRepositoryImpl({
+  RemoteCategoryRepository({
     required NewsApiClient apiClient,
   }) : _apiClient = apiClient;
 

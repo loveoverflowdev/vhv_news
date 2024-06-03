@@ -2,10 +2,9 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_repository/news_repository.dart' show CategoryChildType;
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:news_repository/news_repository.dart' show CategoryChildType, CategoryResponse;
 
-import '../../article/article.dart';
+import '../../news/article.dart';
 import '../../category/category.dart' show CategoryController;
 
 import '../widgets/widgets.dart';
@@ -35,14 +34,27 @@ class FeedView extends StatelessWidget {
       },
       builder: (CategoryController controller) {
         final currentCategory = controller.selectedCategory.value;
-        return switch (currentCategory?.childType) {
-          CategoryChildType.introduction => const _FeedIntroduction(),
-          CategoryChildType.news => const _FeedArticles(),
-          null => const Center(child: CircularProgressIndicator()),
-          _ => _FeedWebview(feedUrl: currentCategory?.rewriteURL ?? ''),
-        };
+        return _CategoryFeedView(category: currentCategory,);
       },
     );
+  }
+}
+
+class _CategoryFeedView extends StatelessWidget {
+  final CategoryResponse? category;
+
+  const _CategoryFeedView({
+    super.key, 
+    required this.category,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return switch (category?.childType) {
+      CategoryChildType.introduction => const _FeedIntroduction(),
+      // CategoryChildType.webview => const _FeedArticles(),
+      _ => const _FeedArticles(),
+    };
   }
 }
 
@@ -118,85 +130,6 @@ class _FeedArticles extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _FeedWebview extends StatefulWidget {
-  final String feedUrl;
-
-  const _FeedWebview({
-    required this.feedUrl,
-  });
-
-  @override
-  State<_FeedWebview> createState() => _FeedWebviewState();
-}
-
-class _FeedWebviewState extends State<_FeedWebview> {
-  late final WebViewController _webViewController;
-  late bool _isLoading;
-  late ValueNotifier<int> _progressValueNotifier;
-
-  @override
-  void initState() {
-    super.initState();
-    _isLoading = true;
-    _progressValueNotifier = ValueNotifier(0);
-
-    _webViewController = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x00000000))
-      ..setNavigationDelegate(
-          NavigationDelegate(
-            onProgress: (int progress) {
-              _progressValueNotifier.value = progress;
-            },
-            onPageStarted: (String url) {},
-            onPageFinished: (String url) {
-              setState(() {
-                _isLoading = false;
-              });
-
-              _filterWholePageContent();
-            },
-          ),
-        )
-      ..loadRequest(Uri.parse(widget.feedUrl));
-  }
-
-  void _filterWholePageContent() {
-    const String script = """
-    (function() { 
-
-      var targetDiv = document.getElementById('whole-page'); 
-      if (targetDiv) { document.body.innerHTML = ''; 
-        document.body.appendChild(targetDiv);
-        } else { document.body.innerHTML = '<p>Nội dung đang được cập nhật</p>';
-      } 
-    })();
-    """;
-    _webViewController.runJavaScript(script);
-    _webViewController.setJavaScriptMode(JavaScriptMode.disabled);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        if (_isLoading)
-          Center(
-            child: ValueListenableBuilder<int>(
-              valueListenable: _progressValueNotifier,
-              builder: (context, progress, _) {
-                return CircularProgressIndicator(
-                  value: progress / 100.0,
-                );
-              }
-            ),
-          ),
-        WebViewWidget(controller: _webViewController),
-      ],
     );
   }
 }

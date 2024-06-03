@@ -3,7 +3,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:vhv_news/article/article.dart';
+import 'package:vhv_news/news/article.dart';
 
 class ArticleArgs {
   final String articleId;

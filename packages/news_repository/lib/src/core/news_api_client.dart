@@ -4,10 +4,34 @@ import 'package:news_repository/src/core/news_api_endpoint.dart';
 
 typedef ApiResponse = Map<String, dynamic>;
 
-class NewsApiClient {
+abstract class NewsApiClient {
+  NewsApiClient();
+
+  factory NewsApiClient.common({
+    required Dio dio,
+  }) = _CommonNewsApiClient;
+
+  Future<List<ApiResponse>> selectAllMap(NewsApiEndpoint endpoint, {
+    Map<String, dynamic>? queryParameters,
+  });
+
+  Future<List<ApiResponse>> selectAllList(NewsApiEndpoint endpoint, {
+    Map<String, dynamic>? queryParameters,
+  });
+
+  Future<ApiResponse> selectById(NewsApiEndpoint endpoint, {
+    required String id,
+  });
+
+  Future<List<ApiResponse>> selectByFilter(NewsApiEndpoint endpoint, {
+    required Map<String, dynamic> filter,
+  });
+}
+
+class _CommonNewsApiClient extends NewsApiClient {
   final Dio _dio;
   
-  NewsApiClient({
+  _CommonNewsApiClient({
     required Dio dio,
   }) : _dio = dio {
     _dio.options.headers.addAll({
@@ -26,6 +50,7 @@ class NewsApiClient {
     ));
   }
 
+  @override
   Future<List<ApiResponse>> selectAllMap(NewsApiEndpoint endpoint, {
     Map<String, dynamic>? queryParameters,
   }) {
@@ -43,6 +68,7 @@ class NewsApiClient {
       );
   }
 
+  @override
   Future<List<ApiResponse>> selectAllList(NewsApiEndpoint endpoint, {
     Map<String, dynamic>? queryParameters,
   }) {
@@ -60,6 +86,7 @@ class NewsApiClient {
       );
   }
 
+  @override
   Future<ApiResponse> selectById(NewsApiEndpoint endpoint, {
     required String id,
   }) {
@@ -69,10 +96,10 @@ class NewsApiClient {
       });
   }
 
+  @override
   Future<List<ApiResponse>> selectByFilter(NewsApiEndpoint endpoint, {
     required Map<String, dynamic> filter,
   }) {
     throw UnimplementedError();
-
   }
 }

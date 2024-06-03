@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
 
 import '../../home/home.dart';
-import '../../article/article.dart';
+import '../../news/article.dart';
 import '../../category/category.dart';
 import '../routes/routes.dart' as routes;
 
@@ -28,7 +28,7 @@ class AppBinding extends Bindings {
   @override
   void dependencies() {
     // Network Client
-    Get.put<NewsApiClient>(NewsApiClient(dio: Dio()));
+    Get.put<NewsApiClient>(NewsApiClient.common(dio: Dio()));
 
     // Repositories
     Get.put<ArticleRepository>(ArticleRepositoryImpl(

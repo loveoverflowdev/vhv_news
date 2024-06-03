@@ -1,15 +1,13 @@
-
 import '../core/news_api_client.dart';
 
 import '../core/endpoints.dart' as endpoints;
 
 import 'legal_document_repository.dart';
-import 'response/response.dart';
 
-class LegalDocumentRepositoryImpl extends LegalDocumentRepository {
+class RemoteLegalDocumentRepository extends LegalDocumentRepository {
   final NewsApiClient _apiClient;
 
-  LegalDocumentRepositoryImpl({
+  RemoteLegalDocumentRepository({
     required NewsApiClient apiClient,
   }) : _apiClient = apiClient;
 

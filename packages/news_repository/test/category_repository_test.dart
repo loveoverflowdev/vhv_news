@@ -5,8 +5,8 @@ import 'package:news_repository/news_repository.dart';
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';
-  final CategoryRepository categoryRepository = CategoryRepositoryImpl(
-    apiClient: NewsApiClient(dio: Dio()),
+  final CategoryRepository categoryRepository = CategoryRepository.remote(
+    apiClient: NewsApiClient.common(dio: Dio()),
   );
   test('Test if call LangsonNewsRepository select all response not empty list', () async {
     final categories = await categoryRepository.getCategories();

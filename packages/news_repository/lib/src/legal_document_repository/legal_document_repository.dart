@@ -1,4 +1,4 @@
-export 'legal_document_repository_impl.dart';
+export '_remote_legal_document_repository.dart';
 export 'response/response.dart';
 
 import 'response/response.dart';

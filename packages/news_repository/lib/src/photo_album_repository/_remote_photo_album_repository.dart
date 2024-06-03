@@ -4,13 +4,12 @@ import '../core/endpoints.dart' as endpoints;
 
 import 'response/response.dart';
 
-class PhotoAlbumRepositoryImpl extends PhotoAlbumRepository {
+class RemotePhotoAlbumRepository extends PhotoAlbumRepository {
   final NewsApiClient _apiClient;
 
-  PhotoAlbumRepositoryImpl({
+  RemotePhotoAlbumRepository({
     required NewsApiClient apiClient,
   }) : _apiClient = apiClient;
-  
 
   @override
   Future<List<PhotoAlbumResponse>> getPhotoAlbums() {

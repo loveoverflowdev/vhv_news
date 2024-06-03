@@ -4,8 +4,8 @@ import 'package:news_repository/news_repository.dart';
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';
-  final LegalDocumentRepository legalDocumentRepository = LegalDocumentRepositoryImpl(
-    apiClient: NewsApiClient(dio: Dio()),
+  final LegalDocumentRepository legalDocumentRepository = RemoteLegalDocumentRepository(
+    apiClient: NewsApiClient.common(dio: Dio()),
   );
 
   test('Test if call select all response not empty list', () async {

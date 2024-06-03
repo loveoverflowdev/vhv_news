@@ -23,7 +23,9 @@ enum ArticleType {
   person,
   news,
   photoAlbum,
-  legalDocument;
+  legalDocument,
+  video,
+  emagazine;
 
   String toParams() {
     switch (this) {
@@ -35,6 +37,10 @@ enum ArticleType {
         return 'Article.PhotoAlbum';
       case ArticleType.legalDocument:
         return 'Article.LegalDocument';
+      case ArticleType.video:
+        return 'Article.Video';
+      case ArticleType.emagazine:
+        return 'Article.Emagazine';
     }
   } 
 }

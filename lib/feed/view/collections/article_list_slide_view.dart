@@ -32,7 +32,7 @@ class ArticleListSlideView extends StatelessWidget {
                       Navigator.pushNamed(
                         context, 
                         '/detail',
-                        arguments: ArticleArgs(articleId: article.id),  
+                        arguments: ArticleDetailArgs(articleId: article.id),  
                       );
                     },
                   );

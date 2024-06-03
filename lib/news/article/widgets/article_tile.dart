@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:news_repository/news_repository.dart' show ArticleResponse;
 
-class FeedTile extends StatelessWidget {
-  const FeedTile({
+class ArticleTile extends StatelessWidget {
+  const ArticleTile({
     super.key, 
     required this.article,
     required this.onTap,
   });
 
-  final void Function()? onTap;
+  final void Function(ArticleResponse)? onTap;
   final ArticleResponse article;
 
   @override
@@ -35,7 +35,7 @@ class FeedTile extends StatelessWidget {
     );
     return GestureDetector(
       onTap: () {
-        onTap?.call();
+        onTap?.call(article);
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -21,7 +21,7 @@ class RemoteEmagazineRepository extends EmagazineRepository {
   Future<List<EmagazineResponse>> getEmagazines() {
     return _apiClient
       .selectAllMap(
-        endpoints.video, 
+        endpoints.emagazine, 
       )
       .then(
         (responses) => responses.map((e) => EmagazineResponse.fromJson(e)

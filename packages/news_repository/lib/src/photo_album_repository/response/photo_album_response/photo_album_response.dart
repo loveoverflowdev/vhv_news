@@ -12,6 +12,9 @@ class PhotoAlbumResponse {
   final String id;
   final String title;
   
+  @JsonKey(name: 'image', fromJson: _parseFileUrl)
+  final String? imageUrl;
+
   @JsonKey(fromJson: _parseDateTimeFromMillisecondsSinceEpoch)
   final DateTime? publishTime;
   
@@ -34,6 +37,7 @@ class PhotoAlbumResponse {
     this.totalViews,
     this.totalPhoto,
     this.photos = const [],
+    this.imageUrl,
   });
 
   factory PhotoAlbumResponse.fromJson(Map<String, dynamic> json) =>
@@ -43,4 +47,6 @@ class PhotoAlbumResponse {
 
   static DateTime? _parseDateTimeFromMillisecondsSinceEpoch(int? publishTime) 
     => utils.parseDateTimeFromMillisecondsSinceEpoch(publishTime);
+  
+  static String? _parseFileUrl(String? url) => utils.parseFileUrl(url);
 }

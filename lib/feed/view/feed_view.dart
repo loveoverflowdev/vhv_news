@@ -3,10 +3,12 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart' show CategoryChildType, CategoryResponse;
+import 'package:vhv_news/app/app.dart';
 
-import '../../category/category.dart' show CategoryController;
+import '../../category/category.dart' show CategoryController, NewsByCategoryView;
 
 import '../../news/article/article.dart';
+import '../../news/photo_album/photo_album.dart';
 import '../widgets/widgets.dart';
 
 class FeedView extends StatelessWidget {
@@ -48,11 +50,13 @@ class _CategoryFeedView extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return switch (category?.childType) {
-      CategoryChildType.introduction => const _FeedIntroduction(),
+      null => const Placeholder(),
+      // CategoryChildType.introduction => const _FeedIntroduction(),
+      // CategoryChildType.photoAlbumn => const PhotoAlbumsView(),
       // CategoryChildType.webview => const _FeedArticles(),
-      _ => const _FeedArticles(),
+      _ => NewsByCategoryView(category: category!,),
     };
   }
 }
@@ -81,51 +85,14 @@ class _FeedIntroduction extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(
                         context, 
-                        '/detail',
-                        arguments: ArticleArgs(articleId: article.id),  
+                        PageRouteName.articleDetail.routeLink,
+                        arguments: ArticleDetailArgs(articleId: article.id),  
                       );
                     },
                   );
                 }, 
               ),
             ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _FeedArticles extends StatelessWidget {
-  const _FeedArticles();
-
-  @override
-  Widget build(BuildContext context) {
-    return GetBuilder<ArticlesController>(
-      builder: (ArticlesController controller) {
-        final status = controller.status.value;
-        final articles = controller.articles;
-
-        return _StatusSwitcher(
-          status: status,
-          child: ListView.separated(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            itemCount: articles.length,
-            itemBuilder: (context, index) {
-              final article = articles[index];
-              return FeedTile(
-                article: article, 
-                onTap: () {
-                  Navigator.pushNamed(
-                    context, 
-                    '/detail',
-                    arguments: ArticleArgs(articleId: article.id),  
-                  );
-                },
-              );
-            }, separatorBuilder: (BuildContext context, int index) {
-              return const Divider();
-            },
           ),
         );
       },

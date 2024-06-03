@@ -20,12 +20,14 @@ PhotoAlbumResponse _$PhotoAlbumResponseFromJson(Map<String, dynamic> json) =>
               ?.map((e) => PhotoResponse.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      imageUrl: PhotoAlbumResponse._parseFileUrl(json['image'] as String?),
     );
 
 Map<String, dynamic> _$PhotoAlbumResponseToJson(PhotoAlbumResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
+      'image': instance.imageUrl,
       'publishTime': instance.publishTime?.toIso8601String(),
       'brief': instance.brief,
       'creatorTitle': instance.creator,

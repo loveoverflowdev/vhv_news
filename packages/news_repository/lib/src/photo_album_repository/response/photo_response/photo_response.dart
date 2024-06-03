@@ -6,7 +6,9 @@ part 'photo_response.g.dart';
 
 @JsonSerializable()
 class PhotoResponse {
-  final String imageUrl;
+  @JsonKey(name: 'image', fromJson: _parseFileUrl)
+  final String? imageUrl;
+
   final String? title;
 
   @JsonKey(fromJson: _parseIsAvatar)
@@ -23,4 +25,6 @@ class PhotoResponse {
   Map<String, dynamic> toJson() => _$PhotoResponseToJson(this);
 
   static bool _parseIsAvatar(int? isFeatured) => utils.parseBoolFromNum(isFeatured);
+
+  static String? _parseFileUrl(String? url) => utils.parseFileUrl(url);
 }

@@ -15,7 +15,7 @@ class RemoteLegalDocumentRepository extends LegalDocumentRepository {
   Future<LegalDocumentDetailResponse> getLegalDocumentDetail({required String id}) {
     return _apiClient
       .selectById(
-        endpoints.article,
+        endpoints.legalDocument,
         id: id,
       )
       .then(
@@ -24,10 +24,11 @@ class RemoteLegalDocumentRepository extends LegalDocumentRepository {
   }
 
   @override
-  Future<List<LegalDocumentResponse>> getLegalDocuments() {
+  Future<List<LegalDocumentResponse>> getLegalDocuments({String? categoryId}) {
     return _apiClient
       .selectAllMap(
-        endpoints.article, 
+        endpoints.legalDocument,
+        queryParameters: categoryId != null ? {'categoryId': categoryId} : null,
       )
       .then(
         (responses) => responses.map((e) => LegalDocumentResponse.fromJson(e)

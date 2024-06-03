@@ -1,8 +1,7 @@
-import 'package:news_repository/news_repository.dart';
-
 import '../core/endpoints.dart' as endpoints;
 
-import 'response/response.dart';
+import '../core/news_api_client.dart';
+import 'photo_album_repository.dart';
 
 class RemotePhotoAlbumRepository extends PhotoAlbumRepository {
   final NewsApiClient _apiClient;
@@ -15,7 +14,7 @@ class RemotePhotoAlbumRepository extends PhotoAlbumRepository {
   Future<List<PhotoAlbumResponse>> getPhotoAlbums() {
     return _apiClient
       .selectAllMap(
-        endpoints.article, 
+        endpoints.photoAlbum, 
       )
       .then(
         (responses) => responses.map((e) => PhotoAlbumResponse.fromJson(e)

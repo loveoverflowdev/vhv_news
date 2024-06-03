@@ -18,6 +18,8 @@ class ArticlesController extends GetxController {
     String? categoryId,
   }) async {
     status.value = RxStatus.loading();
+    update();
+    
     _articleRepository
       .getArticles(categoryId: categoryId)
       .then((response) {
@@ -29,5 +31,12 @@ class ArticlesController extends GetxController {
         status.value = RxStatus.error(e.toString());
         update();
       });
+  }
+
+  @override
+  void onClose() {
+    articles.close();
+    status.close();
+    super.onClose();
   }
 }

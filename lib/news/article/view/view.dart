@@ -1,1 +1,2 @@
-export 'article_page.dart';
+export 'article_detail/article_detail_page.dart';
+export 'articles/articles_page.dart';

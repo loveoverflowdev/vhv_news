@@ -3,11 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
+import '../routes/routes.dart' as routes;
 
 import '../../home/home.dart';
 import '../../category/category.dart';
 import '../../news/article/article.dart';
-import '../routes/routes.dart' as routes;
+import '../../news/legal_document/legal_document.dart';
+
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -37,11 +39,19 @@ class AppBinding extends Bindings {
     Get.put<CategoryRepository>(CategoryRepository.remote(
       apiClient: Get.find()),
     );
+    Get.put<LegalDocumentRepository>(LegalDocumentRepository.remote(
+      apiClient: Get.find()),
+    );
+    Get.put<PhotoAlbumRepository>(PhotoAlbumRepository.remote(
+      apiClient: Get.find()),
+    );
 
     // Controllers
+    // TODO: refactor
     Get.put<HomeController>(HomeController());
     Get.put<ArticlesController>(ArticlesController(articleRepository: Get.find()));
     Get.put<ArticleDetailController>(ArticleDetailController(articleRepository: Get.find()));
     Get.put<CategoryController>(CategoryController(categoryRepository: Get.find()));
+    // Get.put<LegalDocumentsController>(LegalDocumentsController(legalDocumentRepository: Get.find()));
   }
 }

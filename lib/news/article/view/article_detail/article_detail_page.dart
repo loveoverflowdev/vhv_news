@@ -1,32 +1,31 @@
-
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../controller/controller.dart';
-import '../widgets/widgets.dart';
-import 'article_view.dart';
+import '../../controller/controller.dart';
+import '../../widgets/widgets.dart';
+import 'article_detail_view.dart';
 
-class ArticleArgs {
+class ArticleDetailArgs {
   final String articleId;
 
-  ArticleArgs({
+  ArticleDetailArgs({
     required this.articleId,
   });
 }
 
-class ArticlePage extends StatelessWidget {
+class ArticleDetailPage extends StatelessWidget {
 
-  final ArticleArgs args;
+  final ArticleDetailArgs args;
 
-  const ArticlePage({super.key, required this.args});
+  const ArticleDetailPage({super.key, required this.args});
 
 
   static Route route({
-    required ArticleArgs args,
+    required ArticleDetailArgs args,
   }) => MaterialPageRoute(
-    builder: (_) => ArticlePage(args: args),
+    builder: (_) => ArticleDetailPage(args: args),
   );
 
   @override
@@ -34,7 +33,6 @@ class ArticlePage extends StatelessWidget {
     return GetBuilder<ArticleDetailController>(
       initState: (state) {
         Get.find<ArticleDetailController>().loadArticleDetail(args.articleId);
-        // state.controller?.loadArticleDetail(args.articleId);
       },
       builder: (ArticleDetailController controller) {
         final articleDetail = controller.articleDetail.value;

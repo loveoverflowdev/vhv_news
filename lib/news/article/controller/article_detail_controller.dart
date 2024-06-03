@@ -28,4 +28,10 @@ class ArticleDetailController extends GetxController {
     super.onInit();
     articleDetail = Rx<ArticleDetailResponse?>(null);
   }
+
+  @override
+  void onClose() {
+    articleDetail.close();
+    super.onClose();
+  }
 }

@@ -2,8 +2,7 @@ import 'package:app_ui/app_ui.dart' show AppCarousel;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../news/controller/controller.dart';
-import '../../../news/view/article_page.dart';
+import '../../../news/article/article.dart';
 import '../../widgets/widgets.dart';
 import 'common.dart';
 

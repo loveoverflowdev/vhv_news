@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart' show CategoryChildType, CategoryResponse;
 
-import '../../news/article.dart';
 import '../../category/category.dart' show CategoryController;
 
+import '../../news/article/article.dart';
 import '../widgets/widgets.dart';
 
 class FeedView extends StatelessWidget {
@@ -44,7 +44,6 @@ class _CategoryFeedView extends StatelessWidget {
   final CategoryResponse? category;
 
   const _CategoryFeedView({
-    super.key, 
     required this.category,
   });
 

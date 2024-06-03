@@ -20,7 +20,6 @@ final class NewsApiEndpoint {
 }
 
 enum ArticleType {
-  person,
   news,
   photoAlbum,
   legalDocument,
@@ -29,8 +28,6 @@ enum ArticleType {
 
   String toParams() {
     switch (this) {
-      case ArticleType.person:
-        return 'Article.Person';
       case ArticleType.news:
         return 'Article.News';
       case ArticleType.photoAlbum:

@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
 
 import '../../home/home.dart';
-import '../../news/article.dart';
 import '../../category/category.dart';
+import '../../news/article/article.dart';
 import '../routes/routes.dart' as routes;
 
 class App extends StatelessWidget {
@@ -31,10 +31,10 @@ class AppBinding extends Bindings {
     Get.put<NewsApiClient>(NewsApiClient.common(dio: Dio()));
 
     // Repositories
-    Get.put<ArticleRepository>(ArticleRepositoryImpl(
+    Get.put<ArticleRepository>(ArticleRepository.remote(
       apiClient: Get.find()),
     );
-    Get.put<CategoryRepository>(CategoryRepositoryImpl(
+    Get.put<CategoryRepository>(CategoryRepository.remote(
       apiClient: Get.find()),
     );
 

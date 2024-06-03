@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vhv_news/news/article.dart';
 
 import '../../home/home.dart';
+import '../../news/article/article.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {

@@ -19,6 +19,9 @@ class LegalDocumentDetailResponse {
   @JsonKey(fromJson: _parseIsFeatured)
   final bool isFeatured;
 
+  final String? code;
+
+  @JsonKey(name: 'otherFiles', fromJson: _parseAttachedFiles)
   final List<FileResponse> attachedFiles;
 
   LegalDocumentDetailResponse({
@@ -26,6 +29,7 @@ class LegalDocumentDetailResponse {
     this.title,
     this.creator,
     this.brief,
+    this.code,
     required this.isFeatured,
     this.attachedFiles = const [],
   });
@@ -36,4 +40,7 @@ class LegalDocumentDetailResponse {
   Map<String, dynamic> toJson() => _$LegalDocumentDetailResponseToJson(this);
 
   static bool _parseIsFeatured(int? isFeatured) => utils.parseBoolFromNum(isFeatured);
+
+  static List<FileResponse> _parseAttachedFiles(dynamic json)
+  => json is Map ? json.entries.map((e) => FileResponse.fromJson(e.value)).toList() : [];
 }

@@ -7,12 +7,12 @@ part of 'file_response.dart';
 // **************************************************************************
 
 FileResponse _$FileResponseFromJson(Map<String, dynamic> json) => FileResponse(
-      title: json['title'] as String,
-      fileUrl: json['fileUrl'] as String,
+      title: json['title'] as String?,
+      fileUrl: json['file'] as String,
     );
 
 Map<String, dynamic> _$FileResponseToJson(FileResponse instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'fileUrl': instance.fileUrl,
+      'file': instance.fileUrl,
     };

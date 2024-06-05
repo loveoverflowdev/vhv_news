@@ -33,7 +33,7 @@ const _$CategoryChildTypeEnumMap = {
   CategoryChildType.introduction: 'introduction',
   CategoryChildType.news: 'news',
   CategoryChildType.legalDocument: 'legalDocument',
-  CategoryChildType.photoAlbum: 'photoAlbumn',
+  CategoryChildType.photoAlbum: 'photoAlbum',
   CategoryChildType.video: 'video',
   CategoryChildType.emagazine: 'emagazine',
   CategoryChildType.unsupported: 'unsupported',

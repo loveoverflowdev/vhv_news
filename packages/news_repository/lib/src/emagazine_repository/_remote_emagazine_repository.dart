@@ -1,7 +1,6 @@
 import '../core/endpoints.dart' as endpoints;
 import '../core/news_api_client.dart';
 import 'emagazine_repository.dart';
-import 'response/response.dart';
 
 class RemoteEmagazineRepository extends EmagazineRepository {
   final NewsApiClient _apiClient;

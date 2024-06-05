@@ -2,6 +2,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../core/utils.dart' as utils;
+import '../file_response/file_response.dart';
 
 part 'legal_document_response.g.dart';
 
@@ -9,6 +10,7 @@ part 'legal_document_response.g.dart';
 class LegalDocumentResponse {
   final String id;
   final String? title;
+  final String? code;
 
   @JsonKey(name: 'creatorTitle')
   final String? creator;
@@ -18,12 +20,17 @@ class LegalDocumentResponse {
   @JsonKey(fromJson: _parseIsFeatured)
   final bool isFeatured;
 
+  @JsonKey(name: 'otherFiles', fromJson: _parseAttachedFiles)
+  final List<FileResponse> attachedFiles;
+
   LegalDocumentResponse({
     required this.id,
     this.title,
     this.creator,
     this.brief,
     required this.isFeatured,
+    this.code,
+    this.attachedFiles = const [],
   });
 
   factory LegalDocumentResponse.fromJson(Map<String, dynamic> json) =>
@@ -32,4 +39,7 @@ class LegalDocumentResponse {
   Map<String, dynamic> toJson() => _$LegalDocumentResponseToJson(this);
 
   static bool _parseIsFeatured(int? isFeatured) => utils.parseBoolFromNum(isFeatured);
+
+  static List<FileResponse> _parseAttachedFiles(dynamic json)
+  => json is Map ? json.entries.map((e) => FileResponse.fromJson(e.value)).toList() : [];
 }

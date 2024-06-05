@@ -15,6 +15,10 @@ LegalDocumentResponse _$LegalDocumentResponseFromJson(
       brief: json['brief'] as String?,
       isFeatured: LegalDocumentResponse._parseIsFeatured(
           (json['isFeatured'] as num?)?.toInt()),
+      code: json['code'] as String?,
+      attachedFiles: json['otherFiles'] == null
+          ? const []
+          : LegalDocumentResponse._parseAttachedFiles(json['otherFiles']),
     );
 
 Map<String, dynamic> _$LegalDocumentResponseToJson(
@@ -22,7 +26,9 @@ Map<String, dynamic> _$LegalDocumentResponseToJson(
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
+      'code': instance.code,
       'creatorTitle': instance.creator,
       'brief': instance.brief,
       'isFeatured': instance.isFeatured,
+      'otherFiles': instance.attachedFiles,
     };

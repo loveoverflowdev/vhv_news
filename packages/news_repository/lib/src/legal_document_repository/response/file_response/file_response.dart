@@ -5,7 +5,9 @@ part 'file_response.g.dart';
 
 @JsonSerializable()
 class FileResponse {
-  final String title;
+  final String? title;
+
+  @JsonKey(name: 'file')
   final String fileUrl;
   
   FileResponse({

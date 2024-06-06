@@ -10,28 +10,25 @@ class NavDrawerSections extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CategoryController>(
-      builder: (CategoryController controller) {
-        final categories = controller.categories;
-
-        return Column(
-          children: [
-            const NavDrawerSectionsTitle(),
-            ...[
-              for (final category in categories)
-                NavDrawerSectionItem(
-                  key: ValueKey(category),
-                  title: toBeginningOfSentenceCase(category.title) ?? '',
-                  selected: category == controller.selectedCategory.value,
-                  onTap: () {
-                    controller.selectCategory(category);
-                    Scaffold.of(context).closeDrawer();
-                  },
-                ),
-            ],
+    final categoryController = Get.find<CategoryController>();
+    return Obx(
+      () => Column(
+        children: [
+          const NavDrawerSectionsTitle(),
+          ...[
+            for (final category in categoryController.categories)
+              NavDrawerSectionItem(
+                key: ValueKey(category),
+                title: toBeginningOfSentenceCase(category.title) ?? '',
+                selected: category == categoryController.selectedCategory.value,
+                onTap: () {
+                  categoryController.selectCategory(category);
+                  Scaffold.of(context).closeDrawer();
+                },
+              ),
           ],
-        );
-      }
+        ],
+      ),
     );
   }
 }

@@ -19,16 +19,15 @@ class PhotoAlbumDetailController extends GetxController {
     required String id,
   }) async {
     status.value = RxStatus.loading();
-    update();
 
     try {
      photoAlbum.value = await _photoAlbumRepository.getPhotoAlbumDetail(id: id);
       status.value = RxStatus.success();
-    } catch (e) {
+    } catch (e, stackTrace) {
       status.value = RxStatus.error(e.toString());
-    } finally {
-      update();
-    }
+
+      e.printError(info: stackTrace.toString());
+    } 
   }
 
   @override

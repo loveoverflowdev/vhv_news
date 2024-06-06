@@ -9,5 +9,5 @@ bool parseBoolFromNum(num? value) => value != 0;
 
 DateTime? parseDateTimeFromMillisecondsSinceEpoch(int? value) 
   => value != null 
-    ? DateTime.fromMillisecondsSinceEpoch(value) 
+    ? DateTime.fromMillisecondsSinceEpoch(value * 1000) 
     : null;

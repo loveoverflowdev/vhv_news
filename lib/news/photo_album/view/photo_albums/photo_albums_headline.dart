@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -8,8 +7,11 @@ import 'package:vhv_news/news/photo_album/photo_album.dart';
 
 class PhotoAlbumsHeadline extends StatefulWidget {
   final CategoryResponse category;
-  
-  const PhotoAlbumsHeadline({super.key, required this.category,});
+
+  const PhotoAlbumsHeadline({
+    super.key,
+    required this.category,
+  });
 
   @override
   State<PhotoAlbumsHeadline> createState() => _PhotoAlbumsHeadlineState();
@@ -33,37 +35,27 @@ class _PhotoAlbumsHeadlineState extends State<PhotoAlbumsHeadline> {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            title: Text(widget.category.title, 
+            title: Text(
+              widget.category.title,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           Expanded(
-            child: GetBuilder<PhotoAlbumsController>(
-              init: _photoAlbumsController,
-              builder: (controller) {
-                final photoAlbums = controller.photoAlbums;
+            child: Obx(() {
+                final photoAlbums = _photoAlbumsController.photoAlbums;
                 final length = min(photoAlbums.length, 3);
                 return Column(
                   children: [
-                    for (int index = 0; index < length; index++) 
+                    for (int index = 0; index < length; index++)
                       ListTile(
-                        title: Text(photoAlbums[index].title, 
+                        title: Text(
+                          photoAlbums[index].title,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                   ],
                 );
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: length,
-                  itemBuilder: (context, index) 
-                  => ListTile(
-                      title: Text(photoAlbums[index].title, 
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                );
-              }
+              },
             ),
           )
         ],

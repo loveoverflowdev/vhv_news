@@ -18,18 +18,15 @@ class ArticlesController extends GetxController {
     String? categoryId,
   }) async {
     status.value = RxStatus.loading();
-    update();
     
     _articleRepository
       .getArticles(categoryId: categoryId)
       .then((response) {
         status.value = RxStatus.success();
         articles.value = response;
-        update();
       })
       .catchError((e) {
         status.value = RxStatus.error(e.toString());
-        update();
       });
   }
 

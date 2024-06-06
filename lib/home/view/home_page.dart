@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' show GetBuilder;
+import 'package:get/get.dart' show Get, Inst, Obx;
 import 'package:vhv_news/home/home.dart';
 import 'package:vhv_news/navigation/view/nav_drawer.dart';
 
@@ -19,10 +19,9 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: AppBar(
-        title: GetBuilder<CategoryController>(
-          builder: (controller) {
-            return Text(controller.selectedCategory.value?.title ?? '');
-          }
+        title: Obx(
+            () => Text(Get.find<CategoryController>().selectedCategory.value?.title ?? '',
+          ),
         ),
       ),
       body: const HomeView(),

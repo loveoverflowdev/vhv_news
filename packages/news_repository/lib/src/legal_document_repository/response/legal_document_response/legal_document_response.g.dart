@@ -19,6 +19,9 @@ LegalDocumentResponse _$LegalDocumentResponseFromJson(
       attachedFiles: json['otherFiles'] == null
           ? const []
           : LegalDocumentResponse._parseAttachedFiles(json['otherFiles']),
+      publishTime:
+          LegalDocumentResponse._parseDateTimeFromMillisecondsSinceEpoch(
+              (json['publishTime'] as num?)?.toInt()),
     );
 
 Map<String, dynamic> _$LegalDocumentResponseToJson(
@@ -31,4 +34,5 @@ Map<String, dynamic> _$LegalDocumentResponseToJson(
       'brief': instance.brief,
       'isFeatured': instance.isFeatured,
       'otherFiles': instance.attachedFiles,
+      'publishTime': instance.publishTime?.toIso8601String(),
     };

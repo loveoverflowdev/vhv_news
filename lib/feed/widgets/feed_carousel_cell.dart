@@ -1,4 +1,5 @@
 
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
@@ -28,7 +29,7 @@ class FeedCarouselCell extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: const [
             BoxShadow(
-              color: Colors.black26,
+              color: AppColors.brightGrey,
               blurRadius: 4.0,
               offset: Offset(0, 2),
             ),
@@ -60,18 +61,18 @@ class FeedCarouselCell extends StatelessWidget {
                         title,
                         maxLines: 3,
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppColors.white,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(width: AppSpacing.lg),
                       SizedBox(
                         height: 60,
                         child: HtmlWidget(
                           description,
                           textStyle: const TextStyle(
-                            color: Colors.white,
+                            color: AppColors.white,
                             fontSize: 14.0,
                           ),
                         ),

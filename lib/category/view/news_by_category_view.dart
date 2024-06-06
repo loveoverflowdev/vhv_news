@@ -6,19 +6,28 @@ import '../../news/legal_document/legal_document.dart';
 import '../../news/photo_album/photo_album.dart';
 
 class NewsByCategoryView extends StatelessWidget {
-  final CategoryResponse category;
+  final CategoryResponse? category;
 
   const NewsByCategoryView({
     super.key, 
     required this.category,
   });
 
+
   @override
   Widget build(BuildContext context) {
+    if (category == null) {
+      return const Placeholder(
+        child: Text(
+          // TODO: localize
+          'category is not selected',
+        ),
+      );
+    }
     return ListView.separated(
-      itemCount: category.children.length,
+      itemCount: category!.children.length,
       itemBuilder: (context, index) {
-        final categoryChild = category.children[index];
+        final categoryChild = category!.children[index];
         switch (categoryChild.childType) {
           case CategoryChildType.introduction:
             return _IntroductionViewHeadline(

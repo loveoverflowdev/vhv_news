@@ -24,12 +24,20 @@ class LegalDocumentDetailResponse {
   @JsonKey(name: 'otherFiles', fromJson: _parseAttachedFiles)
   final List<FileResponse> attachedFiles;
 
+  @JsonKey(fromJson: _parseDateTimeFromMillisecondsSinceEpoch)
+  final DateTime? publishTime;
+
+  @JsonKey(fromJson: _parseDateTimeFromMillisecondsSinceEpoch)
+  final DateTime? lastUpdateTime;
+
   LegalDocumentDetailResponse({
     required this.id,
     this.title,
     this.creator,
     this.brief,
     this.code,
+    this.lastUpdateTime,
+    this.publishTime,
     required this.isFeatured,
     this.attachedFiles = const [],
   });
@@ -42,5 +50,8 @@ class LegalDocumentDetailResponse {
   static bool _parseIsFeatured(int? isFeatured) => utils.parseBoolFromNum(isFeatured);
 
   static List<FileResponse> _parseAttachedFiles(dynamic json)
-  => json is Map ? json.entries.map((e) => FileResponse.fromJson(e.value)).toList() : [];
+    => json is Map ? json.entries.map((e) => FileResponse.fromJson(e.value)).toList() : [];
+
+  static DateTime? _parseDateTimeFromMillisecondsSinceEpoch(int? publishTime) 
+    => utils.parseDateTimeFromMillisecondsSinceEpoch(publishTime);
 }

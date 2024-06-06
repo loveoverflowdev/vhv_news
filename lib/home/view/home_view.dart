@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:vhv_news/feed/view/feed_view.dart';
@@ -10,17 +9,12 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (HomeController controller) {
-        final tabIndex = controller.tabIndex.value;
-        return IndexedStack(
-          index: tabIndex,
-          children: [
-            const FeedView(),
-            Placeholder(),
-          ],
-        );
-      }
-    );
+    return Obx(() => IndexedStack(
+      index: Get.find<HomeController>().tabIndex.value,
+      children: const [
+        FeedView(),
+        Placeholder(),
+      ],
+    ));
   }
 }

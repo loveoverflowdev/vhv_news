@@ -58,20 +58,11 @@ class _ArticleViewState extends State<ArticleView> {
                   // fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(width: AppSpacing.lg),
               content,
             ],
           ),
         ),
-        // Text(
-        //   article?.title ?? '',
-        //   style: const TextStyle(
-        //     fontSize: 20.0,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
-        // const SizedBox(height: 16),
-        // content,
       ],
     );
   }

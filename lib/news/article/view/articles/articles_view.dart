@@ -13,34 +13,30 @@ class ArticlesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ArticlesController>(
-      builder: (ArticlesController controller) {
-        final status = controller.status.value;
-        final articles = controller.articles;
-
-        return StatusSwitcher(
-          status: status,
-          child: ListView.separated(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            itemCount: articles.length,
-            itemBuilder: (context, index) {
-              final article = articles[index];
-              return ArticleTile(
-                article: article, 
-                onTap: (article) {
-                  Navigator.pushNamed(
-                    context, 
-                    '/detail',
-                    arguments: ArticleDetailArgs(articleId: article.id),  
-                  );
-                },
+    final articleController = Get.find<ArticlesController>();
+    return Obx(() => StatusSwitcher(
+      status: articleController.status.value,
+      child: Obx(() => ListView.separated(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        itemCount: articleController.articles.length,
+        itemBuilder: (context, index) {
+          final article = articleController.articles[index];
+          return ArticleTile(
+            article: article, 
+            onTap: (article) {
+              Navigator.pushNamed(
+                context, 
+                '/detail',
+                arguments: ArticleDetailArgs(articleId: article.id),  
               );
-            }, separatorBuilder: (BuildContext context, int index) {
-              return const Divider();
             },
-          ),
-        );
-      },
+          );
+        }, 
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider();
+        },
+      )),
+    ),
     );
   }
 }

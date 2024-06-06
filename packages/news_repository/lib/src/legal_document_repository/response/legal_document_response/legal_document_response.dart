@@ -23,6 +23,9 @@ class LegalDocumentResponse {
   @JsonKey(name: 'otherFiles', fromJson: _parseAttachedFiles)
   final List<FileResponse> attachedFiles;
 
+  @JsonKey(fromJson: _parseDateTimeFromMillisecondsSinceEpoch)
+  final DateTime? publishTime;
+
   LegalDocumentResponse({
     required this.id,
     this.title,
@@ -31,6 +34,7 @@ class LegalDocumentResponse {
     required this.isFeatured,
     this.code,
     this.attachedFiles = const [],
+    this.publishTime,
   });
 
   factory LegalDocumentResponse.fromJson(Map<String, dynamic> json) =>
@@ -42,4 +46,7 @@ class LegalDocumentResponse {
 
   static List<FileResponse> _parseAttachedFiles(dynamic json)
   => json is Map ? json.entries.map((e) => FileResponse.fromJson(e.value)).toList() : [];
+
+  static DateTime? _parseDateTimeFromMillisecondsSinceEpoch(int? publishTime) 
+    => utils.parseDateTimeFromMillisecondsSinceEpoch(publishTime);
 }

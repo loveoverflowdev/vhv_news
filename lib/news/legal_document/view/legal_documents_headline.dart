@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart' show CategoryResponse;
 import 'package:vhv_news/news/legal_document/controller/legal_documents_controller.dart';
 
+import '../widgets/widgets.dart';
+
 class LegalDocumentsHeadline extends StatefulWidget {
   final CategoryResponse category;
   
@@ -53,52 +55,23 @@ class _LegalDocumentsHeadlineState extends State<LegalDocumentsHeadline> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GetBuilder<LegalDocumentsController>(
-                init: _legalDocumentsController,
-                builder: (controller) {
-                  final legalDocuments = controller.legalDocuments;
+              child: Obx(() {
+                  final legalDocuments = _legalDocumentsController.legalDocuments;
                   final length = min(legalDocuments.length, 3);
-                  
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.grey.withOpacity(0.1),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        for (int index = 0; index < length; index++)
-                          TextButton(
-                            onPressed: () {
-                              // showAppModal(
-                              //   builder: (context) {
-                              //     return 
-                              //   },
-                              // );
-                            },
-                            child: Row(
-                              children: [
-                                Text(
-                                  legalDocuments[index].title ?? '', 
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                  textAlign: TextAlign.start,
-                                ),
-                                const Spacer(),
-                                Text(
-                                  'Chi tiết', 
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (int index = 0; index < length; index++)
+                        Builder(
+                          builder: (context) {
+                            final legalDoc = legalDocuments[index];
+                            return LegalDocumentTile(legalDoc: legalDoc);
+                          }
+                        ),
                       ],
-                    ),
-                  );
-                }
+                    );
+                  },
               ),
             ),
           )
@@ -107,3 +80,4 @@ class _LegalDocumentsHeadlineState extends State<LegalDocumentsHeadline> {
     );
   }
 }
+

@@ -15,60 +15,70 @@ class ArticleDetailArgs {
   });
 }
 
-class ArticleDetailPage extends StatelessWidget {
-
+class ArticleDetailPage extends StatefulWidget {
   final ArticleDetailArgs args;
 
   const ArticleDetailPage({super.key, required this.args});
 
-
   static Route route({
     required ArticleDetailArgs args,
-  }) => MaterialPageRoute(
-    builder: (_) => ArticleDetailPage(args: args),
-  );
+  }) =>
+      MaterialPageRoute(
+        builder: (_) => ArticleDetailPage(args: args),
+      );
+
+  @override
+  State<ArticleDetailPage> createState() => _ArticleDetailPageState();
+}
+
+class _ArticleDetailPageState extends State<ArticleDetailPage> {
+  late final ArticleDetailController _articleDetailController;
+
+  @override
+  void initState() {
+    super.initState();
+    _articleDetailController = Get.find<ArticleDetailController>()
+      ..loadArticleDetail(widget.args.articleId);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ArticleDetailController>(
-      initState: (state) {
-        Get.find<ArticleDetailController>().loadArticleDetail(args.articleId);
-      },
-      builder: (ArticleDetailController controller) {
-        final articleDetail = controller.articleDetail.value;
-
+    return Obx(
+      () {
+        final articleDetail = _articleDetailController.articleDetail.value;
         final rewriteUrl = articleDetail?.rewriteUrl;
         final articleTitle = articleDetail?.title;
 
-
         return Scaffold(
           appBar: AppBar(
-            title:  Text(articleTitle ?? ''),
+            title: Text(articleTitle ?? ''),
             systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarIconBrightness:Brightness.dark,
-                statusBarBrightness:Brightness.light,
-              ),
-              leading: AppBackButton(
-                onPressed: Navigator.of(context).pop,
-              ),
-              actions: [
-                if (rewriteUrl?.isNotEmpty == true)
-                  Padding(
-                    key: const Key('articlePage_shareButton'),
-                    padding: const EdgeInsets.only(right: AppSpacing.lg),
-                    child: ShareButton(
-                      shareText: 'Chia sẻ',
-                      color: AppColors.highEmphasisSurface,
-                      onPressed: () {
-                        controller.shareArticle(url: rewriteUrl ?? '');
-                      },
-                    ),
-                  ),
-              ],
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.light,
             ),
-          body: ArticleView(article: articleDetail,),
+            leading: AppBackButton(
+              onPressed: Navigator.of(context).pop,
+            ),
+            actions: [
+              if (rewriteUrl?.isNotEmpty == true)
+                Padding(
+                  key: const Key('articlePage_shareButton'),
+                  padding: const EdgeInsets.only(right: AppSpacing.lg),
+                  child: ShareButton(
+                    shareText: 'Chia sẻ',
+                    color: AppColors.highEmphasisSurface,
+                    onPressed: () {
+                      _articleDetailController.shareArticle(url: rewriteUrl ?? '');
+                    },
+                  ),
+                ),
+            ],
+          ),
+          body: ArticleView(
+            article: articleDetail,
+          ),
         );
-      }
+      },
     );
   }
 }

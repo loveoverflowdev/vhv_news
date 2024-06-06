@@ -14,6 +14,12 @@ LegalDocumentDetailResponse _$LegalDocumentDetailResponseFromJson(
       creator: json['creatorTitle'] as String?,
       brief: json['brief'] as String?,
       code: json['code'] as String?,
+      lastUpdateTime:
+          LegalDocumentDetailResponse._parseDateTimeFromMillisecondsSinceEpoch(
+              (json['lastUpdateTime'] as num?)?.toInt()),
+      publishTime:
+          LegalDocumentDetailResponse._parseDateTimeFromMillisecondsSinceEpoch(
+              (json['publishTime'] as num?)?.toInt()),
       isFeatured: LegalDocumentDetailResponse._parseIsFeatured(
           (json['isFeatured'] as num?)?.toInt()),
       attachedFiles: json['otherFiles'] == null
@@ -31,4 +37,6 @@ Map<String, dynamic> _$LegalDocumentDetailResponseToJson(
       'isFeatured': instance.isFeatured,
       'code': instance.code,
       'otherFiles': instance.attachedFiles,
+      'publishTime': instance.publishTime?.toIso8601String(),
+      'lastUpdateTime': instance.lastUpdateTime?.toIso8601String(),
     };

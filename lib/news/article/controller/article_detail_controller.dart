@@ -14,7 +14,6 @@ class ArticleDetailController extends GetxController {
 
   void loadArticleDetail(String id) async {
     articleDetail.value = await _articleRepository.getArticleDetail(id: id);
-    update();
   }
 
   void shareArticle({

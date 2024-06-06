@@ -19,12 +19,11 @@ class CategoryController extends GetxController {
 
   void selectCategory(CategoryResponse category) {
     selectedCategory.value = category;
-    update();
   }
-
 
   void getCategories() {
     status.value = RxStatus.loading();
+    
     _categoryRepository
       .getCategories()
       .then((respone) {
@@ -34,11 +33,9 @@ class CategoryController extends GetxController {
         if (categories.isNotEmpty) {
           selectedCategory.value = categories.first;
         }
-        update();
       })
-      .catchError((e) {
+      .catchError((e, stackTrace) {
         status.value = RxStatus.error(e.toString());
-        update();
       });
   }
 

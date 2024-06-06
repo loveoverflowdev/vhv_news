@@ -16,18 +16,16 @@ class LegalDocumentsController extends GetxController {
 
   void getLegalDocuments({String? categoryId}) async {
     status.value = RxStatus.loading();
-    update();
 
     try {
       final legalDocuments = await _legalDocumentRepository.getLegalDocuments(categoryId: categoryId);
       this.legalDocuments.value = legalDocuments;
       status.value = RxStatus.success();
-    } catch (e) {
+    } catch (e, stackTrace) {
       status.value = RxStatus.error(e.toString());
-    } finally {
-      update();
+
+      e.printError(info: stackTrace.toString());
     }
-    
   }
 
   @override

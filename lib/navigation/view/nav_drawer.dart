@@ -42,7 +42,7 @@ class NavDrawer extends StatelessWidget {
                     Expanded(
                       child: Text('Cổng thông tin Vusta Vĩnh Phúc', 
                         style: Theme.of(context).textTheme.titleLarge
-                        ?.copyWith(color: Colors.white),
+                        ?.copyWith(color: AppColors.white),
                       ),
                     ),
                   ],

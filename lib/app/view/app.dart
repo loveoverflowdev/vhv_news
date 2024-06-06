@@ -7,7 +7,6 @@ import '../routes/routes.dart' as routes;
 
 import '../../home/home.dart';
 import '../../category/category.dart';
-import '../../news/article/article.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

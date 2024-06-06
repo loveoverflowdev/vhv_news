@@ -1,10 +1,8 @@
-
-import 'dart:ffi';
-
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_repository/news_repository.dart' show LegalDocumentResponse;
+import 'package:news_repository/news_repository.dart' show FileResponse, LegalDocumentResponse;
+import 'package:open_file_plus/open_file_plus.dart';
 
 import '../controller/controller.dart' show LegalDocumentDetailController;
 
@@ -58,21 +56,27 @@ class _LegalDocumentDetailViewState extends State<LegalDocumentDetailView> {
           title: 'Publish time: ',
           content: AppDateTimeLabel(
             dateTime: widget.legalDocument.publishTime,
-            textStyle: Theme.of(context).textTheme.bodyMedium,
+            textStyle: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         Obx(
-          () => _buildLabel(
-            context,
-            title: 'Last update time: ',
-            content: AppDateTimeLabel(
-              textStyle: Theme.of(context).textTheme.bodyMedium,
-              dateTime: _legalDocumentDetailController.legalDocumentDetail.value?.lastUpdateTime,
-            ),
-          ),
+          () {
+            final legalDocument = _legalDocumentDetailController.legalDocumentDetail.value;
+            return _buildLabel(
+              context,
+              title: 'Last update time: ',
+              content: legalDocument == null ? null : AppDateTimeLabel(
+                textStyle: Theme.of(context).textTheme.bodyLarge,
+                dateTime: legalDocument.lastUpdateTime,
+              ),
+            );
+          }
         ),        
         const Divider(),
-        _buildFileDowloadTileList(context),
+        _FileTileListView(
+          fileResponses: widget.legalDocument.attachedFiles,
+          legalDocumentDetailController: _legalDocumentDetailController,
+        ),
       ],
     );
   }
@@ -85,44 +89,107 @@ class _LegalDocumentDetailViewState extends State<LegalDocumentDetailView> {
       return const SizedBox.shrink();
     }
 
-    final textStyle =  Theme.of(context).textTheme.bodyMedium?.copyWith(
+    final boldTextStyle =  Theme.of(context).textTheme.bodyLarge?.copyWith(
       fontWeight: FontWeight.w600,
     );
+    final textStyle = Theme.of(context).textTheme.bodyLarge;
+    
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxs, horizontal: AppSpacing.lg),
       child: Row(
         children: [
-          Text(title, style: textStyle,),
+          Text(title, style: boldTextStyle,),
           const SizedBox(width: AppSpacing.lg),
           if (content is Widget) 
             content
           else 
-            Text(content.toString()),
+            Text(content.toString(), style: textStyle,),
         ],
       ),
     );
   }
+}
 
-  Widget _buildFileDowloadTileList(BuildContext context) {
-    // final keyTheme =  Theme.of(context).textTheme.titleMedium?.copyWith(
-    //   fontWeight: FontWeight.w600,
-    // );
-    final fileResponses = widget.legalDocument.attachedFiles;
+class _FileTileListView extends StatefulWidget {
+  final LegalDocumentDetailController legalDocumentDetailController;
+  final List<FileResponse> fileResponses;
+
+  const _FileTileListView({
+    required this.fileResponses,
+    required this.legalDocumentDetailController,
+  });
+
+  @override
+  State<_FileTileListView> createState() => _FileTileListViewState();
+}
+
+class _FileTileListViewState extends State<_FileTileListView> {
+  late List<ValueNotifier<double?>> _valueNotifiers;
+
+  @override
+  void initState() {
+    super.initState();
+    _valueNotifiers = [];
+    for (int i = 0; i < widget.fileResponses.length; i++) {
+      _valueNotifiers.add(ValueNotifier(null));
+    }
+  }
+
+  @override
+  void dispose() {
+    for (final notifier in _valueNotifiers) { notifier.dispose(); }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: fileResponses.length,
+      itemCount: widget.fileResponses.length,
       itemBuilder: (context, index) {
-        final fileResponse = fileResponses[index];
+        final fileResponse = widget.fileResponses[index];
+        final valueNotifier = _valueNotifiers[index];
+
         return TextButton(
           onPressed: () {
-            
+            widget.legalDocumentDetailController.downloadFile(
+              fileResponse.fileUrl,
+              onReceiveProgress: (receivedProgress, total) {
+                valueNotifier.value = receivedProgress / total;
+              },
+            )
+            .then((savedPath) {
+              valueNotifier.value = null;
+              OpenFile.open(savedPath);
+            })
+            .catchError(
+              (error) {
+                valueNotifier.value = null;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(error.toString()),
+                  ),
+                );
+              }
+            );
           },
           child: Row(
             children: [
-              const Icon(Icons.file_download),
+              AppFileIcon(uri: fileResponse.fileUrl),
               const SizedBox(width: AppSpacing.lg),
               Text(fileResponse.title ?? ''),
+              const Spacer(),
+              ValueListenableBuilder(
+                key: ValueKey(fileResponse.fileUrl),
+                valueListenable: valueNotifier,
+                builder: (context, percent, _) {
+                  if (percent == null) {
+                    return const Icon(Icons.file_download_outlined);
+                  }
+                  return AppCircularPercentIndicator(percent: percent);
+                }
+              ),
             ],
           ),
         );

@@ -19,7 +19,6 @@ class _LegalDocumentsListViewState extends State<LegalDocumentsListView> {
 
   @override
   void initState() {
-
     super.initState();
     _legalDocumentsController = LegalDocumentsController(legalDocumentRepository: Get.find())
       ..getLegalDocuments(categoryId: widget.category.id);
@@ -49,36 +48,37 @@ class _LegalDocumentsListViewState extends State<LegalDocumentsListView> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Obx(() => ListView.builder(
-                itemCount: _legalDocumentsController.legalDocuments.length,
-                itemBuilder: (context, index) {
-                    return TextButton(
-                      onPressed: () {
-                          // showAppModal(
-                          //   builder: (context) {
-                          //     return 
-                          //   },
-                          // );
-                      },
-                      child: Row(
-                        children: [
-                        Text(
-                          _legalDocumentsController.legalDocuments[index].title ?? '', 
-                          style: Theme.of(context).textTheme.bodyLarge,
-                          textAlign: TextAlign.start,
-                        ),
-                        const Spacer(),
-                        Text(
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: _legalDocumentsController.legalDocuments.length,
+                  itemBuilder: (context, index) {
+                      return TextButton(
+                        onPressed: () {
+                            // showAppModal(
+                            //   builder: (context) {
+                            //     return 
+                            //   },
+                            // );
+                        },
+                        child: Row(
+                          children: [
+                          Text(
+                            _legalDocumentsController.legalDocuments[index].title ?? '', 
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.start,
+                          ),
+                          const Spacer(),
+                          Text(
                             'Chi tiết', 
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.blueDress,
                             ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           )

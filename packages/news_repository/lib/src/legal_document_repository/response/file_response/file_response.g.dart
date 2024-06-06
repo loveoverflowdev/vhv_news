@@ -8,7 +8,7 @@ part of 'file_response.dart';
 
 FileResponse _$FileResponseFromJson(Map<String, dynamic> json) => FileResponse(
       title: json['title'] as String?,
-      fileUrl: json['file'] as String,
+      fileUrl: FileResponse._parseFileUrl(json['file'] as String?),
     );
 
 Map<String, dynamic> _$FileResponseToJson(FileResponse instance) =>

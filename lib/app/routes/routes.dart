@@ -42,7 +42,7 @@ extension PageRouteNameExt on PageRouteName {
     switch (routeName) {
       case PageRouteName.home: 
         return HomePage.route();
-      case PageRouteName.articleDetail: 
+      case PageRouteName.articleDetail:
         final args = settings.arguments as ArticleDetailArgs;
         return ArticleDetailPage.route(args: args);
       case PageRouteName.photoAlbumDetail: 

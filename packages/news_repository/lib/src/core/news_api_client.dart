@@ -26,6 +26,8 @@ abstract class NewsApiClient {
   Future<List<ApiResponse>> selectByFilter(NewsApiEndpoint endpoint, {
     required Map<String, dynamic> filter,
   });
+
+  Future<dynamic> downloadFile({required String url, void Function(int, int)? onReceiveProgress});
 }
 
 class _CommonNewsApiClient extends NewsApiClient {
@@ -101,5 +103,18 @@ class _CommonNewsApiClient extends NewsApiClient {
     required Map<String, dynamic> filter,
   }) {
     throw UnimplementedError();
+  }
+  
+  @override
+  Future downloadFile({required String url, void Function(int, int)? onReceiveProgress}) async {
+    final Response response = await _dio.get(
+      url,
+      onReceiveProgress: onReceiveProgress,
+      options: Options(
+        responseType: ResponseType.bytes,
+        followRedirects: false,
+      ),
+    );
+    return response.data;
   }
 }

@@ -35,4 +35,9 @@ class RemoteLegalDocumentRepository extends LegalDocumentRepository {
       )
       .toList());
   }
+  
+  @override
+  Future downloadFile({required String url, void Function(int, int)? onReceiveProgress}) {
+    return _apiClient.downloadFile(url: url, onReceiveProgress: onReceiveProgress);
+  }
 }

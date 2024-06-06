@@ -16,21 +16,32 @@ class LegalDocumentTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        showAppModal(
-          builder: (context) {
-            return SafeArea(
-              child: Scaffold(
-                appBar: AppBar(
-                  title: Text(legalDoc.title ?? ''),
-                ),
-                body: LegalDocumentDetailView(
-                  legalDocument: legalDoc,
-                ),
-              ),
-            );
-          }, 
-          context: context,
+        Navigator.push(
+          context, 
+          MaterialPageRoute(builder: (_) => Scaffold(
+            appBar: AppBar(
+              title: Text(legalDoc.title ?? ''),
+            ),
+            body: LegalDocumentDetailView(
+              legalDocument: legalDoc,
+            ),
+          )),
         );
+        // showAppModal(
+        //   builder: (context) {
+        //     return SafeArea(
+        //       child: Scaffold(
+        //         appBar: AppBar(
+        //           title: Text(legalDoc.title ?? ''),
+        //         ),
+        //         body: LegalDocumentDetailView(
+        //           legalDocument: legalDoc,
+        //         ),
+        //       ),
+        //     );
+        //   }, 
+        //   context: context,
+        // );
       },
       child: Row(
         children: [

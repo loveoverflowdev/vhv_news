@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' show RxStatus;
 
-class StatusSwitcher extends StatelessWidget {
-  const StatusSwitcher({super.key, required this.status, required this.child});
+class AppStatusSwitcher extends StatelessWidget {
+  const AppStatusSwitcher({
+    super.key, 
+    required this.status, 
+    required this.child,
+  });
 
   final RxStatus status;
   final Widget child;

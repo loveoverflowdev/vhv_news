@@ -11,9 +11,7 @@ CategoryResponse _$CategoryResponseFromJson(Map<String, dynamic> json) =>
       id: CategoryResponse._parseId(json['_id']),
       title: json['title'] as String,
       treeLevel: (json['treeLevel'] as num).toInt(),
-      children: (json['items'] as List<dynamic>)
-          .map((e) => CategoryResponse.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      children: CategoryResponse._parseChildren(json['items'] as List),
       childType: CategoryResponse._parseChildType(json['childType'] as String),
       rewriteURL:
           CategoryResponse._parseRewriteUrl(json['rewriteURL'] as String?),

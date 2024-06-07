@@ -16,7 +16,7 @@ class CategoryResponse {
   @JsonKey(fromJson: _parseChildType)
   final CategoryChildType childType;
 
-  @JsonKey(name: 'items')
+  @JsonKey(name: 'items', fromJson: _parseChildren)
   final List<CategoryResponse> children;
 
   @JsonKey(name: 'rewriteURL', fromJson: _parseRewriteUrl)
@@ -51,6 +51,18 @@ class CategoryResponse {
     url != null 
       ? NewsApiEndpoint(resource: url).fileUrl 
       : null;
+
+  static List<CategoryResponse> _parseChildren(List<dynamic> children) {
+    final List<CategoryResponse> categories = children.map((child) => CategoryResponse.fromJson(child)).toList();
+    return _flattenCategories(categories).toList();
+  }
+
+  static Iterable<CategoryResponse> _flattenCategories(Iterable<CategoryResponse> categories) sync* {
+    for (final category in categories) {
+      yield category;
+      yield* _flattenCategories(category.children);
+    }
+  }
 }
 
 enum CategoryChildType {

@@ -19,9 +19,9 @@ class VideoTile extends StatelessWidget {
     return InkWell(
       onTap: () => onTap?.call(video),
       child: SizedBox(
-        height: 80,
+        height: 108,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+          padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
           child: Row(
             children: [
               const SizedBox(width: AppSpacing.lg),
@@ -48,9 +48,14 @@ class VideoTile extends StatelessWidget {
                     Flexible(
                       child: HtmlWidget(
                         video.brief ?? '',
-                        textStyle: const TextStyle(
-                          fontSize: 12.0,
-                        ),
+                        textStyle: Theme.of(context).textTheme.bodySmall,
+                        customWidgetBuilder: (element) {
+                          return Text(
+                            element.text,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          );
+                        },
                       ),
                     ),
                   ],

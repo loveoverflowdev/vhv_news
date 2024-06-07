@@ -15,12 +15,9 @@ class ArticleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget leading = article.imageUrl != null ? Padding(
-      padding: const EdgeInsets.all(AppSpacing.xs),
-      child: AppCachedNetworkImage(
-        width: 100,
-        uri: article.imageUrl!,
-      ),
+    final Widget leading = article.imageUrl != null ? AppCachedNetworkImage(
+      width: 100,
+      uri: article.imageUrl!,
     ) : const SizedBox.shrink();
     final Widget title = Text(
       article.title, 
@@ -31,14 +28,12 @@ class ArticleTile extends StatelessWidget {
     // final Widget subtitle = Text(article.brief ?? '');
     final Widget subtitle = HtmlWidget(
       article.brief ?? '',
-      textStyle: const TextStyle(
-        height: 1.5,
-        fontSize: 14.0,
-      ),
+      textStyle: Theme.of(context).textTheme.bodySmall,
       customWidgetBuilder: (element) {
         return Text(
           element.text,
           maxLines: 3,
+          overflow: TextOverflow.ellipsis,
         );
       },
     );
@@ -47,7 +42,7 @@ class ArticleTile extends StatelessWidget {
         onTap?.call(article);
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md, horizontal: AppSpacing.md),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

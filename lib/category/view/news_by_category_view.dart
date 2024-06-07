@@ -23,39 +23,25 @@ class NewsByCategoryView extends StatelessWidget {
     return AppStatusSwitcher(
       status: category != null ? RxStatus.success() : RxStatus.loading(),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            if (category != null)
-              _NewsByCategoryChildType(
-                category: category!,
-              ),
-            for (final child in category!.children)
-              ...[
-                const Divider(),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: AppSpacing.lg),
+          child: Column(
+            children: [
+              if (category != null)
                 _NewsByCategoryChildType(
-                  category: child,
+                  category: category!,
                 ),
-              ]
-          ],
+              for (final child in category?.children ?? [])
+                ...[
+                  const Divider(),
+                  _NewsByCategoryChildType(
+                    category: child,
+                  ),
+                ]
+            ],
+          ),
         ),
       ),
-      // child: ListView.separated(
-      //   padding: const EdgeInsets.only(bottom: AppSpacing.lg),
-      //   itemCount: (category?.children.length ?? 0) + 1,
-      //   itemBuilder: (context, index) {
-      //     if (index == 0) {
-      //       return _NewsByCategoryChildType(
-      //         category: category!,
-      //       );
-      //     }
-
-      //     final categoryChild = category!.children[index - 1];
-      //     return _NewsByCategoryChildType(category: categoryChild);
-      //   },
-      //   separatorBuilder: (BuildContext context, int index) {
-      //     return const Divider();
-      //   },
-      // ),
     );
   }
 }

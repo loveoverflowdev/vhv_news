@@ -2,6 +2,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:news_repository/news_repository.dart';
 
 class EmagazineTile extends StatelessWidget {
@@ -19,9 +20,9 @@ class EmagazineTile extends StatelessWidget {
     return InkWell(
       onTap: () => onTap?.call(emagazine),
       child: SizedBox(
-        height: 80,
+        height: 108,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+          padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
           child: Row(
             children: [
               const SizedBox(width: AppSpacing.lg),
@@ -48,9 +49,14 @@ class EmagazineTile extends StatelessWidget {
                     Flexible(
                       child: HtmlWidget(
                         emagazine.brief ?? '',
-                        textStyle: const TextStyle(
-                          fontSize: 12.0,
-                        ),
+                        textStyle: Theme.of(context).textTheme.bodySmall,
+                        customWidgetBuilder: (element) {
+                          return Text(
+                            element.text,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          );
+                        },
                       ),
                     ),
                   ],

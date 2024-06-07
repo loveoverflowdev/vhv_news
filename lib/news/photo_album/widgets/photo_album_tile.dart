@@ -14,29 +14,32 @@ class PhotoAlbumTile extends StatelessWidget {
       onTap: () {
         onTap.call(photoAlbum);
       },
-      child: Row(
-        children: [
-          AppCachedNetworkImage(uri: photoAlbum.imageUrl ?? ''),
-          const SizedBox(width: AppSpacing.lg),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Text(photoAlbum.title,
-                    style: Theme.of(context).textTheme.titleMedium,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+        child: Row(
+          children: [
+            AppCachedNetworkImage(uri: photoAlbum.imageUrl ?? ''),
+            const SizedBox(width: AppSpacing.lg),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(photoAlbum.title,
+                      style: Theme.of(context).textTheme.titleMedium,
+                      maxLines: 2,
+                    ),
+                  ),
+                  Text(photoAlbum.title,
+                    style: Theme.of(context).textTheme.bodyLarge,
                     maxLines: 2,
                   ),
-                ),
-                Text(photoAlbum.title,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  maxLines: 2,
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

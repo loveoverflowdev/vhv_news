@@ -16,7 +16,7 @@ PhotoAlbumResponse _$PhotoAlbumResponseFromJson(Map<String, dynamic> json) =>
       creator: json['creatorTitle'] as String?,
       totalViews: (json['totalViews'] as num?)?.toInt(),
       totalPhoto: (json['totalPhoto'] as num?)?.toInt(),
-      photos: (json['photos'] as List<dynamic>?)
+      photos: (json['images'] as List<dynamic>?)
               ?.map((e) => PhotoResponse.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
@@ -33,5 +33,5 @@ Map<String, dynamic> _$PhotoAlbumResponseToJson(PhotoAlbumResponse instance) =>
       'creatorTitle': instance.creator,
       'totalViews': instance.totalViews,
       'totalPhoto': instance.totalPhoto,
-      'photos': instance.photos,
+      'images': instance.photos,
     };

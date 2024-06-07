@@ -10,7 +10,7 @@ abstract class PhotoAlbumRepository {
 
   factory PhotoAlbumRepository.remote({required NewsApiClient apiClient}) => RemotePhotoAlbumRepository(apiClient: apiClient);
 
-  Future<List<PhotoAlbumResponse>> getPhotoAlbums();
+  Future<List<PhotoAlbumResponse>> getPhotoAlbums({required String categoryId});
 
   Future<PhotoAlbumResponse> getPhotoAlbumDetail({required String id});
 }

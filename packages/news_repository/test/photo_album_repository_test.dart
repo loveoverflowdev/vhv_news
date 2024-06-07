@@ -10,7 +10,7 @@ void main() async {
   );
 
   test('Test if call select all response not empty list', () async {
-    final photoAlbum = await photoAlbumRepository.getPhotoAlbums();
+    final photoAlbum = await photoAlbumRepository.getPhotoAlbums(categoryId: '1881906');
     // for (final article in articles) {
     //   // debugPrint(article.toJson().toString());
     // }

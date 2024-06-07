@@ -24,7 +24,7 @@ class PhotoResponse {
 
   Map<String, dynamic> toJson() => _$PhotoResponseToJson(this);
 
-  static bool _parseIsAvatar(int? isFeatured) => utils.parseBoolFromNum(isFeatured);
+  static bool _parseIsAvatar(dynamic isAvatar) => utils.parseBoolFromNum(isAvatar);
 
   static String? _parseFileUrl(String? url) => utils.parseFileUrl(url);
 }

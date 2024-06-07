@@ -10,8 +10,7 @@ PhotoResponse _$PhotoResponseFromJson(Map<String, dynamic> json) =>
     PhotoResponse(
       imageUrl: PhotoResponse._parseFileUrl(json['image'] as String?),
       title: json['title'] as String?,
-      isAvatar:
-          PhotoResponse._parseIsAvatar((json['isAvatar'] as num?)?.toInt()),
+      isAvatar: PhotoResponse._parseIsAvatar(json['isAvatar']),
     );
 
 Map<String, dynamic> _$PhotoResponseToJson(PhotoResponse instance) =>

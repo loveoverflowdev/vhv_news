@@ -26,6 +26,7 @@ class PhotoAlbumResponse {
   final int? totalViews;
   final int? totalPhoto;
 
+  @JsonKey(name: 'images')
   final List<PhotoResponse> photos;
 
   PhotoAlbumResponse({

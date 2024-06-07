@@ -5,7 +5,7 @@ String? parseFileUrl(String? url)
       ? NewsApiEndpoint(resource: url).fileUrl 
       : null;
 
-bool parseBoolFromNum(num? value) => value != 0;
+bool parseBoolFromNum(dynamic value) => (num.tryParse(value.toString()) ?? 0) != 0;
 
 DateTime? parseDateTimeFromMillisecondsSinceEpoch(int? value) 
   => value != null 

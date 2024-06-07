@@ -11,10 +11,15 @@ class RemotePhotoAlbumRepository extends PhotoAlbumRepository {
   }) : _apiClient = apiClient;
 
   @override
-  Future<List<PhotoAlbumResponse>> getPhotoAlbums() {
+  Future<List<PhotoAlbumResponse>> getPhotoAlbums({
+    required String categoryId,
+  }) {
     return _apiClient
       .selectAllMap(
-        endpoints.photoAlbum, 
+        endpoints.photoAlbum,
+        queryParameters: {
+          'categoryId': categoryId,
+        },
       )
       .then(
         (responses) => responses.map((e) => PhotoAlbumResponse.fromJson(e)

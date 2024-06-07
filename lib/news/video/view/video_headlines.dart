@@ -4,9 +4,11 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
+import 'package:vhv_news/app/app.dart';
 
 import '../controller/controller.dart';
 import '../widgets/widgets.dart';
+import 'video_detail_page.dart';
 
 class VideoHeadlines extends StatefulWidget {
   final CategoryResponse category;
@@ -45,7 +47,15 @@ class _VideoHeadlinesState extends State<VideoHeadlines> {
             return Column(
               children: [
                 for (var i = 0; i < length; i++) 
-                  VideoTile(video: videos[i])
+                  VideoTile(
+                    onTap: (video) {
+                      Navigator.pushNamed(context, 
+                        PageRouteName.videoDetail.routeLink, 
+                        arguments: VideoDetailArgs(video: video) ,
+                      );
+                    },
+                    video: videos[i],
+                  )
               ],
             );
             // return ListView.builder(

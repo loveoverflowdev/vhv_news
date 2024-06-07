@@ -1,4 +1,5 @@
 
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:get/get.dart';
@@ -38,18 +39,26 @@ class LegalDocumentDetailController extends GetxController {
       throw Exception('URL is null');
     }
 
-    // TODO: Check if file saved
     final fileName = url.split('/').last;
     final directory = await getApplicationDocumentsDirectory();
     final filePath = '${directory.path}/$fileName';
+
+    final file = File(filePath);
+
+    if (file.existsSync()) {
+      return filePath;
+    }
+
+    // Notify the user
+    log('Downloading file from $url to $filePath');
     
     // Download the file
     final response = await _legalDocumentRepository.downloadFile(url: url, onReceiveProgress: onReceiveProgress);
-    final file = File(filePath);
+    
     await file.writeAsBytes(response);
 
     // Notify the user
-    print('File downloaded to $filePath');
+    log('File downloaded to $filePath');
     return filePath;
   }
 

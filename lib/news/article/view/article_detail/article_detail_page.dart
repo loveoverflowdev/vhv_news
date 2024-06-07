@@ -37,7 +37,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
   @override
   void initState() {
     super.initState();
-    _articleDetailController = Get.find<ArticleDetailController>()
+    _articleDetailController = ArticleDetailController(articleRepository: Get.find())
       ..loadArticleDetail(widget.args.articleId);
   }
 

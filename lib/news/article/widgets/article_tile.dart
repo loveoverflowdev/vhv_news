@@ -33,7 +33,7 @@ class ArticleTile extends StatelessWidget {
         ),
       ),
     );
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         onTap?.call(article);
       },

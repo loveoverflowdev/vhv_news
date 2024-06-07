@@ -57,7 +57,9 @@ class _NewsByCategoryChildType extends StatelessWidget {
       case CategoryChildType.introduction:
         body = const ArticlesSlideView();
       case CategoryChildType.news:
-        body = const Placeholder();
+        body = ArticleHeadline(
+          category: category,
+        );
       case CategoryChildType.legalDocument:
         body = LegalDocumentsHeadline(
           category: category,

@@ -25,10 +25,15 @@ class AppHeadline extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Text(title, 
-              style: Theme.of(context).textTheme.titleLarge,
+            Expanded(
+              child: Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
-            const Spacer(),
+            const SizedBox(width: AppSpacing.md),
             trailing ?? const Icon(Icons.arrow_forward, size: 24),
           ],
         ),

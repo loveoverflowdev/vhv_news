@@ -10,7 +10,9 @@ class ArticleDetailController extends GetxController {
   
   ArticleDetailController({
     required ArticleRepository articleRepository
-  }) : _articleRepository = articleRepository;
+  }) : 
+  _articleRepository = articleRepository, 
+  articleDetail = Rx<ArticleDetailResponse?>(null);
 
   void loadArticleDetail(String id) async {
     articleDetail.value = await _articleRepository.getArticleDetail(id: id);

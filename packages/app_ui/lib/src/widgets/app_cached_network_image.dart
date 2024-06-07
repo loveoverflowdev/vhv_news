@@ -21,15 +21,17 @@ class AppCachedNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imageUrl = uri.contains('https') ? uri : 'https://$imageDomain$uri';
-    return CachedNetworkImage(
+    return SizedBox(
       height: height,
       width: width,
-      fit: BoxFit.cover,
-      imageUrl: imageUrl,
-      placeholder: (context, url) => const Center(
-        child: CircularProgressIndicator(),
+      child: CachedNetworkImage(
+        fit: BoxFit.cover,
+        imageUrl: imageUrl,
+        placeholder: (context, url) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
-      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }

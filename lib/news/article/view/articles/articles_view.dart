@@ -14,7 +14,7 @@ class ArticlesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final articleController = Get.find<ArticlesController>();
-    return Obx(() => StatusSwitcher(
+    return Obx(() => AppStatusSwitcher(
       status: articleController.status.value,
       child: Obx(() => ListView.separated(
         padding: const EdgeInsets.all(AppSpacing.lg),

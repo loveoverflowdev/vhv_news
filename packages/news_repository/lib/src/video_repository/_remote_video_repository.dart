@@ -1,5 +1,4 @@
 import '../core/news_api_client.dart';
-import 'response/response.dart';
 import 'video_repository.dart';
 
 import '../core/endpoints.dart' as endpoints;
@@ -19,10 +18,13 @@ class RemoteVideoRepository extends VideoRepository {
   }
 
   @override
-  Future<List<VideoResponse>> getVideos() {
+  Future<List<VideoResponse>> getVideos({required String categoryId}) {
     return _apiClient
       .selectAllMap(
-        endpoints.video, 
+        endpoints.video,
+        queryParameters: {
+          'categoryId': categoryId,
+        }
       )
       .then(
         (responses) => responses.map((e) => VideoResponse.fromJson(e)

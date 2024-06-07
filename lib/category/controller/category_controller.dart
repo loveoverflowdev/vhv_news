@@ -21,22 +21,21 @@ class CategoryController extends GetxController {
     selectedCategory.value = category;
   }
 
-  void getCategories() {
+  void getCategories() async {
     status.value = RxStatus.loading();
     
-    _categoryRepository
-      .getCategories()
-      .then((respone) {
-        status.value = RxStatus.success();
-
-        categories.value = respone;
-        if (categories.isNotEmpty) {
-          selectedCategory.value = categories.first;
-        }
-      })
-      .catchError((e, stackTrace) {
-        status.value = RxStatus.error(e.toString());
-      });
+    try {
+      final categoryResponses = await _categoryRepository
+        .getCategories();
+      categories.value = categoryResponses;
+      if (categoryResponses.isNotEmpty) {
+        selectedCategory.value = categoryResponses.first;
+      }
+      status.value = RxStatus.success();
+    } catch (e, stackTrace) {
+      status.value = RxStatus.error(e.toString());
+      e.printError(info: stackTrace.toString());
+    }
   }
 
   @override

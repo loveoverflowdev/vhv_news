@@ -9,7 +9,7 @@ abstract class VideoRepository {
 
   factory VideoRepository.remote({required NewsApiClient apiClient}) => RemoteVideoRepository(apiClient: apiClient);
 
-  Future<List<VideoResponse>> getVideos();
+  Future<List<VideoResponse>> getVideos({required String categoryId});
 
   Future<VideoDetailResponse> getVideoDetail({required String id});
 }

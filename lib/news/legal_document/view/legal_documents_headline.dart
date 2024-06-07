@@ -1,6 +1,7 @@
 
 import 'dart:math';
 
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart' show CategoryResponse;
@@ -38,20 +39,24 @@ class _LegalDocumentsHeadlineState extends State<LegalDocumentsHeadline> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile(
-            onTap: () {
-              
-            },
-            title: Row(
-              children: [
-                Text(widget.category.title, 
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const Spacer(),
-                const Icon(Icons.arrow_forward, size: 24),
-              ],
-            ),
+          AppHeadline(
+            onTap: () {},
+            title: widget.category.title,
           ),
+          // ListTile(
+          //   onTap: () {
+              
+          //   },
+          //   title: Row(
+          //     children: [
+          //       Text(widget.category.title, 
+          //         style: Theme.of(context).textTheme.titleLarge,
+          //       ),
+          //       const Spacer(),
+          //       const Icon(Icons.arrow_forward, size: 24),
+          //     ],
+          //   ),
+          // ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),

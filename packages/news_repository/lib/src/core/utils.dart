@@ -1,9 +1,15 @@
 import 'news_api_endpoint.dart';
 
-String? parseFileUrl(String? url) 
-  => url != null 
-      ? NewsApiEndpoint(resource: url).fileUrl 
-      : null;
+String? parseFileUrl(String? url) {
+  if (url != null) {
+    if (url.contains('http')) {
+      return url;
+    } else {
+      return NewsApiEndpoint(resource: url).fileUrl;
+    }
+  }
+  return null;
+}
 
 bool parseBoolFromNum(dynamic value) => (num.tryParse(value.toString()) ?? 0) != 0;
 

@@ -17,17 +17,18 @@ class ArticlesController extends GetxController {
   void getArticles({
     String? categoryId,
   }) async {
-    status.value = RxStatus.loading();
-    
-    _articleRepository
-      .getArticles(categoryId: categoryId)
-      .then((response) {
-        status.value = RxStatus.success();
-        articles.value = response;
-      })
-      .catchError((e) {
-        status.value = RxStatus.error(e.toString());
-      });
+    try {
+      status.value = RxStatus.loading();
+      _articleRepository
+        .getArticles(categoryId: categoryId)
+        .then((response) {
+          status.value = RxStatus.success();
+          articles.value = response;
+        });
+    } catch (e, stackTrace) {
+      status.value = RxStatus.error(e.toString());
+      e.printError(info: stackTrace.toString());
+    }
   }
 
   @override

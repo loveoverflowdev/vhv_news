@@ -11,7 +11,7 @@ void main() async {
     apiClient: NewsApiClient.common(dio: Dio()),
   );
   test('Test if call LangsonNewsRepository select all response not empty list', () async {
-    final articles = await videoRepository.getVideos();
+    final articles = await videoRepository.getVideos(categoryId: '1881905');
 
     debugPrint(articles.length.toString());
 

@@ -15,12 +15,14 @@ class PhotoAlbumsController extends GetxController {
     status = Rx<RxStatus>(RxStatus.empty()),
     photoAlbums = RxList<PhotoAlbumResponse>([]);
 
-  void getPhotoAlbums() async {
+  void getPhotoAlbums({
+    required String categoryId,
+  }) async {
     status.value = RxStatus.loading();
-    update();
 
     try {
-      photoAlbums.value = await _photoAlbumRepository.getPhotoAlbums();
+      final response = await _photoAlbumRepository.getPhotoAlbums(categoryId: categoryId);
+      photoAlbums.value = [...response, ...response];
       status.value = RxStatus.success();
     } catch (e, stackTrace) {
       status.value = RxStatus.error(e.toString());

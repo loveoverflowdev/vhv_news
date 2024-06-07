@@ -1,11 +1,12 @@
-
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
 
+import '../../news/article/article.dart';
 import '../../news/legal_document/legal_document.dart';
 import '../../news/photo_album/photo_album.dart';
+import '../../news/video/video.dart';
 
 class NewsByCategoryView extends StatelessWidget {
   final CategoryResponse? category;
@@ -15,37 +16,22 @@ class NewsByCategoryView extends StatelessWidget {
     required this.category,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return AppStatusSwitcher(
       status: category != null ? RxStatus.success() : RxStatus.loading(),
       child: ListView.separated(
-        itemCount: category?.children.length ?? 0,
+        padding: const EdgeInsets.only(bottom: AppSpacing.lg),
+        itemCount: (category?.children.length ?? 0) + 1,
         itemBuilder: (context, index) {
-          final categoryChild = category!.children[index];
-          switch (categoryChild.childType) {
-            case CategoryChildType.introduction:
-              return _IntroductionViewHeadline(
-                category: categoryChild,
-              );
-            case CategoryChildType.news:
-              return const Placeholder();
-            case CategoryChildType.legalDocument:
-              return LegalDocumentsHeadline(
-                category: categoryChild,
-              );
-            case CategoryChildType.photoAlbum:
-              return PhotoAlbumsHeadline(
-                category: categoryChild,
-              );
-            case CategoryChildType.video:
-              return const Placeholder();
-            case CategoryChildType.emagazine:
-              return const Placeholder();
-            case CategoryChildType.unsupported:
-              return const Placeholder();
+          if (index == 0) {
+            return _NewsByCategoryChildType(
+              category: category!,
+            );
           }
+
+          final categoryChild = category!.children[index - 1];
+          return _NewsByCategoryChildType(category: categoryChild);
         },
         separatorBuilder: (BuildContext context, int index) {
           return const Divider();
@@ -55,16 +41,42 @@ class NewsByCategoryView extends StatelessWidget {
   }
 }
 
-class _IntroductionViewHeadline extends StatelessWidget {
+class _NewsByCategoryChildType extends StatelessWidget {
   final CategoryResponse category;
 
-  const _IntroductionViewHeadline({super.key, required this.category,});
+  const _NewsByCategoryChildType({
+    required this.category, 
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final Widget body; 
+    switch (category.childType) {
+      case CategoryChildType.introduction:
+        body = const ArticlesSlideView();
+      case CategoryChildType.news:
+        body = const Placeholder();
+      case CategoryChildType.legalDocument:
+        body = LegalDocumentsHeadline(
+          category: category,
+        );
+      case CategoryChildType.photoAlbum:
+        body = PhotoAlbumsHeadline(
+          category: category,
+        );
+      case CategoryChildType.video:
+        body = VideoHeadlines(
+          category: category,
+        );
+      case CategoryChildType.emagazine:
+        body = const Placeholder();
+      case CategoryChildType.unsupported:
+        body = const Placeholder();
+    }
+    return body;
   }
 }
+
 
 // enum CategoryChildType {
 //   introduction,

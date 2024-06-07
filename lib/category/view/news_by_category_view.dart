@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
 
 import '../../news/article/article.dart';
+import '../../news/emagazine/emagazine.dart';
 import '../../news/legal_document/legal_document.dart';
 import '../../news/photo_album/photo_album.dart';
+import '../../news/unsupported/unsupported.dart';
 import '../../news/video/video.dart';
 
 class NewsByCategoryView extends StatelessWidget {
@@ -69,9 +71,11 @@ class _NewsByCategoryChildType extends StatelessWidget {
           category: category,
         );
       case CategoryChildType.emagazine:
-        body = const Placeholder();
+        body = EmagazineHeadlines(
+          category: category,
+        );
       case CategoryChildType.unsupported:
-        body = const Placeholder();
+        body = const UnsupportedView();
     }
     return body;
   }

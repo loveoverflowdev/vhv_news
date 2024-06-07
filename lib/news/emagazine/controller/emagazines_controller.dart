@@ -6,17 +6,19 @@ class EmagazinesController extends GetxController {
   EmagazinesController({
     required EmagazineRepository emagazineRepository
   }) : _emagazineRepository = emagazineRepository, 
-    emagazines = RxList<EmagazineResponse>(), 
+    emagazines = Rx<List<EmagazineResponse>>([]), 
     status = Rx<RxStatus>(RxStatus.empty());
 
   final EmagazineRepository _emagazineRepository;
-  final RxList<EmagazineResponse> emagazines;
+  final Rx<List<EmagazineResponse>> emagazines;
   final Rx<RxStatus> status;
 
-  Future<void> getEmagazines() async {
+  Future<void> getEmagazines({
+    required String categoryId,
+  }) async {
     status.value = RxStatus.loading();
     try {
-      emagazines.value = await _emagazineRepository.getEmagazines();
+      emagazines.value = await _emagazineRepository.getEmagazines(categoryId: categoryId);
       status.value = RxStatus.success();
     } catch (e, stackTrace) {
       status.value = RxStatus.error(e.toString());

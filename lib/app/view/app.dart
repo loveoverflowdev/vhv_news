@@ -45,6 +45,9 @@ class AppBinding extends Bindings {
     Get.put<VideoRepository>(VideoRepository.remote(
       apiClient: Get.find()),
     );
+    Get.put<EmagazineRepository>(EmagazineRepository.remote(
+      apiClient: Get.find()),
+    );
 
     // Controllers
     // TODO: refactor

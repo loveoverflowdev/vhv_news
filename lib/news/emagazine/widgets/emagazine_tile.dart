@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:news_repository/news_repository.dart';
 
-class VideoTile extends StatelessWidget {
-  final void Function(VideoResponse)? onTap;
-  final VideoResponse video;
-  
-  const VideoTile({
-    super.key, 
-    required this.video,
+class EmagazineTile extends StatelessWidget {
+  final void Function(EmagazineResponse)? onTap;  
+  final EmagazineResponse emagazine;
+
+  const EmagazineTile({
+    super.key,
+    required this.emagazine,
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTap?.call(video),
+      onTap: () => onTap?.call(emagazine),
       child: SizedBox(
         height: 80,
         child: Padding(
@@ -28,7 +28,7 @@ class VideoTile extends StatelessWidget {
               AspectRatio(
                 aspectRatio: 12 / 9,
                 child: AppCachedNetworkImage(
-                  uri: video.imageUrl ?? '',
+                  uri: emagazine.imageUrl ?? '',
                 ),
               ),
               const SizedBox(width: AppSpacing.lg),
@@ -38,7 +38,7 @@ class VideoTile extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      video.title,
+                      emagazine.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -47,7 +47,7 @@ class VideoTile extends StatelessWidget {
                     ),
                     Flexible(
                       child: HtmlWidget(
-                        video.brief ?? '',
+                        emagazine.brief ?? '',
                         textStyle: const TextStyle(
                           fontSize: 12.0,
                         ),

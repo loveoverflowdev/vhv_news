@@ -9,7 +9,9 @@ abstract class EmagazineRepository {
 
   factory EmagazineRepository.remote({required NewsApiClient apiClient}) => RemoteEmagazineRepository(apiClient: apiClient);
 
-  Future<List<EmagazineResponse>> getEmagazines();
+  Future<List<EmagazineResponse>> getEmagazines({
+    required String categoryId,
+  });
 
   Future<EmagazineDetailResponse> getEmagazineDetail({required String id});
 }

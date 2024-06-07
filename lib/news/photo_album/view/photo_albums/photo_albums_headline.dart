@@ -40,13 +40,16 @@ class _PhotoAlbumsHeadlineState extends State<PhotoAlbumsHeadline> {
           height: 220,
           child: Scaffold(
             appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(120), 
+              preferredSize: const Size.fromHeight(124), 
               child: Column(
                 children: [
                   AppHeadline(title: widget.category.title),
                   SizedBox(
                     height: 60,
                     child: TabBar(
+                      indicatorPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxs),
+                      unselectedLabelStyle: Theme.of(context).textTheme.titleSmall,
+                      labelStyle: Theme.of(context).textTheme.titleSmall,
                       tabs: [
                         for (final photoAlbum in photoAlbums)
                           Tab(
@@ -58,17 +61,7 @@ class _PhotoAlbumsHeadlineState extends State<PhotoAlbumsHeadline> {
                 ],
               ),
             ),
-            // appBar: AppBar(
-            //   title: AppHeadline(title: widget.category.title),
-            //   bottom: TabBar(
-            //     tabs: [
-            //       for (final photoAlbum in photoAlbums)
-            //         Tab(
-            //           text: photoAlbum.title,
-            //         ),
-            //     ],
-            //   ),
-            // ),
+    
             body: TabBarView(
               children: [
                 for (final photoAlbum in photoAlbums)

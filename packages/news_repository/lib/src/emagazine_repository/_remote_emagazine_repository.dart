@@ -17,10 +17,15 @@ class RemoteEmagazineRepository extends EmagazineRepository {
   }
 
   @override
-  Future<List<EmagazineResponse>> getEmagazines() {
+  Future<List<EmagazineResponse>> getEmagazines({
+    required String categoryId,
+  }) {
     return _apiClient
       .selectAllMap(
-        endpoints.emagazine, 
+        endpoints.emagazine,
+        queryParameters: {
+          'categoryId': categoryId,
+        }
       )
       .then(
         (responses) => responses.map((e) => EmagazineResponse.fromJson(e)

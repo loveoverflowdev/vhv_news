@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:news_repository/news_repository.dart' show NewsApiEndpoint;
+import 'package:vhv_video_player/vhv_video_player.dart';
 import 'app/app.dart';
 
 void main() async {
@@ -12,6 +13,7 @@ void main() async {
   final String domain = dotenv.env['DOMAIN'] ?? 'vustavinhphuc.coquan.vn';
   AppCachedNetworkImage.imageDomain = domain;
   NewsApiEndpoint.domain = domain;
+  VhvVideoPlayer.domain = domain;
   
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

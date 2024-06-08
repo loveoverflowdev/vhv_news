@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
 
   webview_flutter: ^4.8.0
+  flick_video_player: ^0.8.0
+  video_player: ^2.8.6
 
 dev_dependencies:
   flutter_test:

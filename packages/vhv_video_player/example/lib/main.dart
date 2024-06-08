@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vhv_video_player/vhv_video_player.dart';
 
 void main() {
+  VhvVideoPlayer.domain = 'vustavinhphuc.coquan.vn';
   runApp(const MyApp());
 }
 
@@ -42,7 +43,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
         title: Text(widget.title),
       ),
       body: VhvVideoPlayerView(
-        url: 'https://www.youtube.com/watch?v=r2Xtk1dS_dE',
+        url: 'upload/2006581/20240103/production_id_3997798__1080p_.mp4',
       ),
     );
   }

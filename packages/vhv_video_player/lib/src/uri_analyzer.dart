@@ -1,4 +1,8 @@
 
+bool useYoutubePlayer(String url) {
+  return url.contains('youtube');
+}
+
 bool _isValidUrl(String url) {
   try {
     final uri = Uri.parse(url);
@@ -8,7 +12,7 @@ bool _isValidUrl(String url) {
   }
 }
 
-String extractVideoId(String url) {
+String extractYoutubeVideoId(String url) {
   if (!_isValidUrl(url)) {
     throw Exception('Invalid URL: $url');
   }
@@ -30,5 +34,5 @@ String extractVideoId(String url) {
 }
 
 String standardizedUrl(String url) {
-  return 'https://www.youtube.com/embed/${extractVideoId(url)}' ;
+  return 'https://www.youtube.com/embed/${extractYoutubeVideoId(url)}' ;
 }

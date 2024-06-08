@@ -12,11 +12,8 @@ class VideoPlayerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 16 / 9,
-      child: VhvVideoPlayerView(
-        url: video.videoLink ?? '',
-      ),
+    return VhvVideoPlayerView(
+      url: video.videoLink ?? '',
     );
   }
 }

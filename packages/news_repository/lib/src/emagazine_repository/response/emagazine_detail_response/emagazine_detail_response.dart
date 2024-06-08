@@ -49,5 +49,5 @@ class EmagazineDetailResponse {
 
   static bool _parseIsFeatured(int? isFeatured) => utils.parseBoolFromNum(isFeatured);
 
-  static List<String> _parseHtmlContents(List<Map> contents) => contents.map((e) => e['title'] as String).toList();
+  static List<String> _parseHtmlContents(List<dynamic> contents) => contents.map((e) => e['title'] as String).toList();
 }

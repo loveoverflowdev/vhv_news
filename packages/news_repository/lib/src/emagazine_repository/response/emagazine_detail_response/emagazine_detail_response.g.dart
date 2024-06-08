@@ -20,8 +20,8 @@ EmagazineDetailResponse _$EmagazineDetailResponseFromJson(
       publishTime:
           EmagazineDetailResponse._parseDateTimeFromMillisecondsSinceEpoch(
               (json['publishTime'] as num?)?.toInt()),
-      htmlContents: EmagazineDetailResponse._parseHtmlContents(
-          json['contents'] as List<Map<dynamic, dynamic>>),
+      htmlContents:
+          EmagazineDetailResponse._parseHtmlContents(json['contents'] as List),
     );
 
 Map<String, dynamic> _$EmagazineDetailResponseToJson(

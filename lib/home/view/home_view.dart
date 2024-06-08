@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:vhv_news/feed/view/feed_view.dart';
 
+import '../../navigation/navigation.dart' show BottomNavTab;
 import '../controller/controller.dart';
 
 class HomeView extends StatelessWidget {
@@ -9,12 +9,10 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rxTab = Get.find<HomeController>().tab;
     return Obx(() => IndexedStack(
-      index: Get.find<HomeController>().tabIndex.value,
-      children: const [
-        FeedView(),
-        Placeholder(),
-      ],
+      index: rxTab.value.tabIndex,
+      children: BottomNavTab.widgets,
     ));
   }
 }

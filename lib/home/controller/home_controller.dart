@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
+import 'package:vhv_news/navigation/navigation.dart' show BottomNavTab;
 
 class HomeController extends GetxController {
-  late RxInt tabIndex;
+  late Rx<BottomNavTab> tab;
 
   @override
   void onInit() {
     super.onInit();
-    tabIndex = 0.obs;
+    tab = BottomNavTab.feed.obs;
   }
 
-  void changeTab(int index) {
-    tabIndex.value = index;
+  void changeTab(BottomNavTab tab) {
+    this.tab.value = tab;
   }
 }

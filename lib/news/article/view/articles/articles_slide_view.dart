@@ -24,20 +24,23 @@ class _ArticlesSlideViewState extends State<ArticlesSlideView> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => AppCarousel(
-        itemBuilder: (context, index, pageIndexView) {
-          final article = _articlesController.articles[index];
-          return ArticleCarouselCell(
-            onTap: () {
-
-            },
-            imageUrl: article.imageUrl ?? '',
-            title: article.title,
-            description: article.brief ?? '',
-          );
-        }, 
-        itemCount: _articlesController.articles.length,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+      child: Obx(
+        () => AppCarousel(
+          itemBuilder: (context, index, pageIndexView) {
+            final article = _articlesController.articles[index];
+            return ArticleCarouselCell(
+              onTap: () {
+      
+              },
+              imageUrl: article.imageUrl ?? '',
+              title: article.title,
+              description: article.brief ?? '',
+            );
+          }, 
+          itemCount: _articlesController.articles.length,
+        ),
       ),
     );
   }

@@ -240,6 +240,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.3+1"
+  dio_cache_interceptor:
+    dependency: transitive
+    description:
+      name: dio_cache_interceptor
+      sha256: fb7905c0d12075d8786a6b63bffd64ae062d053f682cfaf28d145a2686507308
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.5.0"
+  dio_cache_interceptor_sembast_storage:
+    dependency: transitive
+    description:
+      name: dio_cache_interceptor_sembast_storage
+      sha256: "9ebd9b844d078607f79af041314ab370195a39f41205931657af8081bbd3400d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   fake_async:
     dependency: transitive
     description:
@@ -280,6 +296,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  flat_buffers:
+    dependency: transitive
+    description:
+      name: flat_buffers
+      sha256: "23e2ced0d8e8ecdffbd9f267f49a668c74438393b9acaeac1c724123e3764263"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   flick_video_player:
     dependency: transitive
     description:
@@ -364,14 +388,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.14.12"
-  fpdart:
-    dependency: transitive
-    description:
-      name: fpdart
-      sha256: "7413acc5a6569a3fe8277928fc7487f3198530f0c4e635d0baef199ea36e8ee9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -476,6 +492,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  idb_shim:
+    dependency: transitive
+    description:
+      name: idb_shim
+      sha256: "0566abfc41fa38889a4575f371d54860f069a7bcf6fcfdf8cf6a242e9d5e248f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1+1"
   image:
     dependency: transitive
     description:
@@ -843,6 +867,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  sembast:
+    dependency: transitive
+    description:
+      name: sembast
+      sha256: dbe19600cff55d43f19405be79138c3fd2c08a87b0b152b18609b9427d113a64
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.7.1"
+  sembast_web:
+    dependency: transitive
+    description:
+      name: sembast_web
+      sha256: e9a7209c279e9ef05d36118152189a9d901c363fb10216dae256e7ce5d78eddb
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
   share_plus:
     dependency: "direct main"
     description:

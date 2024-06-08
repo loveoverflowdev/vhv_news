@@ -1,5 +1,4 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
@@ -25,10 +24,7 @@ class App extends StatelessWidget {
 
 class AppBinding extends Bindings {
   @override
-  void dependencies() {
-    // Network Client
-    Get.put<NewsApiClient>(NewsApiClient.common(dio: Dio()));
-
+  void dependencies() async {    
     // Repositories
     Get.put<ArticleRepository>(ArticleRepository.remote(
       apiClient: Get.find()),
@@ -50,7 +46,6 @@ class AppBinding extends Bindings {
     );
 
     // Controllers
-    // TODO: refactor
     Get.put<HomeController>(HomeController());
     Get.put<CategoryController>(CategoryController(categoryRepository: Get.find()));
   }

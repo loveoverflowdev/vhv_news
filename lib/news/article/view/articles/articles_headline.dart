@@ -36,7 +36,15 @@ class _ArticleHeadlineState extends State<ArticleHeadline> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppHeadline(title: widget.category.title),
+        AppHeadline(
+          onTap: () {
+            Navigator.pushNamed(
+              context, 
+              PageRouteName.articles.routeLink, 
+              arguments: ArticlesArgs(category: widget.category),
+            );
+          },
+          title: widget.category.title),
         Obx(() {
           final articles = _articlesController.articles;
           final length = min(3, articles.length);

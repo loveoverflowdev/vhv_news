@@ -7,6 +7,7 @@ import '../../news/video/video.dart';
 
 enum PageRouteName {
   home,
+  articles,
   articleDetail,
   photoAlbumDetail,
   videoDetail,
@@ -27,10 +28,12 @@ extension PageRouteNameExt on PageRouteName {
         return '/photo_album_detail';
       case PageRouteName.videoDetail:
         return '/video_detail';
+      case PageRouteName.articles:
+        return '/articles';
     }        
   }
 
-  static PageRouteName fromLink(String link) {
+  static PageRouteName _fromLink(String link) {
     for (final routeName in PageRouteName.values) {
       if (link == routeName.routeLink) {
         return routeName;
@@ -42,7 +45,7 @@ extension PageRouteNameExt on PageRouteName {
   static Route getPage({
     required RouteSettings settings,
   }) {
-    final routeName = fromLink(settings.name ?? '');
+    final routeName = _fromLink(settings.name ?? '');
     switch (routeName) {
       case PageRouteName.home: 
         return HomePage.route();
@@ -55,6 +58,9 @@ extension PageRouteNameExt on PageRouteName {
       case PageRouteName.videoDetail:
         final args = settings.arguments as VideoDetailArgs;
         return VideoDetailPage.route(args: args);
+      case PageRouteName.articles:
+        final args = settings.arguments as ArticlesArgs;
+        return ArticlesPage.route(args: args);
     }      
   }
 }

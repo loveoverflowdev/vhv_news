@@ -35,8 +35,8 @@ dependencies:
     path: packages/app_ui
   news_repository:
     path: packages/news_repository
-  youtube_player:
-    path: packages/youtube_player
+  vhv_video_player:
+    path: packages/vhv_video_player
   
   dio: ^5.4.3+1
   get: ^4.6.6

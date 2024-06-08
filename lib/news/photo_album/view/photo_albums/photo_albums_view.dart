@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vhv_news/news/photo_album/widgets/photo_album_tile.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_player/youtube_player.dart';
+import 'package:vhv_video_player/vhv_video_player.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,7 +41,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: YoutubePlayerView(
+      body: VhvVideoPlayerView(
         url: 'https://www.youtube.com/watch?v=r2Xtk1dS_dE',
       ),
     );

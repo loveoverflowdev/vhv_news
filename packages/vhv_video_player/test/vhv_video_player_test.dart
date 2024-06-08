@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:youtube_player/youtube_player.dart';
+import 'package:vhv_video_player/vhv_video_player.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -19,5 +19,12 @@ void main() {
     final videoId = extractVideoId('https://youtu.be/GpS36BWaV5Y&t=194s');
     debugPrint(videoId);
     expect(videoId, 'GpS36BWaV5Y');
+  });
+
+  test('Extract url 4', ()  {
+    expect(() {
+      final videoId = extractVideoId('https://www.youtube.com');
+      debugPrint(videoId);
+    }, throwsException);
   });
 }

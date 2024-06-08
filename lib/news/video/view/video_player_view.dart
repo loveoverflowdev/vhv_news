@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_player/youtube_player.dart';
+import 'package:vhv_video_player/vhv_video_player.dart';
 import 'package:news_repository/news_repository.dart';
 
 class VideoPlayerView extends StatelessWidget {
@@ -12,8 +12,11 @@ class VideoPlayerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayerView(
-      url: video.videoLink ?? '',
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child: VhvVideoPlayerView(
+        url: video.videoLink ?? '',
+      ),
     );
   }
 }

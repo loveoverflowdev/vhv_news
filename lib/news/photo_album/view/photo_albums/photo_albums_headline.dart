@@ -2,7 +2,6 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
-import 'package:vhv_news/app/app.dart';
 import 'package:vhv_news/news/photo_album/photo_album.dart';
 
 import '../../widgets/widgets.dart' show PhotoCell;

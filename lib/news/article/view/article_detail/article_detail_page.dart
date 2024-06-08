@@ -74,7 +74,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
                 ),
             ],
           ),
-          body: ArticleView(
+          body: ArticleDetailView(
             article: articleDetail,
           ),
         );

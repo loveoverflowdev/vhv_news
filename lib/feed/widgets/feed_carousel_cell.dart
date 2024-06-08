@@ -69,7 +69,7 @@ class FeedCarouselCell extends StatelessWidget {
                       const SizedBox(width: AppSpacing.lg),
                       SizedBox(
                         height: 60,
-                        child: HtmlWidget(
+                        child: AppHtmlWidget(
                           description,
                           textStyle: const TextStyle(
                             color: AppColors.white,

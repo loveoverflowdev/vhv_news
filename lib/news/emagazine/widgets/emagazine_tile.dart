@@ -46,7 +46,7 @@ class EmagazineTile extends StatelessWidget {
                       ),
                     ),
                     Flexible(
-                      child: HtmlWidget(
+                      child: AppHtmlWidget(
                         emagazine.brief ?? '',
                         textStyle: Theme.of(context).textTheme.bodySmall,
                         customWidgetBuilder: (element) {

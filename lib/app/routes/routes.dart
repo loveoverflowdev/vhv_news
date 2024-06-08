@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../home/home.dart';
 import '../../news/article/article.dart';
+import '../../news/emagazine/emagazine.dart';
 import '../../news/photo_album/photo_album.dart';
 import '../../news/video/video.dart';
 
@@ -11,6 +12,7 @@ enum PageRouteName {
   articleDetail,
   photoAlbumDetail,
   videoDetail,
+  emagazineDetail,
 }
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -30,6 +32,8 @@ extension PageRouteNameExt on PageRouteName {
         return '/video_detail';
       case PageRouteName.articles:
         return '/articles';
+      case PageRouteName.emagazineDetail:
+        return '/emagazine_detail';
     }        
   }
 
@@ -61,6 +65,9 @@ extension PageRouteNameExt on PageRouteName {
       case PageRouteName.articles:
         final args = settings.arguments as ArticlesArgs;
         return ArticlesPage.route(args: args);
+      case PageRouteName.emagazineDetail:
+        final args = settings.arguments as EmagazineDetailArgs;
+        return EmagazineDetailPage.route(args: args);
     }      
   }
 }

@@ -1,3 +1,2 @@
-export 'emagazine_detail_view.dart';
-export 'emagazine_list_view.dart';
-export 'emagazine_headlines.dart';
+export 'emagazine_detail/emagazine_detail.dart';
+export 'emagazines/emagazines.dart';

@@ -1,40 +1,22 @@
-
 import 'package:app_ui/app_ui.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:news_repository/news_repository.dart' show ArticleDetailResponse;
+import 'package:photo_view/photo_view.dart';
 
-class ArticleView extends StatefulWidget {
+class ArticleDetailView extends StatefulWidget {
   final ArticleDetailResponse? article;
 
-  const ArticleView({super.key, required this.article,});
+  const ArticleDetailView({super.key, required this.article,});
 
   @override
-  State<ArticleView> createState() => _ArticleViewState();
+  State<ArticleDetailView> createState() => _ArticleDetailViewState();
 }
 
-class _ArticleViewState extends State<ArticleView> {
+class _ArticleDetailViewState extends State<ArticleDetailView> {
   @override
   Widget build(BuildContext context) {
     if (widget.article == null) return const SizedBox.shrink();
-
-    final Widget content = HtmlWidget(
-      widget.article?.content ?? '',
-      textStyle: const TextStyle(
-        fontSize: 14.0,
-      ),
-      customWidgetBuilder: (element) {
-        if (element.localName == 'img') {
-          return Container(
-            margin: const EdgeInsets.all(AppSpacing.xs),
-            child: AppCachedNetworkImage(
-              uri: element.attributes['src'] ?? '',
-            )
-          );
-        }
-        return null;
-      }
-    );
 
     final Widget coverImage = widget.article?.imageUrl != null ? Padding(
       padding: const EdgeInsets.all(AppSpacing.xs),
@@ -55,11 +37,47 @@ class _ArticleViewState extends State<ArticleView> {
                 widget.article?.title ?? '',
                 style: const TextStyle(
                   fontSize: 20.0,
-                  // fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(width: AppSpacing.lg),
-              content,
+              const SizedBox(height: AppSpacing.md),
+              const Divider(),
+              const SizedBox(height: AppSpacing.md),
+              AppHtmlWidget(
+                widget.article?.content ?? '',
+                customWidgetBuilder: (element) {
+                  if (element.localName == 'img') {
+                    final url = element.attributes['src'] ?? '';
+                    final imageUrl = url.contains('https') ? url : 'https://${AppCachedNetworkImage.imageDomain}$url';
+                    return Builder(
+                      builder: (context) => GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                          // ignore: inference_failure_on_instance_creation
+                          MaterialPageRoute(
+                            builder: (_) => Scaffold(
+                              appBar: AppBar(
+                                title: Text(element.attributes['alt'] ?? ''),
+                                // backgroundColor: Colors.transparent,
+                              ),
+                              body: PhotoView(
+                                heroAttributes: PhotoViewHeroAttributes(tag: url),
+                                imageProvider: CachedNetworkImageProvider(imageUrl),
+                              ),
+                            ),
+                          ),
+                        ),
+                        child: Hero(
+                          tag: url, 
+                          child: AppCachedNetworkImage(
+                            uri: imageUrl,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  return null;
+                },
+              ),
             ],
           ),
         ),
@@ -67,4 +85,3 @@ class _ArticleViewState extends State<ArticleView> {
     );
   }
 }
-

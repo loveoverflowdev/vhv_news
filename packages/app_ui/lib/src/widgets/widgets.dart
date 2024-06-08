@@ -7,6 +7,7 @@ export 'app_date_time_label.dart';
 export 'app_email_text_field.dart';
 export 'app_file_icon.dart';
 export 'app_headline.dart';
+export 'app_html_widget.dart';
 export 'app_logo.dart';
 export 'app_status_switcher.dart';
 export 'app_switch.dart';

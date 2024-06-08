@@ -1,4 +1,4 @@
-import 'package:app_ui/app_ui.dart' show AppCachedNetworkImage, AppSpacing;
+import 'package:app_ui/app_ui.dart' show AppCachedNetworkImage, AppHtmlWidget, AppSpacing;
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:news_repository/news_repository.dart' show ArticleResponse;
@@ -26,7 +26,7 @@ class ArticleTile extends StatelessWidget {
       ),
     ); 
     // final Widget subtitle = Text(article.brief ?? '');
-    final Widget subtitle = HtmlWidget(
+    final Widget subtitle = AppHtmlWidget(
       article.brief ?? '',
       textStyle: Theme.of(context).textTheme.bodySmall,
       customWidgetBuilder: (element) {

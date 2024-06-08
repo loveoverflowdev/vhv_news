@@ -22,7 +22,7 @@ class PhotoAlbumsController extends GetxController {
 
     try {
       final response = await _photoAlbumRepository.getPhotoAlbums(categoryId: categoryId);
-      photoAlbums.value = [...response, ...response];
+      photoAlbums.value = response;
       status.value = RxStatus.success();
     } catch (e, stackTrace) {
       status.value = RxStatus.error(e.toString());

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
+import 'package:vhv_news/app/app.dart';
 
-import '../controller/controller.dart';
-import '../widgets/widgets.dart';
+import '../../controller/controller.dart';
+import '../../widgets/widgets.dart';
+import '../emagazine_detail/emagazine_detail.dart';
 
 class EmagazineHeadlines extends StatefulWidget {
   final CategoryResponse category;
@@ -35,7 +37,12 @@ class _EmagazineHeadlinesState extends State<EmagazineHeadlines> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        AppHeadline(title: widget.category.title),
+        AppHeadline(
+          onTap: () {
+            
+          },
+          title: widget.category.title,
+        ),
         Flexible(
           child: Obx(() {
             final emagazines = _emagazinesController.emagazines.value;
@@ -44,7 +51,16 @@ class _EmagazineHeadlinesState extends State<EmagazineHeadlines> {
               mainAxisSize: MainAxisSize.min,
               children: [      
                 for (int i = 0; i < length; i++) 
-                  EmagazineTile(emagazine: emagazines[i])
+                  EmagazineTile(
+                    onTap: (emagazine) {
+                      Navigator.pushNamed(
+                        context,
+                        PageRouteName.emagazineDetail.routeLink,
+                        arguments: EmagazineDetailArgs(emagazine: emagazine),
+                      );
+                    },
+                    emagazine: emagazines[i],
+                  )
               ],
             );
           }),

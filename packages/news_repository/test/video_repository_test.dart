@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:dio/dio.dart';
 import 'package:news_repository/src/core/core.dart';
-import 'package:news_repository/src/video_repository/video_repository.dart';
+import 'package:news_repository/src/video_repository/repository/video_repository.dart';
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';

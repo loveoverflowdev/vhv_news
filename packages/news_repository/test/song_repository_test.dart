@@ -2,15 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:dio/dio.dart';
+import 'package:news_repository/src/core/core.dart';
 import 'package:news_repository/news_repository.dart';
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';
-  final ArticleRepository langsonNewsRepository = RemoteArticleRepository(
+  final SongRepository songRepository = RemoteSongRepository(
     apiClient: NewsApiClient.common(dio: Dio()),
   );
-  test('Test if call LangsonNewsRepository select all response not empty list', () async {
-    final articles = await langsonNewsRepository.getArticles();
+  test('Test if call songRepository select all response not empty list', () async {
+    final articles = await songRepository.getSongs();
 
     debugPrint(articles.length.toString());
 

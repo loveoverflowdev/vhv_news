@@ -1,7 +1,7 @@
-import '../core/news_api_client.dart';
+import '../../core/news_api_client.dart';
 import 'video_repository.dart';
 
-import '../core/endpoints.dart' as endpoints;
+import '../../core/endpoints.dart' as endpoints;
 
 class RemoteVideoRepository extends VideoRepository {
   final NewsApiClient _apiClient;

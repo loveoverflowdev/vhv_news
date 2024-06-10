@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:news_repository/news_repository.dart' show NewsApiClient, NewsApiEndpoint;
 import 'package:path_provider/path_provider.dart';
 import 'package:vhv_video_player/vhv_video_player.dart';
+import 'package:news_repository/news_repository.dart' show NewsApiEndpoint, NewsApiClient;
 import 'app/app.dart';
 
 void main() async {

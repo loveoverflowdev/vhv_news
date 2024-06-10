@@ -1,6 +1,7 @@
-import '../core/endpoints.dart' as endpoints;
-import '../core/news_api_client.dart';
+import '../../core/endpoints.dart' as endpoints;
+import '../../core/news_api_client.dart';
 
+import '../response/response.dart';
 import 'category_repository.dart';
 
 class RemoteCategoryRepository extends CategoryRepository {

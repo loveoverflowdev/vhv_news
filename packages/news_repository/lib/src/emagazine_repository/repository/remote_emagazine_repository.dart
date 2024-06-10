@@ -1,5 +1,6 @@
-import '../core/endpoints.dart' as endpoints;
-import '../core/news_api_client.dart';
+import '../../core/endpoints.dart' as endpoints;
+import '../../core/news_api_client.dart';
+import '../response/response.dart';
 import 'emagazine_repository.dart';
 
 extension EmagazineRepositoryFactory on EmagazineRepository {

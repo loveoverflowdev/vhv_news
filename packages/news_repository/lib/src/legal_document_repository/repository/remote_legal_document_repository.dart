@@ -1,7 +1,8 @@
-import '../core/news_api_client.dart';
+import '../../core/news_api_client.dart';
 
-import '../core/endpoints.dart' as endpoints;
+import '../../core/endpoints.dart' as endpoints;
 
+import '../response/response.dart';
 import 'legal_document_repository.dart';
 
 class RemoteLegalDocumentRepository extends LegalDocumentRepository {

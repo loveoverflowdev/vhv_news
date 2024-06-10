@@ -16,6 +16,16 @@ final class NewsApiEndpoint {
 
   String selectAllApiUrl() => '${protocol.name}://$domain/api/$resource/selectAll?type=${articleType.toParams()}';
 
+  String search({required String keyword}) {
+    final String query;
+    if (articleType == ArticleType.all) {
+      query = 'keyword=$keyword';
+    } else {
+      query = 'type=${articleType.toParams()}&keyword=$keyword';
+    }
+    return '${protocol.name}://$domain/api/$resource/search?$query';
+  }
+
   String get fileUrl => '${protocol.name}://$domain/$resource';
 }
 
@@ -25,7 +35,8 @@ enum ArticleType {
   legalDocument,
   video,
   emagazine,
-  song;
+  song,
+  all;
 
   String toParams() {
     switch (this) {
@@ -41,8 +52,12 @@ enum ArticleType {
         return 'Article.Emagazine';
       case ArticleType.song:
         return 'Article.Song';
+      case ArticleType.all:
+        return '';
     }
-  } 
+  }
+
+  static ArticleType fromString(String raw) => values.firstWhere((type) => type.toParams() == raw);
 }
 
 enum Protocol {

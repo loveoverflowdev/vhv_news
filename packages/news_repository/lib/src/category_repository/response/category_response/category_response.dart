@@ -36,15 +36,7 @@ class CategoryResponse {
 
   static String _parseId(dynamic value) => value.toString();
 
-  static CategoryChildType _parseChildType(String type) => switch (type) {
-    'Introduction' => CategoryChildType.introduction,
-    'Article.News' => CategoryChildType.news,
-    'Article.LegalDocument' => CategoryChildType.legalDocument,
-    'Article.PhotoAlbum' => CategoryChildType.photoAlbum,
-    'Article.Video' => CategoryChildType.video,
-    'Article.Emagazine' => CategoryChildType.emagazine,
-    _ => CategoryChildType.unsupported,
-  };
+  static CategoryChildType _parseChildType(String type) => CategoryChildType.fromString(type);
 
   static String? _parseRewriteUrl(String? url) => 
     url != null 
@@ -65,11 +57,17 @@ class CategoryResponse {
 }
 
 enum CategoryChildType {
-  introduction,
-  news,
-  legalDocument,
-  photoAlbum,
-  video,
-  emagazine,
-  unsupported,
+  introduction('Introduction'),
+  news('Article.News'),
+  legalDocument('Article.LegalDocument'),
+  photoAlbum('Article.PhotoAlbum'),
+  video('Article.Video'),
+  emagazine('Article.Emagazine'),
+  unsupported('_');
+
+  final String raw;
+
+  const CategoryChildType(this.raw);
+
+  static CategoryChildType fromString(String raw) => values.firstWhere((type) => type.raw == raw, orElse: () => unsupported);
 }

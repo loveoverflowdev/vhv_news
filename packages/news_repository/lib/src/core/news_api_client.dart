@@ -26,8 +26,8 @@ abstract class NewsApiClient {
     required String id,
   });
 
-  Future<List<ApiResponse>> selectByFilter(NewsApiEndpoint endpoint, {
-    required Map<String, dynamic> filter,
+  Future<ApiResponse> search(NewsApiEndpoint endpoint, {
+    required String keyword,
   });
 
   Future<dynamic> downloadFile({required String url, void Function(int, int)? onReceiveProgress});
@@ -105,10 +105,13 @@ class _CommonNewsApiClient extends NewsApiClient {
   }
 
   @override
-  Future<List<ApiResponse>> selectByFilter(NewsApiEndpoint endpoint, {
-    required Map<String, dynamic> filter,
+  Future<ApiResponse> search(NewsApiEndpoint endpoint, {
+    required String keyword,
   }) {
-    throw UnimplementedError();
+    return _dio.get(endpoint.search(keyword: keyword))
+      .then((response) {
+      return response.data as ApiResponse;
+    });
   }
   
   @override

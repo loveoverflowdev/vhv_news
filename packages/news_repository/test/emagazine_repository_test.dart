@@ -7,7 +7,7 @@ import 'package:news_repository/src/emagazine_repository/emagazine_repository.da
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';
-  final EmagazineRepository emagazineRepository = EmagazineRepository.remote(
+  final EmagazineRepository emagazineRepository = RemoteEmagazineRepository(
     apiClient: NewsApiClient.common(dio: Dio()),
   );
   test('Test if call LangsonNewsRepository select all response not empty list', () async {

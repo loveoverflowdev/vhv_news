@@ -5,7 +5,7 @@ import 'package:news_repository/news_repository.dart';
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';
-  final PhotoAlbumRepository photoAlbumRepository = PhotoAlbumRepository.remote(
+  final PhotoAlbumRepository photoAlbumRepository = RemotePhotoAlbumRepository(
     apiClient: NewsApiClient.common(dio: Dio()),
   );
 

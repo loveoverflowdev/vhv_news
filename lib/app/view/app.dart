@@ -26,22 +26,22 @@ class AppBinding extends Bindings {
   @override
   void dependencies() async {    
     // Repositories
-    Get.put<ArticleRepository>(ArticleRepository.remote(
+    Get.put<ArticleRepository>(RemoteArticleRepository(
       apiClient: Get.find()),
     );
-    Get.put<CategoryRepository>(CategoryRepository.remote(
+    Get.put<CategoryRepository>(RemoteCategoryRepository(
       apiClient: Get.find()),
     );
-    Get.put<LegalDocumentRepository>(LegalDocumentRepository.remote(
+    Get.put<LegalDocumentRepository>(RemoteLegalDocumentRepository(
       apiClient: Get.find()),
     );
-    Get.put<PhotoAlbumRepository>(PhotoAlbumRepository.remote(
+    Get.put<PhotoAlbumRepository>(RemotePhotoAlbumRepository(
       apiClient: Get.find()),
     );
-    Get.put<VideoRepository>(VideoRepository.remote(
+    Get.put<VideoRepository>(RemoteVideoRepository(
       apiClient: Get.find()),
     );
-    Get.put<EmagazineRepository>(EmagazineRepository.remote(
+    Get.put<EmagazineRepository>(RemoteEmagazineRepository(
       apiClient: Get.find()),
     );
 

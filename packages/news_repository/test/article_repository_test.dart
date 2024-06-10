@@ -7,7 +7,7 @@ import 'package:news_repository/src/article_repository/article_repository.dart';
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';
-  final ArticleRepository langsonNewsRepository = ArticleRepository.remote(
+  final ArticleRepository langsonNewsRepository = RemoteArticleRepository(
     apiClient: NewsApiClient.common(dio: Dio()),
   );
   test('Test if call LangsonNewsRepository select all response not empty list', () async {

@@ -7,7 +7,7 @@ import 'package:news_repository/src/video_repository/video_repository.dart';
 
 void main() async {
   NewsApiEndpoint.domain = 'vustavinhphuc.coquan.vn';
-  final VideoRepository videoRepository = VideoRepository.remote(
+  final VideoRepository videoRepository = RemoteVideoRepository(
     apiClient: NewsApiClient.common(dio: Dio()),
   );
   test('Test if call LangsonNewsRepository select all response not empty list', () async {

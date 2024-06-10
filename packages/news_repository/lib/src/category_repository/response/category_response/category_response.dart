@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 import '../../../core/news_api_endpoint.dart';
 

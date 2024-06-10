@@ -1,4 +1,5 @@
 
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:vhv_news/search/search.dart';
 
@@ -22,6 +23,7 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
       children: [
         SearchTextField(
           controller: _textEditingController,

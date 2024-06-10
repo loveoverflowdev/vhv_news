@@ -15,7 +15,9 @@ class RemoteCategoryRepository extends CategoryRepository {
     return _apiClient.selectAllList(endpoints.category)
       .then((responses) 
         => responses.map((e) 
-          => CategoryResponse.fromJson(e)).toList()
+          => CategoryResponse.fromJson(e))
+          .where((e) => e.children.isNotEmpty || e.childType != CategoryChildType.introduction)
+          .toList()
       );
   }
 }

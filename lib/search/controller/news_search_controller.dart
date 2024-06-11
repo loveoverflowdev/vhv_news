@@ -11,17 +11,13 @@ class NewsSearchController extends GetxController {
   _searchRepository = searchRepository, 
   searchResult = Rx<SearchResponse?>(null),
   status = Rx<RxStatus>(RxStatus.empty()),
-  _oldQuery = '';
-
-  String _oldQuery;
-  Rx<RxStatus> status;
-  Rx<SearchResponse?> searchResult;
-
-  @override
-  void onInit() {
-    super.onInit();
+  _oldQuery = null {
     search('');
   }
+
+  String? _oldQuery;
+  Rx<RxStatus> status;
+  Rx<SearchResponse?> searchResult;
 
   Future<void> search(String query) async {
     if (query == _oldQuery) {
@@ -34,8 +30,9 @@ class NewsSearchController extends GetxController {
     try {
       searchResult.value = await _searchRepository.search(query);
       status.value = RxStatus.success();
-    } catch (e) {
+    } catch (e, stackTrace) {
       status.value = RxStatus.error(e.toString());
+      e.printError(info: stackTrace.toString());
     }
   }
 

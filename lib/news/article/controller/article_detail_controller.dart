@@ -15,7 +15,12 @@ class ArticleDetailController extends GetxController {
   articleDetail = Rx<ArticleDetailResponse?>(null);
 
   void loadArticleDetail(String id) async {
-    articleDetail.value = await _articleRepository.getArticleDetail(id: id);
+    try {
+      final detail = await _articleRepository.getArticleDetail(id: id);
+      articleDetail.value = detail;
+    } catch (e, stackTrace) {
+      e.printError(info: stackTrace.toString());
+    }
   }
 
   void shareArticle({

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:vhv_news/search/search.dart';
 
 import '../controller/controller.dart';
-import 'search_result_list_view.dart';
+import 'search_result_view.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -47,7 +47,7 @@ class _SearchViewState extends State<SearchView> {
             child: Obx(
               () => AppStatusSwitcher(
                 status: _searchController.status.value,
-                builder: (_) => SearchResultListView(
+                builder: (_) => SearchResultView(
                   searchResult: _searchController.searchResult.value!,
                 ),
               ),

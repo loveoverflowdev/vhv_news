@@ -4,9 +4,7 @@ import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
 import 'package:vhv_news/news/photo_album/widgets/photo_album_tile.dart';
 
-import '../../../../app/app.dart';
 import '../../controller/controller.dart';
-import '../photo_album_detail/photo_album_detail.dart';
 
 class PhotoAlbumsListView extends StatefulWidget {
   final Widget? header;

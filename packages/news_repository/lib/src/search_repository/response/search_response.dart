@@ -8,6 +8,7 @@ class SearchResponse {
   final List<PhotoAlbumResponse> photoAlbums;
   final List<VideoResponse> videos;
   final List<SongResponse> songs;
+  final List<ArticleType> orders;
 
   bool get isNotEmpty 
     => articles.isNotEmpty 
@@ -32,6 +33,7 @@ class SearchResponse {
     this.photoAlbums = const [],
     this.videos = const [],
     this.songs = const [],
+    this.orders = ArticleType.values,
   });
 
   factory SearchResponse.fromJson(Map<String, dynamic> json) {
@@ -48,6 +50,7 @@ class SearchResponse {
     final List<PhotoAlbumResponse> photoAlbums = [];
     final List<VideoResponse> videos = [];
     final List<SongResponse> songs = [];
+
 
     for (final article in articlesMap.values) {
       final type = ArticleType.fromString(article['type']);
@@ -72,6 +75,27 @@ class SearchResponse {
       }
     }
 
+    List<MapEntry<ArticleType, int>> orderMaps = [
+      ArticleType.news,
+      ArticleType.photoAlbum,
+      ArticleType.legalDocument,
+      ArticleType.video,
+      ArticleType.emagazine,
+      ArticleType.song,
+    ].map((e) => MapEntry(e, switch(e) {
+      ArticleType.news => articles.length,
+      ArticleType.photoAlbum => photoAlbums.length,
+      ArticleType.legalDocument => legalDocuments.length,
+      ArticleType.video => videos.length,
+      ArticleType.emagazine => emagazines.length,
+      ArticleType.song => songs.length,
+      ArticleType.all => (-1 >>> 1) , // MAX_INT_NUMBER
+    })).toList();
+
+    orderMaps.sort(
+      (a, b) => b.value.compareTo(a.value),
+    );
+
     return SearchResponse(
       articles: articles,
       emagazines: emagazines,
@@ -79,6 +103,7 @@ class SearchResponse {
       photoAlbums: photoAlbums,
       videos: videos,
       songs: songs,
+      orders: orderMaps.map((e) => e.key).toList(),
     );
   }
 

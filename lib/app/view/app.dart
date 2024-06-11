@@ -44,6 +44,12 @@ class AppBinding extends Bindings {
     Get.put<EmagazineRepository>(RemoteEmagazineRepository(
       apiClient: Get.find()),
     );
+    Get.put<SongRepository>(RemoteSongRepository(
+      apiClient: Get.find()),
+    );
+    Get.put<SearchRepository>(RemoteSearchRepository(
+      apiClient: Get.find()),
+    );
 
     // Controllers
     Get.put<HomeController>(HomeController());

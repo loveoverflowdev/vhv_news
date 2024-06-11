@@ -1,21 +1,34 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesTabBar extends StatelessWidget implements PreferredSizeWidget {
   const CategoriesTabBar({
-    required this.controller,
     required this.tabs,
+    this.controller,
+    this.bottom,
     super.key,
   });
 
-  final TabController controller;
+  final TabController? controller;
   final List<Widget> tabs;
+  final Widget? bottom;
 
   @override
   Widget build(BuildContext context) {
-    return TabBar(
-      controller: controller,
-      isScrollable: true,
-      tabs: tabs,
+    return Column(
+      children: [
+        Flexible(
+          child: TabBar(
+            indicatorPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxs),
+            unselectedLabelStyle: Theme.of(context).textTheme.titleMedium,
+            labelStyle: Theme.of(context).textTheme.titleMedium,
+            controller: controller,
+            isScrollable: true,
+            tabs: tabs,
+          ),
+        ),
+        bottom ?? const SizedBox.shrink(),
+      ],
     );
   }
 

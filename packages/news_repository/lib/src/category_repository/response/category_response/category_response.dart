@@ -63,6 +63,7 @@ enum CategoryChildType {
   photoAlbum('Article.PhotoAlbum'),
   video('Article.Video'),
   emagazine('Article.Emagazine'),
+  song('Article.Song'),
   unsupported('_');
 
   final String raw;

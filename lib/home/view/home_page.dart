@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' show Get, Inst, Obx;
 import 'package:vhv_news/home/home.dart';
-import 'package:vhv_news/navigation/view/nav_drawer.dart';
 
 import '../../category/category.dart';
 import '../../navigation/navigation.dart';

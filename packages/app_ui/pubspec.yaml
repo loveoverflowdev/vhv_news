@@ -14,7 +14,10 @@ dependencies:
   percent_indicator: ^4.2.3
   cached_network_image: ^3.3.1
   carousel_slider: ^4.2.1
-  file_icon: ^1.0.0
+  # file_icon: ^1.0.0
+  file_icon:
+    path: ../file_icon
+
   flutter_svg: ^2.0.5
   get: ^4.6.6
   intl: ^0.18.1

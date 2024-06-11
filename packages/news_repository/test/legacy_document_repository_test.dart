@@ -14,7 +14,7 @@ void main() async {
     //   // debugPrint(article.toJson().toString());
     // }
 
-    final documentDetail = await legalDocumentRepository.getLegalDocumentDetail(id: '6633506f852406cec30876c4');
+    // final documentDetail = await legalDocumentRepository.getLegalDocumentDetail(id: '6633506f852406cec30876c4');
 
     expect(documents.isNotEmpty, true);
   });

@@ -1,8 +1,7 @@
 import 'package:news_repository/news_repository.dart';
 
 import '../../core/endpoints.dart' as endpoints;
-import '../response/response.dart';
-import 'search_repository.dart';
+
 
 class RemoteSearchRepository extends SearchRepository {
   final NewsApiClient _apiClient;

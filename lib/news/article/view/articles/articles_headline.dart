@@ -29,7 +29,7 @@ class _ArticleHeadlineState extends State<ArticleHeadline> {
     super.initState();
     _articlesController = ArticlesController(
       articleRepository: Get.find(),
-    )..getArticles();
+    )..getArticles(categoryId: widget.category.id);
   }
 
   @override
@@ -52,13 +52,6 @@ class _ArticleHeadlineState extends State<ArticleHeadline> {
             children: [
               for (int i = 0; i < length; i++)
                 ArticleTile(
-                  onTap: (article) {
-                    Navigator.pushNamed(
-                      context,
-                      PageRouteName.articleDetail.routeLink,
-                      arguments: ArticleDetailArgs(articleId: article.id),
-                    );
-                  },
                   article: articles[i], 
                 ),
             ],

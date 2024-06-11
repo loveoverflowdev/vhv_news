@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_repository/news_repository.dart';
 
-import 'articles_view.dart';
+import 'articles_list_view.dart';
 
 class ArticlesArgs {
   final CategoryResponse category;
@@ -28,7 +28,7 @@ class ArticlesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(args.category.title),
       ),
-      body: ArticlesView(category: args.category),
+      body: ArticlesListView(category: args.category),
     );
   }
 }

@@ -1,8 +1,7 @@
 import 'package:news_repository/news_repository.dart';
 
 import '../../core/endpoints.dart' as endpoints;
-import '../response/response.dart';
-import 'song_repository.dart';
+
 
 class RemoteSongRepository extends SongRepository {
   final NewsApiClient _apiClient;

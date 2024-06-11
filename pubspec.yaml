@@ -47,6 +47,7 @@ dependencies:
   open_file_plus: ^3.4.1+1
   share_plus: ^9.0.0
   flutter_native_splash: ^2.4.0
+  easy_debounce: ^2.0.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -111,7 +112,10 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
   image_path: "assets/logo.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
+  android:
+    generate: true
+    icon_size: 48
+  ios:
+    generate: "launcher_icon"
+    icon_size: 48

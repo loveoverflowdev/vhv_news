@@ -9,6 +9,22 @@ class SearchResponse {
   final List<VideoResponse> videos;
   final List<SongResponse> songs;
 
+  bool get isNotEmpty 
+    => articles.isNotEmpty 
+    || emagazines.isNotEmpty 
+    || legalDocuments.isNotEmpty 
+    || photoAlbums.isNotEmpty 
+    || videos.isNotEmpty 
+    || songs.isNotEmpty;
+
+
+  int get itemCount => articles.length 
+    + emagazines.length 
+    + legalDocuments.length 
+    + photoAlbums.length 
+    + videos.length 
+    + songs.length;
+
   SearchResponse({
     this.articles = const [],
     this.emagazines = const [],

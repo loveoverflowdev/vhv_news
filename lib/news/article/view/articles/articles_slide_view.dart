@@ -1,12 +1,14 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart' show Get, Inst, Obx;
+import 'package:news_repository/news_repository.dart';
 
 import '../../controller/controller.dart';
 import '../../widgets/widgets.dart' show ArticleCarouselCell;
 
 class ArticlesSlideView extends StatefulWidget {
-  const ArticlesSlideView({super.key});
+  final CategoryResponse category;
+  const ArticlesSlideView({super.key, required this.category,});
 
   @override
   State<ArticlesSlideView> createState() => _ArticlesSlideViewState();
@@ -19,7 +21,8 @@ class _ArticlesSlideViewState extends State<ArticlesSlideView> {
   @override
   void initState() {
     super.initState();
-    _articlesController = ArticlesController(articleRepository: Get.find())..getArticles();
+    _articlesController = ArticlesController(articleRepository: Get.find())
+      ..getArticles(categoryId: widget.category.id);
   }
 
   @override

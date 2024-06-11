@@ -5,16 +5,20 @@ import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart' show CategoryResponse;
 
 import '../controller/controller.dart';
+import '../widgets/widgets.dart';
 
 class LegalDocumentsListView extends StatefulWidget {
-    final CategoryResponse category;
-    const LegalDocumentsListView({super.key, required this.category,});
-    
-    @override
-    State<LegalDocumentsListView> createState() => _LegalDocumentsListViewState();
+  final Widget? header;
+  final ScrollPhysics? physics;
+  final CategoryResponse category;
+
+  const LegalDocumentsListView({super.key, required this.category, this.physics, this.header,});
+  
+  @override
+  State<LegalDocumentsListView> createState() => _LegalDocumentsListViewState();
 }
 
-class _LegalDocumentsListViewState extends State<LegalDocumentsListView> {
+class _LegalDocumentsListViewState extends State<LegalDocumentsListView> with AutomaticKeepAliveClientMixin {
   late final LegalDocumentsController _legalDocumentsController;
 
   @override
@@ -25,65 +29,36 @@ class _LegalDocumentsListViewState extends State<LegalDocumentsListView> {
   }
 
   @override
+  void dispose() {
+    _legalDocumentsController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(
-            onTap: () {
-              
+    super.build(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Obx(
+        () => Visibility(
+          visible: _legalDocumentsController.legalDocuments.isNotEmpty,
+          replacement: const AppEmptyWidget(),
+          child: ListView.builder(
+            physics: widget.physics,
+            itemCount: _legalDocumentsController.legalDocuments.length + 1,
+            itemBuilder: (context, index) {
+              if (index == 0) {
+                return widget.header ?? const SizedBox();
+              }
+              final legalDoc = _legalDocumentsController.legalDocuments[index - 1];
+              return LegalDocumentTile(legalDoc: legalDoc);
             },
-            title: Row(
-              children: [
-                Text(widget.category.title, 
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const Spacer(),
-                const Icon(Icons.arrow_forward, size: 24),
-              ],
-            ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Obx(
-                () => ListView.builder(
-                  itemCount: _legalDocumentsController.legalDocuments.length,
-                  itemBuilder: (context, index) {
-                      return TextButton(
-                        onPressed: () {
-                            // showAppModal(
-                            //   builder: (context) {
-                            //     return 
-                            //   },
-                            // );
-                        },
-                        child: Row(
-                          children: [
-                          Text(
-                            _legalDocumentsController.legalDocuments[index].title ?? '', 
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            textAlign: TextAlign.start,
-                          ),
-                          const Spacer(),
-                          Text(
-                            'Chi tiết', 
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.blueDress,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_repository/news_repository.dart';
 
+import 'photo_album_detail_view.dart';
+
 class PhotoAlbumDetailArgs {
   final PhotoAlbumResponse photoAlbum;
 
@@ -25,6 +27,13 @@ class PhotoAlbumDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(args.photoAlbum.title),
+      ),
+      body: PhotoAlbumDetailView(
+        photoAlbum: args.photoAlbum,
+      ),
+    );
   }
 }

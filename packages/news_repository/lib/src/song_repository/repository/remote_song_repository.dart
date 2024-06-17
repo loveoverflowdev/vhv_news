@@ -26,4 +26,17 @@ class RemoteSongRepository extends SongRepository {
         => response.map((e) => SongResponse.fromJson(e))
       .toList());
   }
+  
+  @override
+  Future<SongDetailResponse> getSongDetail({
+    required String id,
+  }) {
+    return _apiClient
+      .selectById(endpoints.song, 
+        id: id,
+      )
+      .then((response) 
+        => SongDetailResponse.fromJson(response),
+      );
+  }
 }

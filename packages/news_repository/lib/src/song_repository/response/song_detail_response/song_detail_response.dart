@@ -2,10 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../../core/utils.dart' as utils;
 
-part 'song_response.g.dart';
+part 'song_detail_response.g.dart';
 
 @JsonSerializable()
-class SongResponse {
+class SongDetailResponse {
   final String id;
 
   @JsonKey(fromJson: _parseDateTimeFromMillisecondsSinceEpoch)
@@ -15,21 +15,29 @@ class SongResponse {
   @JsonKey(name: 'image', fromJson: _parseFileUrl)
   final String? imageUrl;
 
+  @JsonKey(name: 'file', fromJson: _parseFileUrl)
+  final String? fileUrl;
+
   @JsonKey(name: 'creatorTitle')
   final String? creator;
 
-  SongResponse({
+  @JsonKey(name: 'lyric')
+  final String lyrics;
+
+  SongDetailResponse({
     required this.id,
     this.publishTime,
     required this.title,
     required this.imageUrl,
+    required this.fileUrl,
     this.creator,
+    required this.lyrics,
   });
 
-  factory SongResponse.fromJson(Map<String, dynamic> json) =>
-      _$SongResponseFromJson(json);
+  factory SongDetailResponse.fromJson(Map<String, dynamic> json) =>
+      _$SongDetailResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SongResponseToJson(this);
+  Map<String, dynamic> toJson() => _$SongDetailResponseToJson(this);
 
 
   static String? _parseFileUrl(String? url) => utils.parseFileUrl(url);

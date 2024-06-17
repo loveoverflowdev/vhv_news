@@ -34,5 +34,6 @@ const _$CategoryChildTypeEnumMap = {
   CategoryChildType.photoAlbum: 'photoAlbum',
   CategoryChildType.video: 'video',
   CategoryChildType.emagazine: 'emagazine',
+  CategoryChildType.song: 'song',
   CategoryChildType.unsupported: 'unsupported',
 };

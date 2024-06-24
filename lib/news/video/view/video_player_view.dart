@@ -25,6 +25,7 @@ class VideoPlayerView extends StatelessWidget {
     );
     
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Flexible(
           child: VhvVideoPlayerView(

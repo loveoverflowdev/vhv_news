@@ -8,7 +8,7 @@ import 'package:vhv_news/news/photo_album/widgets/photo_album_tile.dart';
 import 'package:vhv_news/news/video/widgets/widgets.dart';
 //
 import '../../news/article/widgets/widgets.dart';
-import '../../song/widgets/widgets.dart';
+import '../../news/song/song.dart';
 
 class SearchResultView extends StatelessWidget {
   final SearchResponse searchResult;

@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -101,8 +102,14 @@ class SongPlayerViewState extends State<SongPlayerView> with WidgetsBindingObser
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              AppCachedNetworkImage(
+                uri: widget.song.imageUrl ?? '',
+           
+              ),
+              const SizedBox(
+                height: AppSpacing.lg,
+              ),
               // Display play/pause button and volume/speed sliders.
               ControlButtons(_player),
               // Display seek bar. Using StreamBuilder, this widget rebuilds
@@ -145,7 +152,7 @@ class ControlButtons extends StatelessWidget {
           onPressed: () {
             showSliderDialog(
               context: context,
-              title: "Adjust volume",
+              title: "Âm lượng",
               divisions: 10,
               min: 0.0,
               max: 1.0,
@@ -204,7 +211,7 @@ class ControlButtons extends StatelessWidget {
             onPressed: () {
               showSliderDialog(
                 context: context,
-                title: "Adjust speed",
+                title: "Tốc độ",
                 divisions: 10,
                 min: 0.5,
                 max: 1.5,

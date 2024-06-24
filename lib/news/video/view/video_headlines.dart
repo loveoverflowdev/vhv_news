@@ -48,12 +48,6 @@ class _VideoHeadlinesState extends State<VideoHeadlines> {
               children: [
                 for (var i = 0; i < length; i++) 
                   VideoTile(
-                    onTap: (video) {
-                      Navigator.pushNamed(context, 
-                        PageRouteName.videoDetail.routeLink, 
-                        arguments: VideoDetailArgs(video: video) ,
-                      );
-                    },
                     video: videos[i],
                   )
               ],

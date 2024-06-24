@@ -59,12 +59,6 @@ class _VideosListViewState extends State<VideosListView> with AutomaticKeepAlive
                 return widget.header ?? const SizedBox.shrink();
               }
               return VideoTile(
-                onTap: (video) {
-                  Navigator.pushNamed(context, 
-                    PageRouteName.videoDetail.routeLink, 
-                    arguments: VideoDetailArgs(video: video) ,
-                  );
-                },
                 video: videos[index - 1],
               );
             },

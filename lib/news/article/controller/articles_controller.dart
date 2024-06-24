@@ -1,40 +1,26 @@
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
+import 'package:vhv_news/app/controller/controller.dart';
 
-class ArticlesController extends GetxController {
+class ArticlesController extends PagingController<ArticleResponse> {
   final ArticleRepository _articleRepository;
-
-  late RxList<ArticleResponse> articles;
-  late Rx<RxStatus> status;
+  String? _categoryId;
 
   ArticlesController({
     required ArticleRepository articleRepository,
   }) : 
-    _articleRepository = articleRepository, 
-    status = RxStatus.empty().obs,
-    articles = <ArticleResponse>[].obs;
+    _articleRepository = articleRepository;
 
-  void getArticles({
-    String? categoryId,
-  }) async {
-    try {
-      status.value = RxStatus.loading();
-      _articleRepository
-        .getArticles(categoryId: categoryId)
-        .then((response) {
-          status.value = RxStatus.success();
-          articles.value = response;
-        });
-    } catch (e, stackTrace) {
-      status.value = RxStatus.error(e.toString());
-      e.printError(info: stackTrace.toString());
-    }
+  void setCategoryId(String? id) {
+    _categoryId = id;
   }
 
   @override
-  void onClose() {
-    articles.close();
-    status.close();
-    super.onClose();
+  Future<List<ArticleResponse>> internalGetResponseList({required int pageIndex}) {
+    return _articleRepository.getArticles(
+      categoryId: _categoryId,
+      page: pageIndex,
+      pageSize: pageSize,
+    );
   }
 }

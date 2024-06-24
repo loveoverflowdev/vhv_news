@@ -29,7 +29,7 @@ class SearchResultView extends StatelessWidget {
               height: 48,
               child: CategoriesTabBar(tabs: [
                 for (final type in searchResult.orders)
-                  CategoryTab(categoryName: type.name)
+                  CategoryTab(categoryName: type.localizedTitle)
                 ],
               ),
             ),

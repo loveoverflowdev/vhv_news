@@ -29,7 +29,9 @@ class _ArticleHeadlineState extends State<ArticleHeadline> {
     super.initState();
     _articlesController = ArticlesController(
       articleRepository: Get.find(),
-    )..getArticles(categoryId: widget.category.id);
+    )
+    ..setCategoryId(widget.category.id)
+    ..loadMoreResponseList();
   }
 
   @override
@@ -46,7 +48,7 @@ class _ArticleHeadlineState extends State<ArticleHeadline> {
           },
           title: widget.category.title),
         Obx(() {
-          final articles = _articlesController.articles;
+          final articles = _articlesController.responseList;
           final length = min(3, articles.length);
           return Column(
             children: [

@@ -54,13 +54,6 @@ class _EmagazinesListViewState extends State<EmagazinesListView> with AutomaticK
               return widget.header ?? const SizedBox.shrink();
             }
             return EmagazineTile(
-              onTap: (emagazine) {
-                Navigator.pushNamed(
-                  context,
-                  PageRouteName.emagazineDetail.routeLink,
-                  arguments: EmagazineDetailArgs(emagazine: emagazine),
-                );
-              },
               emagazine: emagazines[index - 1],
             );
           },

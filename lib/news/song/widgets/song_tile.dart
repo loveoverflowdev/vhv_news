@@ -3,17 +3,14 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:news_repository/news_repository.dart';
 import 'package:vhv_news/app/app.dart';
+import 'package:vhv_news/news/song/song.dart';
 
-import '../view/emagazine_detail/emagazine_detail_page.dart';
-
-class EmagazineTile extends StatelessWidget {
-  final void Function(EmagazineResponse)? onTap;  
-  final EmagazineResponse emagazine;
-
-  const EmagazineTile({
-    super.key,
-    required this.emagazine,
-    this.onTap,
+class SongTile extends StatelessWidget {
+  final SongResponse song;
+  
+  const SongTile({
+    super.key, 
+    required this.song,
   });
 
   @override
@@ -21,9 +18,8 @@ class EmagazineTile extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(
-          context,
-          PageRouteName.emagazineDetail.routeLink,
-          arguments: EmagazineDetailArgs(emagazine: emagazine),
+          context, PageRouteName.songDetail.routeLink, 
+          arguments: SongDetailArgs(song: song),
         );
       },
       child: SizedBox(
@@ -36,7 +32,7 @@ class EmagazineTile extends StatelessWidget {
               AspectRatio(
                 aspectRatio: 12 / 9,
                 child: AppCachedNetworkImage(
-                  uri: emagazine.imageUrl ?? '',
+                  uri: song.imageUrl ?? '',
                 ),
               ),
               const SizedBox(width: AppSpacing.lg),
@@ -46,24 +42,11 @@ class EmagazineTile extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      emagazine.title,
+                      song.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Flexible(
-                      child: AppHtmlWidget(
-                        emagazine.brief ?? '',
-                        textStyle: Theme.of(context).textTheme.bodySmall,
-                        customWidgetBuilder: (element) {
-                          return Text(
-                            element.text,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          );
-                        },
                       ),
                     ),
                   ],

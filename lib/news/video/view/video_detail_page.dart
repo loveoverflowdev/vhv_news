@@ -25,7 +25,9 @@ class VideoDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Video Player')),
+      appBar: AppBar(
+        title: Text(args.video.title),
+      ),
       body: VideoPlayerView(video: args.video),
     );
   }

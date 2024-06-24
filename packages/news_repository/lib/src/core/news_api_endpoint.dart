@@ -57,6 +57,16 @@ enum ArticleType {
     }
   }
 
+  String get localizedTitle => switch (this) {
+      ArticleType.news => 'Tin tức',
+      ArticleType.photoAlbum => 'Ảnh',
+      ArticleType.legalDocument => 'Tài liệu',
+      ArticleType.video => 'Video',
+      ArticleType.emagazine => 'Tạp Chí',
+      ArticleType.song => 'Bài hát',
+      ArticleType.all => 'Tất cả',
+    };
+
   static ArticleType fromString(String raw) => values.firstWhere((type) => type.toParams() == raw);
 }
 

@@ -17,7 +17,7 @@ abstract class PagingController<T> extends GetxController  {
   : status = Rx<RxStatus>(RxStatus.loading()), 
     responseList = RxList<T>([]),
     pageIndex = 1,
-    pageSize = 3,
+    pageSize = 13,
     isAbleToLoadMore = true;
 
   @override

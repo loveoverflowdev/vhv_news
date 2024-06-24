@@ -2,6 +2,9 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:news_repository/news_repository.dart';
+import 'package:vhv_news/app/app.dart';
+
+import '../view/emagazine_detail/emagazine_detail_page.dart';
 
 class EmagazineTile extends StatelessWidget {
   final void Function(EmagazineResponse)? onTap;  
@@ -16,7 +19,13 @@ class EmagazineTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTap?.call(emagazine),
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          PageRouteName.emagazineDetail.routeLink,
+          arguments: EmagazineDetailArgs(emagazine: emagazine),
+        );
+      },
       child: SizedBox(
         height: 108,
         child: Padding(

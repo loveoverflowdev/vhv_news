@@ -60,6 +60,7 @@ class _RawVideoPlayerViewState extends State<RawVideoPlayerView> {
       child: AspectRatio(
         aspectRatio: _videoPlayerController.value.aspectRatio,
         child: FlickVideoPlayer(
+          key: Key(widget.url),
           flickManager: _flickManager,
           flickVideoWithControls: const FlickVideoWithControls(
             videoFit: BoxFit.fitHeight,

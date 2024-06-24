@@ -58,7 +58,7 @@ enum ArticleType {
   }
 
   String get localizedTitle => switch (this) {
-      ArticleType.news => 'Tin tức',
+      ArticleType.news => 'Bài báo',
       ArticleType.photoAlbum => 'Ảnh',
       ArticleType.legalDocument => 'Tài liệu',
       ArticleType.video => 'Video',

@@ -10,7 +10,7 @@ void main() async {
     apiClient: NewsApiClient.common(dio: Dio()),
   );
   test('Test if call LangsonNewsRepository select all response not empty list', () async {
-    final articles = await langsonNewsRepository.getArticles();
+    final articles = await langsonNewsRepository.getArticles(page: 0, pageSize: 5);
 
     debugPrint(articles.length.toString());
 

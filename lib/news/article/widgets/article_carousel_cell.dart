@@ -1,32 +1,33 @@
 
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:news_repository/news_repository.dart';
+import 'package:vhv_news/app/app.dart';
+import 'package:vhv_news/news/article/article.dart';
 
 class ArticleCarouselCell extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String description;
-  final void Function()? onTap;
-
   const ArticleCarouselCell({
-    super.key,
-    required this.imageUrl,
-    required this.title,
-    required this.description,
-    required this.onTap,
+    super.key, 
+    required this.article,
   });
+
+  final ArticleResponse article;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onTap?.call();
+        Navigator.pushNamed(
+          context, 
+          PageRouteName.articleDetail.routeLink,
+          arguments: ArticleDetailArgs(articleId: article.id),  
+        );
       },
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         child: Stack(
           children: <Widget>[
-            Image.network(imageUrl, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
+            Image.network(article.imageUrl ?? '', fit: BoxFit.cover, width: double.infinity, height: double.infinity),
             Positioned(
               bottom: 0.0,
               left: 0.0,
@@ -45,7 +46,7 @@ class ArticleCarouselCell extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Text(
-                      title,
+                      article.title,
                       maxLines: 3,
                       style: const TextStyle(
                         color: AppColors.white,
@@ -57,7 +58,7 @@ class ArticleCarouselCell extends StatelessWidget {
                     SizedBox(
                       height: 60,
                       child: AppHtmlWidget(
-                        description,
+                        article.brief ?? '',
                         textStyle: const TextStyle(
                           color: AppColors.white,
                           fontSize: 14.0,

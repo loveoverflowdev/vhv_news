@@ -14,12 +14,16 @@ class RemoteArticleRepository extends ArticleRepository {
   @override
   Future<List<ArticleResponse>> getArticles({
     String? categoryId,
+    required int page,
+    required int pageSize,
   }) async {
     return _apiClient
       .selectAllMap(
         endpoints.article, 
         queryParameters: categoryId != null ? {
           'categoryId': categoryId,
+          'itemsPerPage': pageSize,
+          'pageNo': page,
         } : null,
       )
       .then(

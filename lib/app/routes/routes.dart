@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vhv_news/news/song/view/song_detail_page.dart';
 
 import '../../home/home.dart';
 import '../../news/article/article.dart';
@@ -13,6 +14,7 @@ enum PageRouteName {
   photoAlbumDetail,
   videoDetail,
   emagazineDetail,
+  songDetail,
 }
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -34,6 +36,8 @@ extension PageRouteNameExt on PageRouteName {
         return '/articles';
       case PageRouteName.emagazineDetail:
         return '/emagazine_detail';
+      case PageRouteName.songDetail:
+        return '/song_detail';
     }        
   }
 
@@ -68,6 +72,9 @@ extension PageRouteNameExt on PageRouteName {
       case PageRouteName.emagazineDetail:
         final args = settings.arguments as EmagazineDetailArgs;
         return EmagazineDetailPage.route(args: args);
+      case PageRouteName.songDetail:
+        final args = settings.arguments as SongDetailArgs;
+        return SongDetailPage.route(args: args);
     }      
   }
 }

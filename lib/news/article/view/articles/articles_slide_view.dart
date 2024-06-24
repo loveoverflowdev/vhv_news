@@ -22,7 +22,8 @@ class _ArticlesSlideViewState extends State<ArticlesSlideView> {
   void initState() {
     super.initState();
     _articlesController = ArticlesController(articleRepository: Get.find())
-      ..getArticles(categoryId: widget.category.id);
+      ..setCategoryId(widget.category.id)
+      ..loadMoreResponseList();
   }
 
   @override
@@ -32,17 +33,12 @@ class _ArticlesSlideViewState extends State<ArticlesSlideView> {
       child: Obx(
         () => AppCarousel(
           itemBuilder: (context, index, pageIndexView) {
-            final article = _articlesController.articles[index];
+            final article = _articlesController.responseList[index];
             return ArticleCarouselCell(
-              onTap: () {
-      
-              },
-              imageUrl: article.imageUrl ?? '',
-              title: article.title,
-              description: article.brief ?? '',
+              article: article,
             );
           }, 
-          itemCount: _articlesController.articles.length,
+          itemCount: _articlesController.responseList.length,
         ),
       ),
     );

@@ -19,9 +19,9 @@ enum BottomNavTab {
   String getLabel() {
     switch (this) {
       case BottomNavTab.feed:
-        return 'Top News';
+        return 'Top Tin';
       case BottomNavTab.search:
-        return 'Search';
+        return 'Tìm kiếm';
     }
   }
 

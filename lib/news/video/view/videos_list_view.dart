@@ -2,11 +2,9 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
-import 'package:vhv_news/app/app.dart';
 
 import '../controller/controller.dart';
 import '../widgets/widgets.dart';
-import 'video_detail_page.dart';
 
 class VideosListView extends StatefulWidget {
   final ScrollPhysics? physics;

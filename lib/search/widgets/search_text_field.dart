@@ -19,7 +19,7 @@ class SearchTextField extends StatelessWidget {
           icon: const Icon(Icons.clear),
         ),
         // Localize it
-        hintText: 'Search by keyword',
+        hintText: 'Nhập từ khóa ...',
         keyboardType: TextInputType.text,
       ),
     );

@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:dio/dio.dart';
-import 'package:news_repository/src/core/core.dart';
 import 'package:news_repository/news_repository.dart';
 
 void main() async {

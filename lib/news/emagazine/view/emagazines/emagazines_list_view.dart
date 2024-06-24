@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
-import 'package:vhv_news/app/app.dart';
 
 import '../../controller/controller.dart';
 import '../../widgets/widgets.dart';
-import '../emagazine_detail/emagazine_detail.dart';
 
 class EmagazinesListView extends StatefulWidget {
   final Widget? header;

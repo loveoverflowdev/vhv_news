@@ -26,7 +26,7 @@ class SearchResultView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: 48,
+              height: 54,
               child: CategoriesTabBar(tabs: [
                 for (final type in searchResult.orders)
                   CategoryTab(categoryName: type.localizedTitle)

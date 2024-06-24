@@ -18,6 +18,8 @@ VideoDetailResponse _$VideoDetailResponseFromJson(Map<String, dynamic> json) =>
           (json['isFeatured'] as num?)?.toInt()),
       publishTime: VideoDetailResponse._parseDateTimeFromMillisecondsSinceEpoch(
           (json['publishTime'] as num?)?.toInt()),
+      videoLink:
+          VideoDetailResponse._parseFileUrl(json['videoLink'] as String?),
     );
 
 Map<String, dynamic> _$VideoDetailResponseToJson(
@@ -31,4 +33,5 @@ Map<String, dynamic> _$VideoDetailResponseToJson(
       'creatorTitle': instance.creator,
       'isFeatured': instance.isFeatured,
       'image': instance.imageUrl,
+      'videoLink': instance.videoLink,
     };

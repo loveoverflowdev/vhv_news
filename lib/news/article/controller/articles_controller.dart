@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:news_repository/news_repository.dart';
 import 'package:vhv_news/app/controller/controller.dart';
 

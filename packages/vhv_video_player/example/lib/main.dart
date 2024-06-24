@@ -42,7 +42,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: VhvVideoPlayerView(
+      body: const VhvVideoPlayerView(
         url: 'upload/2006581/20240103/production_id_3997798__1080p_.mp4',
       ),
     );

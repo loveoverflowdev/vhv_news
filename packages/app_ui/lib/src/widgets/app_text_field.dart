@@ -107,7 +107,7 @@ class AppTextField extends StatelessWidget {
                 height: 32,
               ),
               prefixIconConstraints: const BoxConstraints.tightFor(
-                width: 48,
+                width: 54,
               ),
             ),
             onChanged: onChanged,

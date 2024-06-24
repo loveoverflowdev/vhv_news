@@ -4,7 +4,6 @@ import 'package:news_repository/news_repository.dart' show VideoResponse;
 import 'package:vhv_news/news/video/video.dart';
 
 class VideoDetailArgs {
-  // TODO: use detail video
   final VideoResponse video;
 
   VideoDetailArgs({required this.video});

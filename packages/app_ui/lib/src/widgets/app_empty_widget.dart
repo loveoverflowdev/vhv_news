@@ -15,8 +15,8 @@ class AppEmptyWidget extends StatelessWidget {
         child: Column(
           children: [
             Assets.images.logoLight.image(
-              height: 48,
-              width: 48,
+              height: 54,
+              width: 54,
             ),
             Text(
               'No Data', 

@@ -23,6 +23,9 @@ class VideoDetailResponse {
   @JsonKey(name: 'image', fromJson: _parseFileUrl)
   final String? imageUrl;
 
+  @JsonKey(name: 'videoLink', fromJson: _parseFileUrl)
+  final String? videoLink;
+
   VideoDetailResponse({
     required this.imageUrl,
     required this.id,
@@ -32,6 +35,7 @@ class VideoDetailResponse {
     required this.creator,
     required this.isFeatured,
     required this.publishTime,
+    required this.videoLink,
   });
 
   factory VideoDetailResponse.fromJson(Map<String, dynamic> json) =>

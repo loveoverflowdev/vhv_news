@@ -33,7 +33,7 @@ class CategoriesTabBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size(double.infinity, 48);
+  Size get preferredSize => const Size(double.infinity, 54);
 }
 
 class CategoryTab extends StatelessWidget {

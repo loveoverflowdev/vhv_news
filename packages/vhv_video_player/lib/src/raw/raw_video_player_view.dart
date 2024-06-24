@@ -1,6 +1,5 @@
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:vhv_video_player/src/vhv_video_player_view.dart';
 import 'package:video_player/video_player.dart';
 
 class RawVideoPlayerView extends StatefulWidget {
@@ -21,11 +20,12 @@ class _RawVideoPlayerViewState extends State<RawVideoPlayerView> {
   void initState() {
     super.initState();
     _error = null;
-    String urlStr = widget.url;
+    
+    _didUpdateWidget();
+  }
 
-    if (!urlStr.contains('http')) {
-      urlStr = 'https://${VhvVideoPlayer.domain}/$urlStr';
-    }
+  void _didUpdateWidget() {
+    String urlStr = widget.url;
 
     final uri = Uri.tryParse(urlStr);
 
@@ -38,6 +38,13 @@ class _RawVideoPlayerViewState extends State<RawVideoPlayerView> {
     _flickManager = FlickManager(
       videoPlayerController: _videoPlayerController,
     );
+  }
+
+
+  @override
+  void didUpdateWidget(covariant RawVideoPlayerView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _didUpdateWidget();
   }
 
   @override

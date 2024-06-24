@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
           () => Text(
             // TODO: Localize it
             homeController.tab.value == BottomNavTab.search 
-              ? 'Search' 
+              ? 'Tìm kiếm' 
               : categoryController.selectedCategory.value?.title ?? '',
           ),
         ),
